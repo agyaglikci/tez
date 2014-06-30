@@ -1,0 +1,656 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"caption",
+				"caption_title"
+			],
+			[
+				"content",
+				"content_id"
+			],
+			[
+				"announce",
+				"announcement_log"
+			],
+			[
+				"anno",
+				"announcement_id"
+			],
+			[
+				"ann",
+				"announcement_id"
+			],
+			[
+				"value",
+				"valueSelected"
+			],
+			[
+				"annou",
+				"announcements"
+			],
+			[
+				"announcemen",
+				"announcement_id"
+			],
+			[
+				"announcement",
+				"announcement_permissions"
+			],
+			[
+				"announ",
+				"announcement_id"
+			],
+			[
+				"announc",
+				"announcement"
+			],
+			[
+				"admin",
+				"admin_visible"
+			],
+			[
+				"base_",
+				"base_url"
+			],
+			[
+				"sear",
+				"search_term"
+			],
+			[
+				"backgroun",
+				"background-color"
+			],
+			[
+				"backgrou",
+				"background-color"
+			],
+			[
+				"last_product",
+				"last_product_date_arr"
+			],
+			[
+				"altLi",
+				"altLinkRaw"
+			],
+			[
+				"mood",
+				"mood_id"
+			],
+			[
+				"secenekler",
+				"seceneklerArray"
+			],
+			[
+				"stock",
+				"stock_control"
+			],
+			[
+				"satislar",
+				"satislar_string"
+			],
+			[
+				"track",
+				"track_stock"
+			],
+			[
+				"sand",
+				"sandBoxMode"
+			],
+			[
+				"s",
+				"stoklar_string"
+			],
+			[
+				"secene",
+				"secenekler_string"
+			],
+			[
+				"update",
+				"update_product"
+			],
+			[
+				"products",
+				"products_model"
+			],
+			[
+				"sece",
+				"secenekler_string"
+			],
+			[
+				"sa",
+				"sandBoxMode"
+			],
+			[
+				"product",
+				"products_model"
+			],
+			[
+				"number_",
+				"number_of_items"
+			],
+			[
+				"order",
+				"order_id"
+			],
+			[
+				"checko",
+				"checkout_model"
+			],
+			[
+				"secenek",
+				"secenekSayisi"
+			],
+			[
+				"produ",
+				"product"
+			],
+			[
+				"newtrack",
+				"newTrackData"
+			],
+			[
+				"tra",
+				"track_stock"
+			],
+			[
+				"q",
+				"quantity"
+			],
+			[
+				"pro",
+				"product"
+			],
+			[
+				"new",
+				"newStckData"
+			],
+			[
+				"prod",
+				"product"
+			],
+			[
+				"produc",
+				"product_id"
+			],
+			[
+				"che",
+				"checkout_model"
+			],
+			[
+				"th",
+				"this"
+			],
+			[
+				"chec",
+				"checkout"
+			],
+			[
+				"sto",
+				"stock_qty"
+			],
+			[
+				"order_",
+				"order_items"
+			],
+			[
+				"options",
+				"optionsArray"
+			],
+			[
+				"opt",
+				"optionIndex"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"secee",
+				"secenekVar"
+			],
+			[
+				"ekle",
+				"ekleLinki"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "tez.tex",
+			"settings":
+			{
+				"buffer_size": 861,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "baslangic.tex",
+			"settings":
+			{
+				"buffer_size": 2339,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bolum1.tex",
+			"settings":
+			{
+				"buffer_size": 16,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/minilatex/MiniLaTeX.sublime-build",
+	"command_palette":
+	{
+		"height": 67.0,
+		"selected_items":
+		[
+			[
+				"",
+				"About"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"InstallPackage",
+			"ls",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation' "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Applications/MAMP/htdocs/dosim/application/models/admin_model.php",
+		"/Applications/MAMP/htdocs/dosim/application/models/sliders_model.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/homepage/index.php",
+		"/Applications/MAMP/htdocs/dosim/application/controllers/homepage.php",
+		"/Applications/MAMP/htdocs/dosim/application/controllers/admin.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/admin/edit_slider.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/admin/slider_list.php",
+		"/Applications/MAMP/htdocs/dosim/application/config/routes.php",
+		"/Applications/MAMP/htdocs/dosim/database.sql",
+		"/Applications/MAMP/htdocs/dosim/application/views/template/footer.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/announcements/index.php",
+		"/Applications/MAMP/htdocs/dosim/application/models/logs_model.php",
+		"/Applications/MAMP/htdocs/dosim/application/models/announcements_model.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/admin/logs.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/admin/edit_announcement.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/announcements/announcement.php",
+		"/Applications/MAMP/htdocs/dosim/application/controllers/announcements.php",
+		"/Applications/MAMP/htdocs/dosim/assets/css/custom.css",
+		"/Applications/MAMP/htdocs/dosim/application/views/template/header.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/admin/admin_panel_footer.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/admin/announcements.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/admin/login.php",
+		"/Applications/MAMP/htdocs/dosim/application/models/permissions_model.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/admin/index.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/admin/admin_panel_header.php",
+		"/Applications/MAMP/htdocs/dosim/application/config/database.php",
+		"/Applications/MAMP/htdocs/dosim/application/views/admin/admin_panel.php",
+		"/Applications/MAMP/htdocs/noolmus/javascript/habercek.js",
+		"/Applications/MAMP/htdocs/noolmus/controller_functions.php",
+		"/Applications/MAMP/htdocs/noolmus/config.php",
+		"/Applications/MAMP/htdocs/noolmus/database_functions.php",
+		"/Applications/MAMP/htdocs/cataload/system/database/DB_active_rec.php",
+		"/Applications/MAMP/htdocs/cataload/application/models/search_model.php",
+		"/Applications/MAMP/htdocs/cataload/system/helpers/text_helper.php",
+		"/Applications/MAMP/htdocs/cataload/application/views/pages/test.php",
+		"/Applications/MAMP/htdocs/cataload/application/views/pages/uploader_min.php",
+		"/Applications/MAMP/htdocs/cataload/application/config/routes.php",
+		"/Applications/MAMP/htdocs/cataload/application/views/file/form.php",
+		"/Applications/MAMP/htdocs/cataload/assets/css/custom.css",
+		"/Applications/MAMP/htdocs/cataload/application/views/sector/index.php",
+		"/Applications/MAMP/htdocs/cataload/application/views/template/header.php",
+		"/Applications/MAMP/htdocs/cataload/application/controllers/catalog.php",
+		"/Applications/MAMP/htdocs/cataload/application/views/file/index.php",
+		"/Applications/MAMP/htdocs/cataload/application/views/file/share-email.php",
+		"/Applications/MAMP/htdocs/cataload/application/views/file/contact-form.php",
+		"/Applications/MAMP/htdocs/cataload/application/views/file/info.php",
+		"/Applications/MAMP/htdocs/cataload/application/models/file_model.php",
+		"/Applications/MAMP/htdocs/cataload/application/views/admin/index.php",
+		"/Applications/MAMP/htdocs/cataload/application/views/admin/login.php",
+		"/Applications/MAMP/htdocs/cataload/application/models/admin_model.php",
+		"/Users/agyaglikci/Documents/ucgoz/AHM/system/libraries/Ftp.php",
+		"/Applications/MAMP/htdocs/deneme/index.html",
+		"/Applications/MAMP/htdocs/deneme/html",
+		"/Users/agyaglikci/Documents/Tefsir.xml",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/hizmetler.group/index.html",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/styles.group/custom.css",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/site.group/index.html",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/duyurular.group/index.html",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/site.group/.html-layout.html",
+		"/Applications/MAMP/htdocs/dosim/.htaccess",
+		"/Applications/MAMP/htdocs/aypar/application/views/pages/iletisim.php",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/iletisim.group/index.html",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/site.group/.html-layout-sub.html",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/faaliyetler.group/index.html",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/kurumsal.group/index.html",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/bilgi-edinme.group/index.html",
+		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/about-us.group/index.html",
+		"/Users/agyaglikci/Downloads/tefsir.rss",
+		"/Users/agyaglikci/Downloads/tefsir-3.rss",
+		"/Users/agyaglikci/Downloads/tefsir-2.rss",
+		"/Users/agyaglikci/Desktop/test.html",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/categories.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/models/categories_model.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/admin/add_product.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/config/routes.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/admin.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/models/products_model.php",
+		"/Applications/MAMP/htdocs/islamhane/application/views/homepage/index.php",
+		"/Applications/MAMP/htdocs/islamhane/application/controllers/homepage.php",
+		"/Applications/MAMP/htdocs/parser/upload.php",
+		"/Applications/MAMP/htdocs/parser/index.php",
+		"/Applications/MAMP/htdocs/islamhane/application/config/routes.php",
+		"/Applications/MAMP/htdocs/islamhane/application/controllers/tefsir.php",
+		"/Applications/MAMP/htdocs/islamhane/application/controllers/kuran_tefsiri.php",
+		"/Applications/MAMP/htdocs/islamhane/application/libraries/simple_html_dom.php",
+		"/Applications/MAMP/htdocs/islamhane/application/views/pages/tefsir.php",
+		"/Applications/MAMP/htdocs/islamhane/application/views/admin/server_log.php",
+		"/Applications/MAMP/htdocs/islamhane/application/controllers/admin.php",
+		"/Applications/MAMP/htdocs/islamhane/.gitignore",
+		"/Applications/MAMP/htdocs/islamhane/.htaccess",
+		"/Users/agyaglikci/Desktop/islamhane/.htaccess",
+		"/Applications/MAMP/htdocs/islamhane/application/config/database.php",
+		"/Applications/MAMP/htdocs/islamhane/assets/css/flat-ui.css",
+		"/Users/agyaglikci/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Applications/MAMP/htdocs/islamhane/application/views/admin/login.php",
+		"/Applications/MAMP/htdocs/islamhane/application/models/admin_model.php",
+		"/Applications/MAMP/htdocs/islamhane/application/views/admin/welcome.php",
+		"/Applications/MAMP/htdocs/islamhane/application/config/autoload.php",
+		"/Users/agyaglikci/Desktop/untitled.html",
+		"/Users/agyaglikci/Desktop/KS_3/111101051/soru1/soru1.v",
+		"/Users/agyaglikci/Desktop/KS_3/121101061/proje_2/soru2.v",
+		"/Users/agyaglikci/Downloads/rss.rss",
+		"/Users/agyaglikci/Downloads/rss-2.rss",
+		"/Users/agyaglikci/Desktop/rss.html",
+		"/Users/agyaglikci/Desktop/Ders Programı.html",
+		"/Users/agyaglikci/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/agyaglikci/Desktop/BIL264L_AS1/07110235/MidtermSoru1/soru1.v",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/cart/index.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/products/view.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/products.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/checkout/index.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/admin/order_box.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/checkout.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/models/orders_model.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/models/checkout_model.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/models/cart_model.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/system/libraries/Cart.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/cart.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/testcontroller.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/system/database/DB_active_rec.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/categories/product_list.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/user.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/user/order_box.php",
+		"/Applications/MAMP/htdocs/yuzlercecesit/.gitignore",
+		"/Applications/MAMP/htdocs/yuzlercecesit/.htaccess",
+		"/Applications/MAMP/htdocs/index.html"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"",
+			"logs.php",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"}\n",
+			"is_user_permitted_to_edit",
+			"get_printable",
+			"sidr",
+			"perm",
+			"permanent",
+			";\n",
+			"sector",
+			"sectors/",
+			"flag",
+			"hata",
+			"HATA",
+			"button-social",
+			"git pull",
+			"pull",
+			"linkHref",
+			"callback",
+			"111101013",
+			"started",
+			"$started",
+			"f9",
+			"ctrl+`",
+			"cntrl+`",
+			"$items['options']",
+			"$items['options'][0]",
+			"['qty']",
+			"+ +",
+			"++",
+			"+",
+			"$shipping",
+			"4.5",
+			"confirm_payment",
+			"$log",
+			"quantity",
+			"get_items_by_orderid",
+			"quantity",
+			"cart",
+			"f3",
+			"f1"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"get_printable_attr"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "tez.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 861,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								861,
+								861
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "baslangic.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2339,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "bolum1.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14,
+								14
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 171.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "tez.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 242.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
