@@ -1,0 +1,34 @@
+\input{baslangic}
+
+\tableofcontents  
+\listoffigures  % Eger tezde herhangi bir sekil yoksa silinmelidir 
+\listoftables  % Tezde herhangi bir tablo yoksa silinmelidir
+\newpage
+\newpage
+%\input{semboller}  % Tezin basina kisaltmalar ya da semboller sayfasi konacaks basindaki '%' kaldirilmeli ve semboller.tex dosyasi olusturulmalidir 
+\newpage
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{4}
+
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\setcounter{section}{1}
+
+
+\input{bolum1}
+\input{bolum2}
+\input{bolum3}
+\input{bolum4}
+\input{bolum5}
+
+\input{kaynakca} % Kaynakca .bib seklinde degil de kaynakca.tex dosyasi olarak hazirlanirsa bu satir kullanilmali
+%\bibliography{kaynakca} % kaynakca.bib dosyasi hazirlanirsa bu satir kullanilmali
+%\bibliographystyle{abbrv} % kaynakca.bib ile beraber kullanim icin.
+\input{ekler}
+\input{ozgecmis}
+
+
+
+\end{document}
