@@ -220,26 +220,18 @@
 	"buffers":
 	[
 		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "tez.tex",
 			"settings":
 			{
 				"buffer_size": 861,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "baslangic.tex",
-			"settings":
-			{
-				"buffer_size": 2339,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bolum1.tex",
-			"settings":
-			{
-				"buffer_size": 16,
 				"line_ending": "Unix"
 			}
 		}
@@ -279,6 +271,14 @@
 	},
 	"file_history":
 	[
+		"/Users/agyaglikci/Workspace/tez/etutez.cls",
+		"/Users/agyaglikci/Workspace/tez/ozgecmis.tex",
+		"/Users/agyaglikci/Workspace/tez/tez.log",
+		"/Users/agyaglikci/Workspace/tez/bolum1.tex",
+		"/Users/agyaglikci/Workspace/tez/tez.sublime-project",
+		"/Users/agyaglikci/Workspace/tez/tez.pdf",
+		"/Users/agyaglikci/Workspace/tez/tez.tex",
+		"/Users/agyaglikci/Workspace/tez/baslangic.tex",
 		"/Applications/MAMP/htdocs/dosim/application/models/admin_model.php",
 		"/Applications/MAMP/htdocs/dosim/application/models/sliders_model.php",
 		"/Applications/MAMP/htdocs/dosim/application/views/homepage/index.php",
@@ -398,13 +398,7 @@
 		"/Applications/MAMP/htdocs/yuzlercecesit/system/libraries/Cart.php",
 		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/cart.php",
 		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/testcontroller.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/system/database/DB_active_rec.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/categories/product_list.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/user.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/user/order_box.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/.gitignore",
-		"/Applications/MAMP/htdocs/yuzlercecesit/.htaccess",
-		"/Applications/MAMP/htdocs/index.html"
+		"/Applications/MAMP/htdocs/yuzlercecesit/system/database/DB_active_rec.php"
 	],
 	"find":
 	{
@@ -425,6 +419,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Hande",
+			"error",
 			"}\n",
 			"is_user_permitted_to_edit",
 			"get_printable",
@@ -482,44 +478,44 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "tez.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 861,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								861,
-								861
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "baslangic.tex",
-					"semi_transient": false,
+					"file": "tez.tex",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 2339,
+						"buffer_size": 861,
 						"regions":
 						{
 						},
@@ -538,35 +534,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "bolum1.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 16,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								14,
-								14
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -605,7 +573,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 171.0
+		"height": 268.0
 	},
 	"output.find_results":
 	{
