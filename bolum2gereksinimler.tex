@@ -1,0 +1,115 @@
+\chapter{TASARIM GEREKSİNİMLERİ}
+OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamalarının, özelleştirilebilir, milli tasarım bir donanım üzerinde çalıştırılması amacı ile başlatılan projenin gerekinimleri şu şekildedir: 
+\begin{enumerate}
+  \item Tasarlanan işlemci çok çekirdekli mimariye sahip olmalıdır.
+  \item Tasarlanan işlemcinin buyruk kümesi OpenCL 1.2 desteklemelidir. 
+  \item Tüm işlemler 32 bit integer ve floating point sayılar üzerinden yapılmalıdır. Floating point sayılar için IEEE754 standardı kullanılmalıdır.
+  \item Tasarım modüler olmalı alt modül sayıları parametrik tanımlanmalı, bütün mimari modülleri özelleştirilebilir olmalıdır. 
+  \item Gelecek çalışmalarda tasarlanacak özel hesaplama ipcore modülleri için standart bir arayüzü desteklemelidir.
+  \item Tasarım sayısal sinyal işleme uygulamalarında sıklıkla kullanılan ve Tablo \ref{table:fonksiyonListesi} içinde belirtilen fonksiyonları desteklemelidir.
+  \item Verilen bir matrisin kopyası oluşturulup kopya üzerinden işlem yapılmalıdır.
+  \item Reel sayılar matrisi oluşturulurken bellekte yalnızca reel sayıların sığabileceği bir alan kullanılmalıdır, karmaşık sayılar matrisi oluşturulurken reel ve imajiner kısımlar için ayrı yer ayrılmalıdır.
+  \item Satır, sütun veya alt matris üzerinde işlem yapılırken yalnızca ilgili veriler kopyalanmalıdır.
+  \newpage
+  	
+  
+\end{enumerate}
+
+\begin{longtable}{p{80pt} p{250pt}}
+\caption[Desteklenmesi beklenen fonksiyon listesi]{Desteklenmesi beklenen fonksiyon listesi} \label{table:fonksiyonListesi} \\
+\multicolumn{1}{c}{\textbf{Fonksiyon}} & \multicolumn{1}{c}{\textbf{Açıklama}} \\ 
+\hline 
+\endfirsthead
+
+\multicolumn{2}{c}%
+{{\bfseries \tablename\ \thetable{} -- devam}} \\
+\multicolumn{1}{c}{\textbf{Fonksiyon}} &
+\multicolumn{1}{c}{\textbf{Açıklama}}  \\ \hline 
+\endhead
+
+\hline \multicolumn{2}{r}{{Sonraki sayfada devam etmektedir.}} \\ 
+\endfoot
+
+\hline \hline
+\endlastfoot
+ Toplama 								& İki matrisin eleman eleman toplanması 											\\%math_desc%		& C$_{m,n}$=A$_{m,n}$ + B$_{m,n}$  \\
+ 												& Matrisin tüm elemanlarına sabit eklenmesi										\\%math_desc% 		& C$_{m,n}$= A$_{m,n}$ + b  \\
+ Çıkarma 								& İki matrisin eleman eleman farkı 														\\%math_desc		& C$_{m,n}$= A$_{m,n}$ - B$_{m,n}$ \\
+ 												& Matrisin tüm elemanlarından sabit çıkarılması 							\\%math_desc		& C$_{m,n}$= A$_{m,n}$ - b\\
+ Çarpma									& Matrislerin eleman - eleman çarpımı 												\\%math_desc		& C$_{m,n}$= A$_{m,n}$ * B$_{m,n}$\\
+ 												& Matris çarpımı 																							\\%math_desc		& C = A x B\\
+ 												& Matrisin tüm elemanlarının sabit ile çarpımı				 				\\%math_desc		& C$_{m,n}$= A$_{m,n}$ * b\\
+ Bölme									& Matrislerin eleman - eleman bölümü 													\\%math_desc		& C$_{m,n}$= A$_{m,n}$ / B$_{m,n}$\\
+ 												& Matrisin tüm elemanlarının sabit ile çarpımı				 				\\%math_desc		& C$_{m,n}$= A$_{m,n}$ / b\\
+ Toplam									& Matrisin satır toplamları 																	\\%math_desc		& C$_{(mx1)}$=sum(A,rows)\\
+ 												& Matrisin sütun toplamları				 														\\%math_desc		& C$_{(1xn)}$=sum(A,cols)\\
+ 												& Matrisin tüm elemanlarının toplamı 													\\%math_desc		& C = sum(A)\\
+ Max, Min,  						& Her satır için																							\\%math_desc		& \\
+ Mean, Median						& Her sütun için																							\\%math_desc		& \\
+ 												& Matrisin tüm elemanları için																\\%math_desc		& \\
+ 												& En büyük elemanın ilk indisi																\\%math_desc		& \\
+ 												& Mutlak en büyük elemanın değeri															\\%math_desc		& \\
+ 												& Mutlak en büyük elemanın ilk indisi													\\%math_desc	  & \\
+ Nokta çarpımı					& İki vektörün nokta çarpımı																	\\%math_desc		& C = V$_{1}$ . V$_{2}$\\
+ FFT/IFFT								& Her satırın fourier ve ters fourier dönüşümü								\\%math_desc		& \\
+ 												& Her sütunun fourier ve ters fourier dönüşümü								\\%math_desc		& \\
+ Logaritma							& Her eleman için doğal logaritma hesabı											\\%math_desc		& C$_{m,n}$ = ln(A$_{m,n}$)\\	
+ 												& Her elemean için 10 tabanında logaritma hesabı							\\%math_desc		& C$_{m,n}$ = log10(A$_{m,n}$)\\
+ Eksponansiyel					& 10 tabanında eksponansiyel 																	\\%math_desc		& C$_{m,n}$ = 10$^{A_{m,n}}$\\
+ 												& Doğal tabanda eksponansiyel 																\\%math_desc		& C$_{m,n}$ = e$^{A_{m,n}}$\\ 
+ Büyüklük								& Matrisin mutlak büyüklüğü																		\\%math_desc		& C = mag(A, abs)\\ 
+ 												& Matrisin enerjisi																						\\%math_desc		& C = mag(A, sqr) \\	
+ Evrişim 								& Dairesel konvolüsyon (Circular convolution)									\\%math_desc		& C = cconv(A, B, n)\\ 
+ 												& Doğrusal konvolüsyon (Linear convolution) 									\\%math_desc		& C = conv(A, B, n)\\  
+ Eşlenik     						&	Bir matrisin karmaşık eşleniği															\\%math_desc		& C = conj(A)\\
+ Transpoz								&	Bir matrisin transpozu																			\\%math_desc		& B = A'\\
+ 											  &	Bir matrisin eşleniksiz transpozu														\\%math_desc		& B = A.'\\			
+ Determinant						& Bir kare matrisin determinantı															\\%math_desc		& C = det(A)\\
+ Trigonometrik					& Her eleman için sin/cos/tan değerleri 											\\%math_desc		& \\ 			
+ Filtreleme							& Her satırı FIR ve IIR Filtreleme 														\\%math_desc		& \\
+ 												& Her sütunu FIR ve IIR Filtreleme 														\\%math_desc		& \\
+ Windowing 							& Hamming, Hanning ve Gaussian 																\\%math_desc		& \\
+ Alt matris 						& Matrisin bir satırını al / değiştir   											\\%math_desc		& \\
+ 												& Matrisin bir sütununu al / değiştir													\\%math_desc		& \\
+ 												& Matrisin bir alt matrisini al / değiştir										\\%math_desc		& \\
+ Türev									& Bir vektörün 1. derecede türevi															\\%math_desc		& \\
+ Norm 									& Matrisin ve vektörün p. dereceden normu 										\\%math_desc		& \\
+ Sıralama 							& Satır sıralama 																							\\%math_desc		& \\
+ 												& Sütun sıralama 																							\\%math_desc		& \\
+ 												& Matris sıralama (vektör sıralama gibi) 											\\%math_desc		& \\
+ Varyans,								& Satır bazlı 	 																							\\%math_desc		& \\
+ Standart Sapma					& Sütun bazlı 	 																							\\%math_desc		& \\
+ 												& Matris bazlı 	 																							\\%math_desc		& \\
+ İşaret									& Her bir eleman için signum fonksiyonu 											\\%math_desc		& \\
+ Flip										& Yatay ve düşey eksende flip 																\\%math_desc		& \\
+ Karekök 								& Her eleman için karekök 																		\\%math_desc		& \\
+ Reverse 								& Elemanların sırasını tersine çevirir 												\\%math_desc		& \\
+ Interpolasyon 					& Lineer interpolasyon 																				\\%math_desc		& \\
+ Karşılaştırma 					& Satır, sütun bazlı veya matris için karşılaştırma 					\\%math_desc		& 
+\end{longtable}
+
+Tasarlanan donanımın temel tasarım kararlarını oluşturan gereksinimler ve fonksiyon listesi incelenmiş, her bir matematiksel işlem için gerekli buyruklar ve donanım birimleri belirlenmiştir. 
+
+\textbf{Fonksiyon listesindeki işlemlerin paralelleştirilmesi ve başarıma etkisi}
+Tablo \ref{table:fonksiyonListesi} içinde belirtilen işlemlerin paralelleştirilmesi ile işlem sürelerinin kısalması beklenmektedir. Paralel hesaplamada işlem süresini belirleyen 4 unsur vardır. \par
+
+Bunlardan birincisi bellek işlemlerine ayrılan süredir. Programlanabilir her sistemde olduğu gibi bir işlem veya işlem dizisi başlarken bellekten veri okunur, sonlandığında ise tekrar belleğe sonuçlar yazılır. İşlemler paralelleştirilse de paralelleştirilmese de bellek için harcanan süre toplamda yakındır. {Citation Here} Hem yazılım hem de donanım seviyesinde bellek işlemlerinde yerelliği artırmak bellek işlemlerinin daha hızlı işlenmesine olanak sağlar.\par
+
+İkinci unsur paralelleştirmenin bir ölçüsü olan thread sayısıdır. Söz konusu işlem birbirinden bağımsız iş parçacıklarına bölünür ve her bir iş parçacığı farklı donanımlarda koşturularak paralel işleme sağlanır. Literatürde bu iş parçacıkları ingilizce ismi olan thread kelimesiyle ifade edilmekte ve thread kelimesinin buradaki anlamını taşıyan bir türkçe tercümesi bulunmamaktadır. Bu sebeple tezin devamında sürekli olarak thread kelimesi kullanılacaktır. Thread sayısındaki artış, programın daha paralel koşturulabilmesine olanak sağlar.\par
+
+Üçüncü unsur donanımda gerçeklenmiş thread yolu sayısıdır. Her bir thread, bir thread yoluna atanır ve o yol üzerinde koşturulur. Eğer thread yolu sayısı thread sayısından büyük veya eşitse, tek seferde bütün threadler işlenir ve program sonlanır. Eğer thread sayısı, thread yolu sayısından fazla ise threadler, thread yolu sayısı kadar elemana sahip kümelere bölünür. NVidia'nın dokümanlarında warp ismi ile anılan bu thread kümelerinin her biri tek seferde işlenir. Toplam işlem süresi ise warp sayısına bağlı olarak artar. Thread yolu sayısının artırılması warp sayısında ve işlem süresinde azalmaya yol açar. Ancak fiziksel kısıtlardan dolayı thread yolu sayısının bir üst limiti vardır. \par
+
+Dördüncü unsur ise her bir thread için harcanan yürütme zamanıdır. Thread başına düşen yürütme zamanı thread içindeki buyruk sayısına, buyrukların çevrim sayılarına, buyruklar arası veri bağımlılıklarına, işlemcinin boru hattı mimarisine ve işlemcinin frekansına bağlı olarak değişir.\par
+
+Dolayısıyla bir paralelleştirilmiş bir uygulamanın yürütme zamanı denklem \ref{equation:yurutmeZamani}'de gösterildiği şekilde formüle dökülebilir.
+
+\begin{equation} \label{equation:yurutmeZamani}
+t_{program} = t_{bellek} + t_{thread} x \frac{N_{thread}}{N_{thread yolu}} \& 
+t_{thread} = N_{buyruk} x c_{ortalama} x T_{saat}
+\end{equation} 
+
+Burada $t_{program}$ program süresini, $t_{bellek}$ bellek işlemleri süresini, $t_{thread}$ thread süresini, $N_{thread}$ toplam thread sayısını, $N_{thread yolu}$ toplam thread yolu sayısını, $N_{buyruk}$ thread içindeki buyruk sayısını, $c_{ortalama}$ her buyruk için harcanan çevrim sayılarının ortalamasını, $T_{saat}$ işlemci saatinin periyodunu ifade eder.\par
+
+Thread yolu sayısının 1 olduğu durumda aynı anda tek bir thread işlenebilir. Dolayısıyla işlem paralelleştirilmemiş olur. Thread yolu sayısının sonsuza gitmesi halinde ise program süresi bellek işlemleri için harcanan zamana eşit olur. \par
+\textbf{Program süresi bileşenlerinin optimize edilmesi}\par
+Thread sayısı ve thread içindeki buyruk sayısı yazılım katmanında belirlenen değerlerdir. Bellek işlemleri için harcanan süre kaçınılmaz olmasına rağmen yazmaç öbeği, paylaşımlı bellek ve ana bellek ara yüzü gibi load ve store işlemleri ile ilgili donanımların tasarımlarında yapılan iyileştirmeler bellek için harcanan süreyi azaltabilir. Öte yandan işlemci frekansı ve işlemler için harcanan ortalama çevrim sayıları da hesaplama işlemlerinin süresini doğrudan belirleyen bileşenler olup optimize edilmesi gerekmektedir. Bu tarz bir optimizasyon için buyruk kümesi ve boru hattı mimarisi belirleyici yapılardır. Buyruk kümesi tasarımı için fonksiyon listesinde bulunan işlemler \par 
