@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"asse",
+				"asset_url"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
 				"caption",
 				"caption_title"
 			],
@@ -219,27 +227,11 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "tez.tex",
-			"settings":
-			{
-				"buffer_size": 861,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/minilatex/MiniLaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 67.0,
+		"height": 375.0,
 		"selected_items":
 		[
 			[
@@ -247,7 +239,7 @@
 				"About"
 			]
 		],
-		"width": 392.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -271,14 +263,25 @@
 	},
 	"file_history":
 	[
-		"/Users/agyaglikci/Workspace/tez/etutez.cls",
-		"/Users/agyaglikci/Workspace/tez/ozgecmis.tex",
-		"/Users/agyaglikci/Workspace/tez/tez.log",
-		"/Users/agyaglikci/Workspace/tez/bolum1.tex",
-		"/Users/agyaglikci/Workspace/tez/tez.sublime-project",
-		"/Users/agyaglikci/Workspace/tez/tez.pdf",
 		"/Users/agyaglikci/Workspace/tez/tez.tex",
 		"/Users/agyaglikci/Workspace/tez/baslangic.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum2gereksinimler.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum1giris.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum4.tex",
+		"/Users/agyaglikci/Workspace/tez/kaynakca.tex",
+		"/Users/agyaglikci/Workspace/tez/kaynakca.bib",
+		"/Users/agyaglikci/Workspace/tez/etutez.cls",
+		"/Users/agyaglikci/Workspace/tez/tez.log",
+		"/Users/agyaglikci/Workspace/tez/bolum1.tex",
+		"/Applications/MAMP/htdocs/deneme/index.html",
+		"/Users/agyaglikci/Workspace/tez/tez.lot",
+		"/Users/agyaglikci/Workspace/tez/tez.toc",
+		"/Users/agyaglikci/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/agyaglikci/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/agyaglikci/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/agyaglikci/Workspace/tez/tez.sublime-project",
+		"/Users/agyaglikci/Workspace/tez/ozgecmis.tex",
+		"/Users/agyaglikci/Workspace/tez/tez.pdf",
 		"/Applications/MAMP/htdocs/dosim/application/models/admin_model.php",
 		"/Applications/MAMP/htdocs/dosim/application/models/sliders_model.php",
 		"/Applications/MAMP/htdocs/dosim/application/views/homepage/index.php",
@@ -330,7 +333,6 @@
 		"/Applications/MAMP/htdocs/cataload/application/views/admin/login.php",
 		"/Applications/MAMP/htdocs/cataload/application/models/admin_model.php",
 		"/Users/agyaglikci/Documents/ucgoz/AHM/system/libraries/Ftp.php",
-		"/Applications/MAMP/htdocs/deneme/index.html",
 		"/Applications/MAMP/htdocs/deneme/html",
 		"/Users/agyaglikci/Documents/Tefsir.xml",
 		"/Applications/MAMP/htdocs/dosim/system/expressionengine/templates/default_site/hizmetler.group/index.html",
@@ -372,7 +374,6 @@
 		"/Users/agyaglikci/Desktop/islamhane/.htaccess",
 		"/Applications/MAMP/htdocs/islamhane/application/config/database.php",
 		"/Applications/MAMP/htdocs/islamhane/assets/css/flat-ui.css",
-		"/Users/agyaglikci/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
 		"/Applications/MAMP/htdocs/islamhane/application/views/admin/login.php",
 		"/Applications/MAMP/htdocs/islamhane/application/models/admin_model.php",
 		"/Applications/MAMP/htdocs/islamhane/application/views/admin/welcome.php",
@@ -384,21 +385,12 @@
 		"/Users/agyaglikci/Downloads/rss-2.rss",
 		"/Users/agyaglikci/Desktop/rss.html",
 		"/Users/agyaglikci/Desktop/Ders Programı.html",
-		"/Users/agyaglikci/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
 		"/Users/agyaglikci/Desktop/BIL264L_AS1/07110235/MidtermSoru1/soru1.v",
 		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/cart/index.php",
 		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/products/view.php",
 		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/products.php",
 		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/checkout/index.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/admin/order_box.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/checkout.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/models/orders_model.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/models/checkout_model.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/models/cart_model.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/system/libraries/Cart.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/cart.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/testcontroller.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/system/database/DB_active_rec.php"
+		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/admin/order_box.php"
 	],
 	"find":
 	{
@@ -409,6 +401,7 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"bolum2.tex",
 			"",
 			"logs.php",
 			""
@@ -419,6 +412,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"(m,n)",
+			"alt+shift",
 			"Hande",
 			"error",
 			"}\n",
@@ -467,6 +462,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"$_{m,n}$",
 			"get_printable_attr"
 		],
 		"reverse": false,
@@ -478,65 +474,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "tez.tex",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 861,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -573,7 +512,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 268.0
+		"height": 303.0
 	},
 	"output.find_results":
 	{
