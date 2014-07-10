@@ -241,8 +241,8 @@ Interpolasyon işlemi, ardışık elemanların ağırlıklı ortalamalalarının
 \subsection{Özet}
 Listedeki fonksiyonların incelenmesi ile gerekli hesaplama buyrukları çıkarılmıştır. Fonksiyon listesinin gerçeklenebilmesi için gerekli buyruklar Tablo \ref{table:instructionList1}'de sunulmuştur. 
 
-\begin{longtable}{p{80pt} p{250pt}}
-\caption[Desteklenmesi beklenen fonksiyon listesi]{Desteklenmesi beklenen fonksiyon listesi} \label{table:fonksiyonListesi} \\
+\begin{longtable}{p{100pt} p{250pt}}
+\caption{Gerekli Hesaplama Buyrukları} \label{table:instructionList1} \\
 \multicolumn{1}{c}{\textbf{Fonksiyon}} & \multicolumn{1}{c}{\textbf{Açıklama}} \\ 
 \hline 
 \endfirsthead
@@ -258,7 +258,15 @@ Listedeki fonksiyonların incelenmesi ile gerekli hesaplama buyrukları çıkar�
 
 \hline \hline
 \endlastfoot
-  and, or, not,    &    \\
-
- Karşılaştırma          & Satır, sütun bazlı veya matris için karşılaştırma           \\%math_desc    & 
+  add, addi, fadd     &   Float ve tamsayı değerleri için toplama ve tamsayı için anlık toplama işlemleri \\
+  sub, subi, fsub     &   Float ve tamsayı değerleri için çıkarma ve tamsayı için anlık çıkarma işlemleri \\
+  mul, muli, fmul     &   Float ve tamsayı değerleri için çarpma ve tamsayı için anlık çarpma işlemleri \\
+  div, divi, fdiv     &   Float ve tamsayı değerleri için bölme ve tamsayı için anlık bölme işlemleri \\
+  fma, ffma           &   Float ve tamsayı değerler için fused multiply add işlemi \\
+  sin, cos, fsin, fcos&   Float ve tamsayı değerler için trigonometrik işlemler \\
+  log, flog           &   Float ve tamsayı değerler için e tabanında logaritma işlemi\\
+  exp, fexp           &   Float ve tamsayı değerler için $e^{x}$ işlemi \\
+  shl, shr, shra      &   Aritmetik ve mantık kaydırma buyrukları \\
+  sqrt, fsqrt         &   Float ve tamsayı değerler için karekök işlemi \\
+  cmp, br, jump       &   Döngü ve koşul oluşturabilmek için gerekli karşılaştırma, dallanma ve atlama buyrukları \\
 \end{longtable}
