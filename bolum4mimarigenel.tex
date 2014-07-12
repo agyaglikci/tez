@@ -1,1 +1,95 @@
 \chapter{BUYRUK KÜMESİ VE BORU HATTI MİMARİSİ}
+İşlemci tasarımı buyruk kümesinin tasarlanması ile başlar, buyrukların koşturulabilmesi için gerekli donanımlar belirlenir ve bu donanımların yüksek verimli kullanımını sağlamak için boru hattı mimarisi tasarlanır. Tezin bu bölümünde öncelikli olarak buyruk kümesi mimarisi anlatılacak, ardından her buyruğun ihtiyaç duyduğu hesaplama modülleri belirlenecek, sonrasında kullanım senaryoları üzerinden boru hattı mimarisi tasarımı anlatılacaktır. \par
+
+Literatür özetinde belirtilen mimari alternatifleri, çekirdek sayısı ve homojen - heterojen çekirdekler bakımından farklı sınıflara ayrılmıştır. Hedeflenen donanım bir FPGA platformudur. FPGA platformları, ASIC tasarımlara göre daha düşük saat sıklığında çalışabildiğinden, uygulamanın yüksek seviyede paralelleştirilmesi ile faydalı bir ürün oluşturulabilir. \par
+
+\section{Buyruk Kümesi Mimarisi}
+Hedeflenen işlemciye benzer özelliklerde mevcut paralel işlemcilerin buyruk kümesi mimarileri incelenmiş, gereksinim analizinde fonksiyonların gerçeklenebilmesi için gerekli olarak belirlenen buyruklar bu buyruk kümesi mimarilerine eklenerek Tosun işlemcisi için bir buyruk kümesi mimarisi oluşturulmuştur. Mevcut buyruk kümelerinin incelenmesinin sebebi paralel işlemcilerin mimari özelliklerinden bağımsız olarak sahip olması gereken ortak özelliklerin bulunmasıdır. Bu özelliklerden bazıları yükleme ve saklama operasyonları, threadler arası senkronizasyonun sağlanması, çekirdeklerin bellek erişimlerinde kullanılan adres hesaplamaları, yazmaçlar üzerinde yapılan okuma ve yazma işlemleridir. \par
+
+Tosun buyruk kümesi mimarisinin oluşturulmasında NVidia PTX \cite{nvidiaPTXISA} buyruk kümesi paralel işleme mimarisi olarak temel alınmıştır. Ayrıca adres hesapları, dallanmalar, temel aritmetik ve mantık işlemleri gibi her işlemcinin sahip olması gereken temel buyruklar için de x86 \cite{x86ISA} ve MIPS \cite{MIPSISA} buyruk kümeleri referans alınmıştır. \par
+
+Tosun buyruk kümesi mimarisinde bulunmasına karar verilen buyruklar tablo \ref{table:tosunInstructions} içinde sunulmuştur. 
+
+
+
+\begin{longtable}{p{50pt} p{300pt} p{70pt}}
+\caption{Tosun Buyruk Listesi} \label{table:tosunInstructions} \\
+\multicolumn{1}{l}{\textbf{Buyruk}} & \multicolumn{1}{l}{\textbf{Açıklama}} & \multicolumn{1}{c}{\textbf{Türü}} \\ 
+\hline 
+\endfirsthead
+
+\multicolumn{2}{c}%
+{{\bfseries \tablename\ \thetable{} -- devam}} \\
+\multicolumn{1}{l}{\textbf{Buyruk}} &
+\multicolumn{1}{l}{\textbf{Açıklama}} &
+\multicolumn{1}{c}{\textbf{Türü}}  \\ \hline 
+\endhead
+
+\hline \multicolumn{2}{r}{{Sonraki sayfada devam etmektedir.}} \\ 
+\endfoot
+
+\hline \hline
+\endlastfoot
+  addi		&	 $r_{d} = r_{s1} + 			$anlık 	& \multicolumn{1}{c}{Anlık} 	\\
+  andi 		&	 $r_{d} = r_{s1} \& 		$anlık 	& \multicolumn{1}{c}{Anlık}  	\\
+  ori 		&	 $r_{d} = r_{s1} | 			$anlık  & \multicolumn{1}{c}{Anlık}  	\\
+  xori 		&	 $r_{d} = r_{s1} \oplus $anlık 	& \multicolumn{1}{c}{Anlık}  	\\
+  divi 		&	 $r_{d} = r_{s1} / 			$anlık  & \multicolumn{1}{c}{Anlık}  	\\
+  muli 		&	 $r_{d} = r_{s1} x 			$anlık  & \multicolumn{1}{c}{Anlık}  	\\
+  subi 		&	 $r_{d} = r_{s1} - 			$anlık  & \multicolumn{1}{c}{Anlık}  	\\
+  movi 		&	 $r_{d}(alt yarısı) = 	$anlık  & \multicolumn{1}{c}{Anlık}  	\\
+  movhi		&	 $r_{d}(üst yarısı) = 	$anlık  & \multicolumn{1}{c}{Anlık}  	\\
+  fabs  	&  $r_{d} = |r_{s1}|			$				&	\multicolumn{1}{c}{Y1}		 	\\
+  fadd  	&  $r_{d} = r_{s1} + r_{s2}$			&	\multicolumn{1}{c}{Y2}		 	\\
+  fcom  	&  $r_{d} = com(r_{s1},r_{s2})$		&	\multicolumn{1}{c}{Karşılaştırma}	 	\\
+  fdiv  	&  $r_{d} = r_{s1} / r_{s2}$			&	\multicolumn{1}{c}{Y2}		 	\\
+  fmul  	&  $r_{d} = r_{s1} x r_{s2}$			&	\multicolumn{1}{c}{Y2}		 	\\
+  fsqrt  	&  $r_{d} = sqrt(r_{s1})$					&	\multicolumn{1}{c}{Y1}		 	\\
+  fcos  	&  $r_{d} = cos(r_{s1})$					&	\multicolumn{1}{c}{Y1}		 	\\
+  fsin  	&  $r_{d} = sin(r_{s1})$					&	\multicolumn{1}{c}{Y1}		 	\\
+  ffma  	&  $r_{d} = r_{s1}xr_{s2}+r_{s3}$	&	\multicolumn{1}{c}{Y3}		 	\\
+  ffms  	&  $r_{d} = r_{s1}xr_{s2}-r_{s3}$	&	\multicolumn{1}{c}{Y3}		 	\\
+  fmin  	&  $r_{d} = min(r_{s1},r_{s2})$		&	\multicolumn{1}{c}{Y2}		 	\\
+  fmax  	&  $r_{d} = max(r_{s1},r_{s2})$		& \multicolumn{1}{c}{Y2}			\\
+  fln 	 	&	 $r_{d} = log_{e}(r_{s1})$			& \multicolumn{1}{c}{Y1}			\\
+  fmod 		&	 $r_{d} = r_{s1} \% r_{s2} $ 		& \multicolumn{1}{c}{Y2}  		\\
+  f2int 	&	 $r_{d} = r_{s1}$ 							& \multicolumn{1}{c}{Y1}  		\\
+  int2f		&	 $r_{d} = r_{s1}$ 							& \multicolumn{1}{c}{Y1}  		\\
+  fchs		&	 $r_{d} = -r_{s1}$ 							& \multicolumn{1}{c}{Y1}  		\\
+  fexp 		&	 $r_{d} = e^{r_{s1}}$						& \multicolumn{1}{c}{Y1}  		\\
+  add 		&	 $r_{d} = r_{s1} + r_{s2}$ 			& \multicolumn{1}{c}{Y2}  		\\
+  and 		&	 $r_{d} = r_{s1} \& r_{s2}$ 		& \multicolumn{1}{c}{Y2}  		\\
+  or 			&	 $r_{d} = r_{s1} | r_{s2}$			& \multicolumn{1}{c}{Y2}  		\\
+  xor			&	 $r_{d} = r_{s1} xor r_{s2}$ 		& \multicolumn{1}{c}{Y2}  		\\
+  div  		&  $r_{d}	= r_{s1} / r_{s2}$			&	\multicolumn{1}{c}{Y2}		 	\\
+  mul  		&  $r_{d} = r_{s1} x r_{s2}$			&	\multicolumn{1}{c}{Y2}		 	\\
+  shl  		&  $r_{d} = r_{s1} << r_{s2}$			&	\multicolumn{1}{c}{Y2}		 	\\
+  shr  		&  $r_{d} = r_{s1} >> r_{s2}$			&	\multicolumn{1}{c}{Y2}			\\
+  shra  	&  $r_{d} = r_{s1} >> r_{s2}$			&	\multicolumn{1}{c}{Y2}		 	\\
+  sub  		&  $r_{d} = r_{s1} - r_{s2}$			&	\multicolumn{1}{c}{Y2}		 	\\
+  min  		&  $r_{d} = min(r_{s1},r_{s2})$		&	\multicolumn{1}{c}{Y2}		 	\\
+  max  		&  $r_{d} = max(r_{s1},r_{s2})$		&	\multicolumn{1}{c}{Y2}		 	\\
+  chs  		&  $r_{d} = -r_{s1}$							&	\multicolumn{1}{c}{Y1}		 	\\
+  not  		&  $r_{d} = ~r_{s1}$							&	\multicolumn{1}{c}{Y1}		 	\\
+  abs  		&  $r_{d} = |r_{s1}|$							&	\multicolumn{1}{c}{Y1}		 	\\
+  com  		&  $r_{d} = max(r_{s1},r_{s2})$		& \multicolumn{1}{c}{Y2}			\\
+  mod  		&  $r_{d} = max(r_{s1},r_{s2})$		& \multicolumn{1}{c}{Y2}			\\
+  brv 		&	 Verilen yazmaçtaki bitleri ters sırada hedef yazmaca yazar & \multicolumn{1}{c}{Y1}  \\
+  bfr 		&	 Verilen yazmacın belirtilen kadar kısmını maskeleyip hedef yazmaca yazar & \multicolumn{1}{c}{Y1}  \\
+  br 			&	 Karşılaştırma bayraklarında belirtilen koşul varsa, verilen adres kadar ileri atlar & \multicolumn{1}{c}{Dallanma}  \\
+  fin 		&	 Programı sonlandırır& \multicolumn{1}{c}{Y0}  \\
+  ldshr 	&	 Paylaşımlı bellekten yükleme işlemi yapar& \multicolumn{1}{c}{Y1}  \\
+  stshr 	&	 Paylaşımlı belleğe saklama işlemi yapar& \multicolumn{1}{c}{Y1}  \\
+  sync		&	 Tüm threadler aynı noktaya gelinceye kadar önce gelen threadleri bekletir. & \multicolumn{1}{c}{Y0}  \\
+  ldram 	&	 Ana bellekten yükleme işlemi yapar& \multicolumn{1}{c}{Y1}  \\
+  stram		&	 Ana belleğe saklama işlemi yapar& \multicolumn{1}{c}{Y1}  \\
+  mov 		&  $r_{d}$ = $r_{s1}$ 						&	\multicolumn{1}{c}{Taşıma}		 \\
+  jmp  		&  Program sayacına belirtilen sayıyı ekleyerek atlar &	\multicolumn{1}{c}{Atlama}		 \\
+  
+\end{longtable}
+
+Belirlenen buyrukların kullandığı işlenen tür ve sayılarına göre buyruk türleri şu şekilde belirlenmiştir. 
+
+Bir işlemcide aynı anda birden fazla threadin koşturulması, paralel veri yolları ve hesaplama ünitelerinin gerçeklenmesi ile mümkün olur. Bu paralel yolların literatürdeki adı SIMD Lane'dir. FPGA donanım üzerinde gerçeklenecek bir işlemcinin yüksek seviyede paralel olması SIMD Lane sayısının artırılması ile mümkündür. Öte yandan SIMD Lane sayısının artması, hem alan kullanımında sebep olduğu artıştan dolayı saat sıklığını kısıtlamakta hem de ortak kullanılan verilere erişimde darboğaz oluşmasına sebep olmaktadır. Dolayısıyla SIMD lane sayısının belirlenmesi bir en iyileme problemidir. Tosun mimarisinin tasarımında SIMD lane sayısı NVidia GPU mimarilerinin incelenmesi ve tüm SIMD Lane'ler tarafından ortak kullanılan paylaşımlı bellek üzerinde oluşacak darboğazın hesaplanması ile kararlaştırılmıştır. \par
+
+Mevcut paralel işlemcilerde  Gereksinim analizi neticesinde fonksiyon listesinde belirtilen fonksiyonların gerçeklenmesi için gerekli buyruklar Tablo \ref{table:instructionList1} belirtilmiştir. 
