@@ -88,7 +88,38 @@ Tosun buyruk kümesi mimarisinde bulunmasına karar verilen buyruklar tablo \ref
   
 \end{longtable}
 
-Belirlenen buyrukların kullandığı işlenen tür ve sayılarına göre buyruk türleri şu şekilde belirlenmiştir. 
+Tosun buyruk kümesinde toplam 56 adet buyruk belirlenmiştir. Tablo \ref{table:tosunInstructions} içinde verilen buyruklar içerdikleri işlenen tür ve sayılarına göre türlere ayrılmıştır. Bu sınıflandırma buyruk içinde belirtilmesi gereken işlenen cins ve sayılarına göre yapılmıştır. Buyruk türlerinin bit yapısının belirlenebilmesi için öncelikle buyruk içine yerleştirilecek bilgilerin bit genişlikleri belirlenmelidir. \par
+
+Buyruk bit yapılarında kaynak ve hedef hafıza birimleri olarak yazmaç numaraları kullanılır. Buyruk içinde bir yazmacın kaç bit ile ifade edileceği, bir thread için tahsis edilen yazmaç sayısına bağlıdır. İşlemci mimarisinde yazmaç sayısının belirlenmesi bir ödünleşimli karardır. Yazmaç sayısının artması yazmaçlar için kullanılan alanı artıracağı gibi yazmaç numaraları için kullanılan karşılaştırıcı devrelerin de büyümesine sebep olur. Öte yandan yazmaç sayısının azlığı bellek işlemlerinin artmasına ve başarımın düşmesine sebep olacaktır. Tosun mimarisinde çok çekirdekli bir mimariden söz edildiği için yazmaç sayılarının artışı tek çekirdekli işlemcilere oranla daha fazla bir alan kullanımında artışa sebep olmaktadır. Bu yüzden Tosun mimarisinde hedef programlara yetebilecek minimum sayıda yazmaç kullanılmıştır. Bu çalışmada NVidia CUDA ile çalışan 184 adet paralel hesaplama uygulamasının yazmaç kullanım adetleri incelenmiştir. Elde edilen sonuçlara göre Tablo \ref{table:NVidiaRegisterUsage}'ta sunulduğu şekilde 64 adetten fazla sayıda yazmaç kullanan program ile karşılaşılmamıştır.
+
+\begin{longtable}{p{350pt} p{100pt} }
+\caption{NVidia GPGPU Programları Yazmaç Kullanım Analizi} \label{table:NVidiaRegisterUsage} \\
+\multicolumn{1}{l}{\textbf{Açıklama}} & \multicolumn{1}{r}{\textbf{Adet}}  \\ 
+\hline 
+\endfirsthead
+32 veya daha az sayıda yazmaç kullanan uygulamalar  & \multicolumn{1}{r}{138} \\
+32 ile 64 adet arasında yazmaç kullanan uygulamalar & \multicolumn{1}{r}{46}  \\
+64 yazmaçtan fazla sayıda yazmaç kullanan uygulamalar & \multicolumn{1}{r}{0} \\
+\end{longtable}
+
+Neticede her bir thread için 64 adet yazmaçtan oluşan yazmaç öbeği kullanılmasına karar verilmiştir. Projenin bir diğer isteği olan OpenCL desteği ise OpenCL spesifikasyonlarında belirtilen bazı özel amaçlı yazmaçların gerçeklenmesini zorunlu kılmaktadır. Lokal thread numarası ve global thread numarası gibi programcının erişimine açık olması gereken ve spesifikasyonda belirtilen bilgiler program içinde özellikle adres hesaplamalarında sıklıkla kullanılmakta olduğundan yazmaç öbeğinde tutulması faydalı olacaktır. Bu bilgilerin yanı sıra program parametrelerinin de yazmaç öbeğine dahil edilmesi ile yazmaç sayısı 128 adete çıkarılmıştır. Ancak 128 yazmacın yalnızca ilk 64 adedi genel amaçlı olup, son 64 adeti özel mov buyruğu ile erişilebilir olarak belirlenmiştir. Toplamda 64 adet genel amaçlı yazmaç, buyruk içinde 6 bit ile ifade edilebilir. \par
+
+Tüm işlemler 32 bit genişliğinde float veya tam sayılar ile yapılmaktadır. Yazmaç sayıları ve işlem kodu da hesaba katıldığında genel olarak buyrukların 32 bit genişliğe sığdırılabileceği hesaplanmıştır. Buyruklar için ayrılan bellek alanının verimli kullanılabilmesi için buyruk genişliklerinin de 32 bitten fazla olmamasına karar verilmiş, bu sebeple de buyruk içinde verilen anlık değerler 16 bit genişliğine sabitlenmiştir. Bir yazmaca anlık bir değerin yazılması ise movi ve movhi buyruklarının peş peşe kullanılması ile mümkündür. \par
+
+\subsection{Anlık türü buyruklar}
+Anlık türü buyruklar bir kaynak yazmacı, bir hedef yazmacı ve bir anlık değer içerir. Dolayısıyla işlem kodu için yalnızca 4 bitlik boş yer kalır. 4 bit, işlem koduna yeterli olmadığı için, olası tasarım çözümleri anlık değerin daraltılması veya buyruk genişliğinin artırılmasıdır. Buyruk genişliğinin değiştirilmesi durumunda bellek yönetimi, buyruk çekme ve kod çözme donanımları karmaşıklaşırken anlık değerin daraltılması durumunda ilave buyruklar gerekeceği gibi, programcının da tasarımı karmaşıklaşmaktadır. Bu probleme özel bir çözüm olarak anlık türü buyrukların 4 bit işlem koduna sahip olmasına karar verilmiştir. Anlık buyruklarda işlem koduna 4 bit ayrılmış olması, işlem kodunun kalan alt bitlerinin x ile doldurulması anlamına gelir. Toplamda 9 adet anlık türü buyruk bulunmaktadır. Dolayısıyla üst 4 biti [0,9] aralığında olan işlem kodları anlık türünde, [10,15] aralığında olan işlem kodları ise diğer türlerdedir. Buyruk kümesinde anlık türü olmayan, 46 adet buyruk vardır. Üst 4 bit için kullanılmayan 6 farklı değer olduğundan alt bitler için 8 farklı değer, dolayısıyla 3 bit gereklidir. \par
+
+Anlık türü buyruklardan kaynaklı bu değişiklik ile Tosun buyrukları 7 bit işlem kodu ile ifade edilir, 0000000 - 1001111 aralığındaki işlem kodları anlık türü buyruklara karşılık gelir, anlık türü buyruklarda alt 3 bit önemsiz olarak kabul edildiğinden yalnızca üst 4 bit buyruk içinde yer alır.\par
+
+\begin{longtable}{p{130pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt} p{10pt}}
+\caption{Buyruk Türleri} \label{table:NVidiaRegisterUsage} \\
+\multicolumn{1}{l}{\textbf{Buyruk Türü}} & \multicolumn{32}{l}{\textbf{Bit Yapısı}}  \\ 
+\multicolumn{1}{l}{} & \multicolumn{4}{c}{31-28} & \multicolumn{3}{l}{27-} & \multicolumn{3}{r}{-22} & \multicolumn{3}{l}{21-} & \multicolumn{3}{r}{-16} & \multicolumn{3}{c}{15-13} & \multicolumn{1}{c}{12} & \multicolumn{1}{r}{-7} & \multicolumn{6}{c}{6-1}   \\ 
+\hline 
+\endfirsthead
+Anlık Türü & \multicolumn{4}{c}{İşlem kodu} & \multicolumn{6}{c}{Sonuç yazmacı} & \multicolumn{6}{c}{Kaynak yazmacı} & \multicolumn{16}{c}{Anlık Değer}
+\end{longtable}
+
 
 Bir işlemcide aynı anda birden fazla threadin koşturulması, paralel veri yolları ve hesaplama ünitelerinin gerçeklenmesi ile mümkün olur. Bu paralel yolların literatürdeki adı SIMD Lane'dir. FPGA donanım üzerinde gerçeklenecek bir işlemcinin yüksek seviyede paralel olması SIMD Lane sayısının artırılması ile mümkündür. Öte yandan SIMD Lane sayısının artması, hem alan kullanımında sebep olduğu artıştan dolayı saat sıklığını kısıtlamakta hem de ortak kullanılan verilere erişimde darboğaz oluşmasına sebep olmaktadır. Dolayısıyla SIMD lane sayısının belirlenmesi bir en iyileme problemidir. Tosun mimarisinin tasarımında SIMD lane sayısı NVidia GPU mimarilerinin incelenmesi ve tüm SIMD Lane'ler tarafından ortak kullanılan paylaşımlı bellek üzerinde oluşacak darboğazın hesaplanması ile kararlaştırılmıştır. \par
 
