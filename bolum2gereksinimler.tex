@@ -150,8 +150,13 @@ Ayrık zamanda fourier ve ters fourier dönüşümü için günümüzde yaygın 
 Fourier transformu alınacak olan giriş sinyali x(n), bu sinyalin fourier transformu ise X(n) olsun.
 Radix-2 yönteminde x(n) vektörünün elemanları tek indisli elemanlar ve çift indisli elemanlar olarak ayrılıp, ikişerli gruplara bölünürler. Daha sonra her bir eleman kendinden N/2 uzaktaki eleman ile butterfly işlemine alınır. Şekil \ref{image:fft_radix2_8p}'de sunulan algoritma, şekil \ref{image:fft_radix2_butterfly}'de çizimi sunulan butterfly işlemlerinden oluşur. Her bir butterfly işleminde yapılan hesaplama denklem \ref{equation:butterfly}'de gösterildiği gibidir.
 
-\begin{figure}[h] \label{image:fft_radix2_butterfly} 
-\centering \includegraphics{gorsel/fft_radix2_butterfly.jpg} \caption{Radix 2 için butterfly işlemi}  
+\begin{figure}
+\centering
+\shorthandoff{=}
+\includegraphics[width=0.3\textwidth]{gorsel/fft_radix2_butterfly.jpg}
+\shorthandoff{=}
+\caption{Radix 2 için butterfly işlemi}
+\label{fft_radix2_butterfly}
 \end{figure}
 
 $k_{1} = cos(-\frac{2pi}{N}) \& k_{2} = sin(-\frac{2pi}{N})$
@@ -185,10 +190,14 @@ $k_{1} = cos(-\frac{2pi}{N}) \& k_{2} = sin(-\frac{2pi}{N})$
   \end{bmatrix}
 \end{equation} 
 
-\begin{figure}[h] \label{image:fft_radix2_8p}
-\centering \includegraphics{gorsel/fft_radix2_8p.jpg} \caption{8 noktalı sinyal için FFT Radix 2 algoritması}  
+\begin{figure}[h]
+\centering
+\shorthandoff{=}
+\includegraphics[width=0.8\textwidth]{gorsel/fft_radix2_8p.jpg}
+\shorthandoff{=}
+\caption{R8 noktalı sinyal için FFT Radix 2 algoritması}
+\label{fft_radix2_8p}
 \end{figure}
-
 Denklem \ref{equation:fft_radix2_butterfly}'de görüldüğü üzere her bir butterfly işlemi matris çarpımları ve matris toplamları şeklinde ifade edilebilir. İşleme alınan parametreler a ve b sayılarının reel ve imajiner kısımlarının yanı sıra $sin(-2\pi/N)$ ve $cos(-2\pi/N)$ değerleridir. Burada N değeri sonuç vektörünün her bir elemanın indisi olup, bir eleman için bir kez hesaplanır. \par
 FFT gerçeklemesi için sin ve cos değerlerinin hesaplanabilmesi gerekmektedir. Dolayısıyla matris çarpma ve toplama işlemlerinin yanı sıra trigonometri buyrukları da gerekmektedir.
 

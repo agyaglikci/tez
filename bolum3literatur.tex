@@ -9,13 +9,9 @@ Bilgisayar bilimlerindeki tüm uygulamalar ve donanımlar paralellik bakımında
 \shorthandoff{=}
 \includegraphics[width=0.9\textwidth]{gorsel/flynnTaxonomy.png}
 \shorthandoff{=}
-\caption{kepşın}
+\caption{Flynn Taksonomisi}
 \label{overflow}
 \end{figure}
-
-%\begin{figure}[ht!]
-%\includegraphics[width=0.8\textwidth]{gorsel/flynnTaxonomy.png}
-%\end{figure}
 
 SISD mimarilerde herhangi bir paralellikten bahsetmek söz konusu değildir. Tek thread çalıştıran mimariler SISD için örnek olarak gösterilebilir. \par
 
@@ -35,9 +31,14 @@ Veri yolu mimarisi, bellek, yazmaç öbekleri ve hesaplama birimleri arasındaki
 \subsection{Homojen az çekirdekli işlemciler}
 Homojen az çekirdekli mimariler birbirinin aynı olan az sayıda yüksek işlem kapasiteli çekirdeklerin 2. veya daha üst seviyede önbellekler üzerinden veri paylaşımı sağladığı işlemcilerdir. Bu mimaride her işlemci çekirdeğin kendisine ait bir önbelleği vardır. Bunlar bir interconnect yardımıyla bütünleşik bir paylaşımlı önbelleğe bağlanırlar. Bu yapıya örnek olarak Intel'in Nehalem işlemcisi gösterilebilir \cite{molka2009memory} \cite{hackenberg2009comparing}. Nehalem mimarisinde hususi önbellek 2 seviyeye ayrılmıştır ve paylaşımlı önbellek 3. seviyeyi oluşturmaktadır. Çekirdekler 3. seviye önbelleğin ardından Şekil \ref{image:nehalem}'deki gibi bir bellek denetleyicisi ile sistemin ana belleğine bağlanır.\par
 
-%\begin{figure}[h] \label{image:nehalem} 
-%\centering \includegraphics[width=50]{gorsel/nehalem.jpg} \caption{Nehalem}  
-%\end{figure}
+\begin{figure}
+\centering
+\shorthandoff{=}
+\includegraphics[width=0.9\textwidth]{gorsel/nehalem.jpg}
+\shorthandoff{=}
+\caption{Intel Nehalem Mimarisi}
+\label{image:nehalem}
+\end{figure}
 
 \subsection{Homojen çok çekirdekli işlemciler}
 Homojen çok çekirdekli mimariler birbirinin aynı olan çok sayıda düşük işlem kapasiteli çekirdeklerden oluşan yapılardır. Bunlara örnek olarak grafik işlemcileri verilebilir \cite{MCSE.2012.23}. Şekil \ref{image:nvidiagpu}'teki gibi bir yapıya sahip olan grafik işlemcilerde amaç, paralelliği ön plana çıkarmak, çok sayıda verinin aynı anda işlenebilmesine olanak sağlamaktır. Az çekirdekli işlemcilerin aksine belleği kullanmak isteyen daha çok çekirdek olacağından bu mimarilerde bellek açısından bir darboğaz oluşmasına sebep olur. Homojen çok çekirdekli mimarilerin bellek hiyerarşisi 2 seviyeli önbellek ve ana bellekten oluşur. Her iki önbellek de çekirdek adacığında paylaşımlıdır. Az çekirdekli mimarilerin aksine çok çekirdekli mimarilerde genel bir yazmaç öbeği tüm çekirdeklerin erişimine açık olup yürütme zamanında her bir çekirdeğe özel olarak atanır.
@@ -46,43 +47,66 @@ Homojen çok çekirdekli mimariler birbirinin aynı olan çok sayıda düşük i
 %\centering \includegraphics[width=300pt]{gorsel/nvidiagpu.jpg} \caption{Nvidia GPU}  
 %\end{figure}
 
+\begin{figure}
+\centering
+\shorthandoff{=}
+\includegraphics[width=0.9\textwidth]{gorsel/nvidiagpu.jpg}
+\shorthandoff{=}
+\caption{Nvidia GPU}
+\label{image:nvidiagpu}
+\end{figure}
+
+
+
 Homojen az çekirdekli mimariler genel amaçlı kullanılan CPU (Central Processing Unit) mimarilerinde tercih edilirken çok çekirdekli mimariler GPU (Graphical Processing Unit) ön plana çıkar. CPU çekirdekleri yüksek işlem gücüne sahip ve az sayıda iken GPU çekirdekleri düşük işlem gücüne sahip ve çok sayıdadır. CPU üzerinde koşturulan programların dallanma ve bellek işlemleri için harcadığı zamanın azaltılması için çekirdeklere yakın büyük kapasiteli önbellekler kullanılır. GPU çekirdeklerinin sayıca fazla olması paralel hesaplamayı ön plana çıkarmakta ve ana bellek erişimi için kullanılan veri yolu genişliği, önbellek büyüklüğünden daha önemli bir kriter olmaktadır. Tablo \ref{table:cpuGpuComparision} içinde CPU ve GPU mimarilerinin bellek özellikleri sunulmuştur \cite{cpuGpuMemoryTable}. \par
 
-%\begin{longtable}{p{150pt} p{100pt} p{100pt}}
-%\caption[CPU GPU Bellek Karşılaştırması]{CPU GPU Bellek Karşılaştırması} \label{table:cpuGpuComparision} \\
-%\multicolumn{1}{c}{} & \multicolumn{1}{c}{\textbf{CPU}} & \multicolumn{1}{c}{\textbf{GPU}} \\ 
-%\hline 
-%\endfirsthead
+\begin{longtable}{p{150pt} p{100pt} p{100pt}}
+\caption[CPU GPU Bellek Karşılaştırması]{CPU GPU Bellek Karşılaştırması} \label{table:cpuGpuComparision} \\
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{\textbf{CPU}} & \multicolumn{1}{c}{\textbf{GPU}} \\ 
+\hline 
+\endfirsthead
 
-%\multicolumn{2}{c}%
-%{{\bfseries \tablename\ \thetable{} -- devam}} \\
-%\multicolumn{1}{c}{} & \multicolumn{1}{c}{\textbf{CPU}} & \multicolumn{1}{c}{\textbf{GPU}} \\  
-%\hline 
-%\endhead
+\multicolumn{2}{c}%
+{{\bfseries \tablename\ \thetable{} -- devam}} \\
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{\textbf{CPU}} & \multicolumn{1}{c}{\textbf{GPU}} \\  
+\hline 
+\endhead
 
-%\hline 
-%\multicolumn{3}{r}{{Sonraki sayfada devam etmektedir.}} \\ 
-%\endfoot
+\hline 
+\multicolumn{3}{r}{{Sonraki sayfada devam etmektedir.}} \\ 
+\endfoot
 
-%\hline \hline
-%\endlastfoot
-%  Bellek 									&		 6 -  64 GB 		& 	768 MB - 6 GB 	\\
-%  Bellek Bant Genişliği 	&		24 -  32 GB/s 	& 	100 - 200 GB/s 	\\
-%  L2 Önbellek				 			&		 8 -  15 MB 		& 	512 - 768 KB 		\\
-%  L1 Önbellek				 			&	 256 - 512 KB 		& 	 16 -  48 KB 		\\
-%\end{longtable}
+\hline \hline
+\endlastfoot
+  Bellek 									&		 6 -  64 GB 		& 	768 MB - 6 GB 	\\
+  Bellek Bant Genişliği 	&		24 -  32 GB/s 	& 	100 - 200 GB/s 	\\
+  L2 Önbellek				 			&		 8 -  15 MB 		& 	512 - 768 KB 		\\
+  L1 Önbellek				 			&	 256 - 512 KB 		& 	 16 -  48 KB 		\\
+\end{longtable}
 
 Homojen çok çekirdekli mimarilere verilebilecek bir örnek de sunucu sistemlerinde kullanılan Tile mimarisidir. \cite{tileArchitecture} Bu mimaride 36-100 arasında RISC işlemciden oluşan çekirdekler birbirlerine bağlanarak yüksek paralellik elde edilir. Tile mimarisinde bellek mimarisi olarak şekil  \ref{image:tileArchitecture}'te sunulan NUCA (non-uniform cache architecture) önbellek mimarisi kullanılır. Bu mimaride çekirdeklerin her birinin kendine ait özel önbelleği vardır. İkinci seviye önbellek olarak diğer çekirdeklerin önbellekleri kullanılır. Örnek olarak, 64 çekirdekli bir işlemcide her bir çekirdeğin 32 KB önbelleği olduğunu varsayarsak; 1 numaralı çekirdeğin 32 KB 1. seviye ve 2016 KB 2. seviye önbelleği olacaktır. Bu tasarımda herhangi bir çekirdeğin diğer tüm çekirdeklerin önbelleklerine bağlantısı olmalıdır. Çekirdek sayısının artması ile bu gereksinim bir wiring problemine dönüşür ve uzun yollar kritik yolu etkileyerek toplam gecikmeye katkıda bulunabilir. Bu kısıttan dolayı Tile mimarisinde 2 boyutlu bir MESH ağı kurulmuş ve her bir çekirdek bu ağdaki bir node olarak yerleştirilmiştir. Her node bir çekirdek, bir önbellek ve bir routerdan oluşur. Bir çekirdek kendinden farklı tüm çekirdeklerin ön belleklerini ikinci seviye ön bellek olarak kullandığından MESH network üzerinden her birine erişimi vardır. Ancak fiziksel olarak kendisine uzak olan veriye erişebilmesi komşuluğundaki routerlar üzerinden her seferinde bir birim şeklindedir. Bu davranış satranç tahtası üzerinde şahın hareketi gibi düşünülebilir. MESH network yapısında tüm verilere erişim hızı aynı olmamakla birlikte, maksimum gecikme, node sayısının karekökü ile orantılı olarak artar. 
 
-%\begin{figure}[h] \label{image:tileArchitecture} 
-%\centering \includegraphics[width=10cm]{gorsel/tileArchitecture.png} \caption{Tile Mimarisi}  
-%\end{figure}
+\begin{figure}
+\centering
+\shorthandoff{=}
+\includegraphics[width=0.9\textwidth]{gorsel/tileArchitecture.png}
+\shorthandoff{=}
+\caption{Tile Mimarisi}
+\label{image:tileArchitecture}
+\end{figure}
 
 \subsection{Heterojen yapıdaki işlemciler}
 Birbirinin aynı olan çekirdeklerin az veya çok sayıda gerçeklenmesi ile elde edilen paralel hesaplama donanımları çoğu uygulamada performans açısından yeterli gelse de, bir takım uygulamalarda sık kullanılan bazı işlemlerin hızlandırılması adına özel donanımlar gerçeklenir. Literatürde bu tip işlemciler heterojen yapıdaki işlemciler olarak adlandırılır. Heterojen mimariler doğrudan amaca yönelik hazırlandıkları için çok farklı mimari yapılarda gerçeklenebilirler. Heterojen mimarilerin temel özelliği bir işi her zaman o işi en hızlı yapan donanıma vermeleridir. Bu sebeple sık kullanılan hemen her işlem için ayrı hesaplama birimleri yerleştirilerek, özel fonksiyonların yazılım seviyesinden donanım seviyesine indirilmesi sağlanır. Örnek olarak şekil \ref{image:playStationArchitecture}'te sunulan heterojen mimari çizimi Playstation oyun konsollarında kullanılan Cell mimarisine aittir. 
 
-%\begin{figure}[h] \label{image:playStationArchitecture} 
-%\centering \includegraphics[width=10cm]{gorsel/playStationArchitecture.png} \caption{Playstation Cell Mimarisi}  
-%\end{figure}
+
+\begin{figure}
+\centering
+\shorthandoff{=}
+\includegraphics[width=0.9\textwidth]{gorsel/playStationArchitecture.png}
+\shorthandoff{=}
+\caption{Sony Playstation Cell Mimarisi}
+\label{image:playStationArchitecture}
+\end{figure}
+
 
 Şekil \ref{image:playStationArchitecture}'te gösterilen Cell mimarisinde PPE (Power processing element) ana işlemci olup, SPE (Synergistic processing element) bloklarının her biri ise DSP benzeri SIMD işlemcilerdir.
