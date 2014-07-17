@@ -50,11 +50,11 @@
 
 
 %% sayfadaki text boyutu ile ilgili olculer
-\voffset 0mm \topmargin -5mm \headsep 15mm \textheight 232mm
+\voffset 15mm \topmargin 0mm \headsep 0mm \textheight 210mm
 
 %% genislikle ilgili olculer
-\hoffset 10mm \textwidth 145mm \oddsidemargin 0.6in \evensidemargin 0.6in
-\marginparwidth 40pt \marginparsep 12pt
+\hoffset 5mm \textwidth 145mm \oddsidemargin 0.6in \evensidemargin 0.6in
+\marginparwidth 44mm \marginparsep 1mm
 
 \parskip 0.166in \footskip 35pt
 \tolerance=6000 \brokenpenalty=10000
@@ -111,7 +111,7 @@
         { \rm
         \bf\uppercase\expandafter{\@baslik}}
     \end{center}
-     \vspace{2.5cm}%
+     \vspace{2.3cm}%
      \begin{center}
                 {
         \rm
@@ -119,7 +119,7 @@
 
                 }
     \end{center}
-        \vspace{2.5cm}
+        \vspace{2.3cm}
     \begin{center}
                 {
         \rm
@@ -141,7 +141,7 @@
                 }
     \end{center}
 
-    \vspace{3cm}
+    \vspace{2.7cm}
     \begin{center}
                 {
             \bf\uppercase\expandafter{\@tarih}\\

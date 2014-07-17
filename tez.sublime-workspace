@@ -228,10 +228,26 @@
 	"buffers":
 	[
 		{
-			"file": "tez.sublime-project",
+			"file": "tez.tex",
 			"settings":
 			{
-				"buffer_size": 73,
+				"buffer_size": 900,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bolum4mimari.tex",
+			"settings":
+			{
+				"buffer_size": 39404,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bolum3literatur.tex",
+			"settings":
+			{
+				"buffer_size": 10687,
 				"line_ending": "Unix"
 			}
 		},
@@ -239,64 +255,15 @@
 			"file": "bolum2gereksinimler.tex",
 			"settings":
 			{
-				"buffer_size": 24802,
+				"buffer_size": 25729,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bolum5mimaridetay.tex",
-			"settings":
-			{
-				"buffer_size": 34,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "tez.tex",
-			"settings":
-			{
-				"buffer_size": 931,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "kaynakca.bib",
-			"settings":
-			{
-				"buffer_size": 3125,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "kaynakca.tex",
-			"settings":
-			{
-				"buffer_size": 1490,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bolum4mimarigenel.tex",
-			"settings":
-			{
-				"buffer_size": 47,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bolum6sonuc.tex",
-			"settings":
-			{
-				"buffer_size": 15,
-				"line_ending": "Unix",
-				"name": "\\chapter{SONUÇ}"
 			}
 		},
 		{
 			"file": "baslangic.tex",
 			"settings":
 			{
-				"buffer_size": 4619,
+				"buffer_size": 4672,
 				"line_ending": "Unix"
 			}
 		}
@@ -336,14 +303,19 @@
 	},
 	"file_history":
 	[
-		"/Users/agyaglikci/Workspace/tez/bolum3literatur.tex",
-		"/Users/agyaglikci/Workspace/tez/tez.tex",
 		"/Users/agyaglikci/Workspace/tez/baslangic.tex",
-		"/Users/agyaglikci/Workspace/tez/bolum2gereksinimler.tex",
-		"/Users/agyaglikci/Workspace/tez/bolum1giris.tex",
-		"/Users/agyaglikci/Workspace/tez/bolum4.tex",
+		"/Users/agyaglikci/Workspace/tez/syntaxcheck.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum5sonuc.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum4mimari.tex",
 		"/Users/agyaglikci/Workspace/tez/kaynakca.tex",
 		"/Users/agyaglikci/Workspace/tez/kaynakca.bib",
+		"/Users/agyaglikci/Workspace/tez/tez.sublime-project",
+		"/Users/agyaglikci/Workspace/tez/bolum2gereksinimler.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum5mimaridetay.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum3literatur.tex",
+		"/Users/agyaglikci/Workspace/tez/tez.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum1giris.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum4.tex",
 		"/Users/agyaglikci/Workspace/tez/etutez.cls",
 		"/Users/agyaglikci/Workspace/tez/tez.log",
 		"/Users/agyaglikci/Workspace/tez/bolum1.tex",
@@ -353,7 +325,6 @@
 		"/Users/agyaglikci/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/agyaglikci/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/Users/agyaglikci/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
-		"/Users/agyaglikci/Workspace/tez/tez.sublime-project",
 		"/Users/agyaglikci/Workspace/tez/ozgecmis.tex",
 		"/Users/agyaglikci/Workspace/tez/tez.pdf",
 		"/Applications/MAMP/htdocs/dosim/application/models/admin_model.php",
@@ -459,11 +430,7 @@
 		"/Users/agyaglikci/Downloads/rss-2.rss",
 		"/Users/agyaglikci/Desktop/rss.html",
 		"/Users/agyaglikci/Desktop/Ders Programı.html",
-		"/Users/agyaglikci/Desktop/BIL264L_AS1/07110235/MidtermSoru1/soru1.v",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/cart/index.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/products/view.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/controllers/products.php",
-		"/Applications/MAMP/htdocs/yuzlercecesit/application/views/checkout/index.php"
+		"/Users/agyaglikci/Desktop/BIL264L_AS1/07110235/MidtermSoru1/soru1.v"
 	],
 	"find":
 	{
@@ -485,6 +452,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"width",
 			"aplanabilir",
 			"(m,n)",
 			"alt+shift",
@@ -548,110 +516,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "tez.sublime-project",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 73,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "bolum2gereksinimler.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 24802,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								24677,
-								24677
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "bolum5mimaridetay.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 34,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								32,
-								32
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "tez.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 931,
+						"buffer_size": 900,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								612,
-								612
+								865,
+								865
 							]
 						],
 						"settings":
@@ -666,50 +548,50 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "kaynakca.bib",
+					"buffer": 1,
+					"file": "bolum4mimari.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3125,
+						"buffer_size": 39404,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3122,
-								3109
+								38584,
+								38584
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/Bibtex.tmLanguage",
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 638.0,
+						"translation.y": 6785.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "kaynakca.tex",
+					"buffer": 2,
+					"file": "bolum3literatur.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1490,
+						"buffer_size": 10687,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1266,
-								1287
+								1015,
+								834
 							]
 						],
 						"settings":
@@ -717,76 +599,49 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "bolum4mimarigenel.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 47,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								45,
-								45
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 87.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "bolum6sonuc.tex",
+					"buffer": 3,
+					"file": "bolum2gereksinimler.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15,
+						"buffer_size": 25729,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14,
-								14
+								18038,
+								18038
 							]
 						],
 						"settings":
 						{
-							"auto_name": "\\chapter{SONUÇ}",
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3798.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 4,
 					"file": "baslangic.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4619,
+						"buffer_size": 4672,
 						"regions":
 						{
 						},
@@ -805,7 +660,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
