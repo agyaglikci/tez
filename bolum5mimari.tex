@@ -110,7 +110,7 @@ Anlık türü buyruklar bir kaynak yazmacı, bir hedef yazmacı ve bir anlık de
 
 Anlık türü buyruklardan kaynaklı bu değişiklik ile Tosun buyrukları 7 bit işlem kodu ile ifade edilir, 0000000 - 1001111 aralığındaki işlem kodları anlık türü buyruklara karşılık gelir, anlık türü buyruklarda alt 3 bit önemsiz olarak kabul edildiğinden yalnızca üst 4 bit buyruk içinde yer alır. Örneğin 0000xxx işlem kodu addi buyruğuna karşılık gelir. Dolayısıyla alt 3 bit buyruğun bit dizisi içinde yer almaz ve gelen herhangi bir buyruk için üst 4 bit 0000 ise buyruğun addi olduğu anlaşılır. Tüm buyruk türlerinin bit yapısı Şekil \ref{image:instructionTypes}'ta sunulmuştur. \par
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \shorthandoff{=}
 \includegraphics[width=0.9\textwidth]{gorsel/instructionTypes.png}
@@ -208,6 +208,7 @@ Yukarıda anlatılan buyrukların koşturulduğu ve boru hattının uygulandığ
 \caption{Tosun Ada Mimarisi (Kavramsal)}
 \label{image:adaMimarisiEski}
 \end{figure}
+
 \begin{figure}[h]
 \centering
 \shorthandoff{=}
@@ -216,9 +217,7 @@ Yukarıda anlatılan buyrukların koşturulduğu ve boru hattının uygulandığ
 \caption{Tosun Ada Mimarisi (Boru Hattı)}
 \label{image:adaMimarisi}
 \end{figure}
-\begin{figure}[h] \label{image:adaMimarisiEski} 
-\centering \includegraphics{gorsel/adaMimarisiEski.png} \caption{Tosun Ada Mimarisi (Kavramsal)}  
-\end{figure}
+
 Ada içi mimarinin kavramsal gösterimi şekil \ref{image:adaMimarisiEski}'de boru hattı ile gösterimi şekil \ref{image:adaMimarisi}'de sunulmuştur. Her bir buyruk boru hattı üzerinde ilerleyerek işlenir. Boru hattının etkin kullanımı için daha önce belirtilen aralıklı işlem modeli kullanılır ve her saat vuruşunda farklı bir warptan işlem alınır. \par
 Bir adada koşturulan thread sayısı adanın SIMD lane sayısı kadardır. Aralıklı işlem modelinin uygulanabilmesi için adada koşturulan warplara ait yazmaç bilgilerinin tamamının yazmaç öbeğinde saklanması gerekir. Dolayısıyla adada koşturulan warp sayısı yazmaç öbeğinin büyüklüğüne bağlıdır.\par
 
@@ -251,10 +250,10 @@ Hesaplama modülleri \ref{image:executionUnitIO}'de sağ tarafta gösterildiği 
 Threadlerin yazmaçları kendilerine özel olup dışarıdan bir modülün erişimi yoktur. Oysa ki paralel hesaplamalarda bir threadin ürettiği bir sonuç başka bir thread tarafından kullanılabilir. Threadler arası veri paylaşımı için iki seçenek vardır. Bir seçenek ana bellek üzerinden veri paylaşımı yapılması iken diğeri paylaşımlı bellek eklenmesidir. Ana bellek hem yonga dışında olduğundan hem de veri yolu genişliğinin sınırlı olmasından dolayı yavaş olacaktır.\par
 FPGA üstünde paylaşımlı bellek gerçeklemesi ancak Block RAM kullanımı ile mümkündür. Donanımda tanımlı Block RAM Primitive'ler 32KB büyüklüğünde olup 2 portu desteklemektedir. Paylaşımlı bellek kapasitesinin artırılması birden fazla Block RAM Primitive üzerine adres uzayı taksim edilir.\par
 Her bir çekirdeğin paylaşımlı belleğe erişiminin bulunması gerekmektedir. Bunun için çekirdek sayısı adetinde porta sahip bir paylaşımlı bellek Block RAM Primitive'ler kullanılarak Şekil \ref{image:sharedMemory}'de gösterildiği şekilde tasarlanmıştır.
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \shorthandoff{=}
-\includegraphics[width=\textwidth]{gorsel/sharedMemory.png}
+\includegraphics[width=0.9\textwidth]{gorsel/sharedMemory.png}
 \shorthandoff{=}
 \caption{Tosun Paylaşımlı Belllek Mimarisi}
 \label{image:sharedMemory}
@@ -264,8 +263,4 @@ Paylaşımlı belleğin girişindeki her bir port bir SIMD lane'e bağlıdır. P
 
 Paylaşımlı bellek mimarisi için en kötü durum tüm SIMD lane portlarından aynı block RAM primitive için istek paketleri gelmesidir. Bu durumda SIMD lane sayısının yarısı büyüklüğünde kuyruk oluşur ve işlemler buna göre gecikmeli gerçekleşir. En kötü durum ihtimalini ortadan kaldırmak mümkün değildir fakat ihtimali düşürmek adına adres uzayının block ram'lere dağıtım yönteminde iyileştirme yapılabilir. \par
 
-Tosun paylaşımlı bellek mimarisinde kullanılan verilerin tamamı 32 bit genişliğinde, block ram primitiveler ise 32 kbit büyüklüğündedir. Dolayısıyla her block ram primitive 1000 adet adresten oluşur. Paylaşımlı bellek büyüklüğünün 128kbit olması durumunda toplamda8 adet block ram bulunmaktadır Adres uzayı block ramlere patlaştırılırken üst bitler yrerine alt bitlerin  
-kullanılması ile ardışık adresler her zaman farklı block ram primitive'lerini gösterir ve en kötü durum ihtimali azaltılır. 
-%Bir işlemcide aynı anda birden fazla threadin koşturulması, paralel veri yolları ve hesaplama ünitelerinin gerçeklenmesi ile mümkün olur. Bu paralel yolların literatürdeki adı SIMD Lane'dir. FPGA donanım üzerinde gerçeklenecek bir işlemcinin yüksek seviyede paralel olması SIMD Lane sayısının artırılması ile mümkündür. Öte yandan SIMD Lane sayısının artması, hem alan kullanımında sebep olduğu artıştan dolayı saat sıklığını kısıtlamakta hem de ortak kullanılan verilere erişimde darboğaz oluşmasına sebep olmaktadır. Dolayısıyla SIMD lane sayısının belirlenmesi bir en iyileme problemidir. Tosun mimarisinin tasarımında SIMD lane sayısı NVidia GPU mimarilerinin incelenmesi ve tüm SIMD Lane'ler tarafından ortak kullanılan paylaşımlı bellek üzerinde oluşacak darboğazın hesaplanması ile kararlaştırılmıştır. \par
-
- 
+Tosun paylaşımlı bellek mimarisinde kullanılan verilerin tamamı 32 bit genişliğinde, block ram primitiveler ise 32 kbit büyüklüğündedir. Dolayısıyla her block ram primitive 1000 adet adresten oluşur. Paylaşımlı bellek büyüklüğünün 128kbit olması durumunda toplamda8 adet block ram bulunmaktadır Adres uzayı block ramlere patlaştırılırken üst bitler yeerine alt bitlerin kullanılması ile ardışık adresler her zaman farklı block ram primitive'lerini gösterir ve en kötü durum ihtimali azaltılır. 
