@@ -1,5 +1,95 @@
 \chapter{SONUÇ}
-Sayısal sinyal işleme algoritmaları, DSP ve GPGPU platformlarında koşturulmaktadır. Uygulamalar, karakteristik SIMD özellikleri sayesinde paralelleştirilerek hızlandırılmaya oldukça elverişli olduğu için son yıllarda GPGPU platformlarında CUDA ve OpenCL kullanılarak gerçeklenen sinyal işleme uygulamaları türetilmiştir. GPGPU mimarileri donanım seviyesinde özelleştirilemezken, platform bağımsız OpenCL sayesinde yüksek seviyede esnekliğe sahiptir. Öte yandan bazı uygulamalarda donanım seviyesinde değişiklikler yapmak istenebilir. Donanım seviyesinde değişiklik GPGPU donanımlarında mümkün olmadığı gibi ASIC tasarımlarda da maliyetlidir. Bu noktada FPGA tabanlı OpenCL destekli bir mimari hem donanım seviyesinde müdahale edilebilir, ölçeklenebilir bir yapıya hem de yazılım seviyesinde OpenCL'in sağladığı esnekliğe sahip olacaktır.  \par
-Tez çalışması dahilinde tasarlanan FPGA tabanlı yardımcı işlemci ünitesi tümüyle ölçeklenebilir ve özelleştirilebilir bir yapıya sahip olarak tasarlanmıştır. Belirlenen buyruk kümesi OpenCL kullanılarak yazılmış herhangi bir uygulamayı koşturabilecek kabiliyete sahiptir. Boru hattı mimarisi, aralıklı işlem modeli ve yazmaç öbeği, farklı warplardan buyrukların bir arada çalıştırılması ile veri bağımlılıkları çözülmeksizin boru hattının etkin kullanımını sağlamaktadır.  \par
-Tasarımın hiyerarşik olmasını sağlayan adalardan oluşan mimaride her ada içinde parametrik miktarda SIMD lane vardır. Bir adanın içindeki tüm SIMD lane'ler için aynı anda aynı buyruk çalıştırılırken farklı adalarda farklı buyruklar çalıştırılabilir. Bu sayede ortak kaynak kullanımı gerektiren ana bellek erişimi işlemlerine harcanan süre farklı adalar arasında faz farkı oluşturularak gizlenebilir. \par
-Kaçınılmaz olarak yüksek miktarda zaman kaybına sebep olan bellek işlemleri için tasarlanan paylaşımlı bellek, 
+Sayısal sinyal işleme algoritmaları, DSP ve GPGPU platformlarında koşturulmaktadır. Uygulamalar, karakteristik SIMD özellikleri sayesinde paralelleştirilerek hızlandırılmaya oldukça elverişli olduğu için son yıllarda GPGPU platformlarında CUDA ve OpenCL kullanılarak gerçeklenen sinyal işleme uygulamaları türetilmiştir. GPGPU mimarileri donanım seviyesinde özelleştirilemezken, platform bağımsız OpenCL sayesinde yüksek seviyede esnekliğe sahiptir. Öte yandan bazı uygulamalarda donanım seviyesinde değişiklikler yapmak istenebilir. Donanım seviyesinde değişiklik GPGPU donanımlarında mümkün olmadığı gibi ASIC tasarımlarda da maliyetlidir. Bu noktada FPGA tabanlı OpenCL destekli bir mimari hem donanım seviyesinde müdahale edilebilir, ölçeklenebilir bir yapıya hem de yazılım seviyesinde OpenCL'in sağladığı esnekliğe sahip olacaktır. Bu motivasyon ile tez çalışması dahilinde tasarlanan FPGA tabanlı yardımcı işlemci ünitesi tümüyle ölçeklenebilir ve özelleştirilebilir bir yapıya sahip olarak tasarlanmıştır.\par
+\begin{itemize}
+\item Belirlenen buyruk kümesi OpenCL kullanılarak yazılmış herhangi bir uygulamayı koşturabilecek kabiliyete sahiptir. 
+\item Boru hattı mimarisi, aralıklı işlem modeli ve yazmaç öbeği, farklı warplardan buyrukların bir arada çalıştırılması ile veri bağımlılıkları çözülmeksizin boru hattının etkin kullanımını sağlamaktadır.
+\item Tasarımın hiyerarşik olmasını sağlayan adalardan oluşan mimaride her ada içinde parametrik miktarda SIMD lane vardır. Bir adanın içindeki tüm SIMD lane'ler için aynı anda aynı buyruk çalıştırılırken farklı adalarda farklı buyruklar çalıştırılabilir. Bu sayede ortak kaynak kullanımı gerektiren ana bellek erişimi işlemlerine harcanan süre farklı adalar arasında faz farkı oluşturularak gizlenebilir.
+\item Threadler arası veri paylaşımı paylaşımlı bellek üzerinden sağlanır. Her adada bir paylaşımlı bellek bulunmaktadır.
+\item Paylaşımlı bellek farklı block ram'lere dağıtılmış bir adres uzayı üzerinde işlem yapmaktadır. Bu sayede SIMD lane adet port üzerinden gelen istekler çoğu durumda eş zamanlı olarak cevaplanabilmektedir. 
+\item Paylaşımlı bellek adres uzayı, block ram'lere dağıttılırken ardışık adresler farklı block ramler'de olacak şekilde soyutlama yapılmıştır. Farklı portlardan gelen isteklerin eş zamanlı çalıştırılabilmesi için bu soyutlama ile yazılım seviyesinde optimizasyon imkanı sağlanmıştır. 
+\item Hiyerarşik yapı, yazılım tarafından bakıldığında OpenCL destekli diğer platformlar gibi bazı kısıtlar getirmektedir. OpenCL ile gerçeklenmiş çekirdekler thread bloklarından oluşur. Her thread bloğunun içindeki threadler arasında veri paylaşımına izin vardır. Tosun mimarisinde her bir ada içinde paylaşımlı bellek gerçeklendiğinden bir adada çalışan herhangi bir thread, aynı ada içinde çalışan başka herhangi bir thread ile veri paylaşımında bulunabilir. Mevcut mimaride thread bloğu içindeki en fazla thread sayısı $N_{SIMD lane} x N_{warp}$ şeklinde ifade edilebilir. 
+\item Hesaplama modüllerinin sabitlenmiş giriş çıkış ara yüzlerine uygun olmak şartı ile herhangi bir özel hesaplama modülü daha sonra tasarıma ilave edilebilir. Mevcut mimaride belirtilen buyruk kümesindeki tüm işlemler için gerekli olan hesaplama modülleri değişik sayılarda boru hattının hesap aşamasına eklenmiştir. Daha sonra ilave edilmek istenen bir hesap biriminden istenilen adette aynı giriş çıkış standardına bağlı kalınarak hesap aşamasına eklenebilir. Böylece buyruk kümesi genişletilebilir. 
+\end{itemize}   
+
+\section{Tosun Performans Analizi}
+Tasarlanan mimaride performansın bir ölçütü buyrukların kaç çevrimde tamamlandığıdır. Her buyruğun boru hattını tamamlama süresi belli olsa da bir uygulamanın çalışmasında boru hattının etkin kullanımına göre toplam süre değişiklik gösterir. Mimariye uygun yazılan bir program için en iyi durumda boru hattı bir kere doldurulduktan sonra her çevrimde bir buyruk tamamlanır. Boru hattının uzunluğu hesap aşaması haricinde tüm buyruklar için sabittir. Hesap aşamasında ise her işlemin farklı bir süresi vardır. Her bir buyruk için hesap aşamasının tamamlanma süresi Tablo \ref{table:hesapSureleri}'de sunulmuştur. \par
+\begin{longtable}{p{50pt} p{300pt} p{70pt}}
+\caption{Her Bir Buyruk için Hesap Aşaması Süreleri} \label{table:hesapSureleri} \\
+\multicolumn{1}{l}{\textbf{Buyruk}} & \multicolumn{1}{l}{\textbf{Açıklama}} & \multicolumn{1}{c}{\textbf{Türü}} \\ 
+\hline 
+\endfirsthead
+
+\multicolumn{2}{c}%
+{{\bfseries \tablename\ \thetable{} -- devam}} \\
+\multicolumn{1}{l}{\textbf{Buyruk}} &
+\multicolumn{1}{l}{\textbf{Hesap Aşaması Çevrim Sayısı}} \\ 
+\hline 
+\endhead
+
+\hline \multicolumn{2}{r}{{Sonraki sayfada devam etmektedir.}} \\ 
+\endfoot
+
+\hline \hline
+\endlastfoot
+  addi		&  \\
+  andi 		&  \\
+  ori 		&  \\
+  ori 		&  \\
+  xori 		&  \\
+  divi 		&  \\
+  muli 		&  \\
+  subi 		&  \\
+  movi 		&  \\
+  movhi		&  \\
+  fabs  	&  \\
+  fadd  	&  \\
+  fcom  	&  \\
+  fdiv  	&  \\
+  fmul  	&  \\
+  fsqrt  	&  \\
+  fcos  	&  \\
+  fsin  	&  \\
+  ffma  	&  \\
+  ffms  	&  \\
+  fmin  	&  \\
+  fmax  	&  \\
+  fln 	 	&	 \\
+  fmod 		&	 \\
+  f2int 	&	 \\
+  int2f		&	 \\
+  fchs		&	 \\
+  fexp 		&	 \\
+  add 		&	 \\
+  and 		&	 \\
+  or 		&	 \\
+  xor		&	 \\
+  div  		&  \\
+  mul  		&  \\
+  shl  		&  \\
+  shr  		&  \\
+  shra  	&  \\
+  sub  		&  \\
+  min  		&  \\
+  max  		&  \\
+  chs  		&  \\
+  not  		&  \\
+  abs  		&  \\
+  com  		&  \\
+  mod  		&  \\
+  brv 		&	 \\
+  bfr 		&	 \\
+  br 			&	 \\
+  fin 		&	 \\
+  ldshr 	&	 \\
+  stshr 	&	 \\
+  sync		&	 \\
+  ldram 	&	 \\
+  stram		&	 \\
+  mov 		&  \\
+  jmp  		&  \\
+  
+\end{longtable}
+
+Çalıştırılan programda N adet buyruk olması durumunda  
+
+\section{Tosun Alan Tüketimi Analizi}
