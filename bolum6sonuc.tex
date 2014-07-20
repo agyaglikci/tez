@@ -115,4 +115,74 @@ Her buyruk için en iyi durum ve en kötü durumda çevrim sayısı, 16 SIMD lan
 
 Mimaride ada sayısının artışı ile aynı anda çalışabilecek thread bloklarının sayısı, dolayısıyla paralellik artmaktadır. Ana bellek veri yolu genişliği sabit olup paralelleştirmede kısıtlayıcı etkendir. Mimaride eş zamanlı koşturulan toplam thread sayısının artırılması bellek işlemlerinde gecikmeyi artırır. En kötü durumda buyruk başına boru hattının ortalama dolma sürelerinin ada sayısına göre değişimi Şekil \ref{figure:bbc16xada}'de sunulmuştur.\par
 
-\section{Tosun Alan Tüketimi Analizi}
+\section{Tosun Kaynak Kullanımı Analizi}
+Tosun mimarisinin büyük kısmını oluşturan ada yapısı alt modülleri seviyesinde irdelenerek devrenin alan değerlerine karşın performansındaki değişim gözlenmiştir. Hedef platform olarak belirlenen Virtex7 FPGA'in kapasitesi Tablo \ref{table:virtex7Resources}'da verilmiştir.
+
+\begin{longtable}{p{90pt} p{90pt}}
+\caption{Virtex 7 VC709 Geliştirme Kartı Kaynak Kapasitesi} \label{table:virtex7Resources} \\
+\textbf{Kaynak} & \textbf{Kapasite}\\ 
+\hline 
+\endfirsthead
+
+\multicolumn{2}{c}%
+{{\bfseries \tablename\ \thetable{} -- devam}} \\
+\textbf{Kaynak} & \textbf{Kapasite}\\  
+\hline 
+\endhead
+
+\hline \multicolumn{2}{r}{\textbf{Sonraki sayfada devam etmektedir.}} \\ 
+\endfoot
+
+\hline \hline
+\endlastfoot
+Slice LUT & 433200 \\
+Slice Register & 866400\\
+Block RAM & 2940 RAMB18\\
+DSPs & 3600\\
+I/O & 1032\\
+\end{longtable}
+
+Adanın her bir alt parçası hedef platforma göre sentezlenerek kaynak kullanımları gözlenmiştir. Hesap modüllerinin sayılarında değişikliğe gidilerek farklı kombinasyonlarda kaynak kullanımı gözlenmiş ve performansa etkisi irdelenmiştir.\par
+\begin{figure}[ht]
+\centering
+\shorthandoff{=}
+\includegraphics[width=0.9\textwidth]{gorsel/Util_S16_FMA16_O8.png}
+\shorthandoff{=}
+\caption{Ada alt modüllerinin kaynak kullanımı}
+\label{image:util_S16_FMA16_O8}
+\end{figure}
+Şekil \ref{image:util_S16_FMA16_O8}'de 16 SIMD lane'e sahip bir adada tüm hesap birimlerinden 16, float bölme, logaritma, üssel fonksiyon ve tamsayı bölme birimlerinden 8 adet gerçeklenmiştir. Elde edilen kaynak tüketim değerlerine göre 1 ada hedef platformun kaynaklarının \%21.4'ünü kullanmaktadır. Dolayısıyla platformda en fazla 4 adet adadan söz edilebilir. Her bir adada 16 SIMD lane ve 32 warp bulunduğundan eş zamanlı olarak platform üzerinde çalışabilecek toplam thread sayısı 2048'dir. Bu seçenekte adalar yerleştirildikten sonra boş kalan \%14'lük kısım bellek ara yüzü, PCI-e arayüzü ve scheduler için değerlendirilir. Bu konfigurasyon için float bölme, logaritma, üssel fonksiyon ve tamsayı bölme işlemlerinde fazladan 1 çevrim hesap süresi, fazladan 2 çevrim kuyruklama süresi eklenir. Değişiklik ile 16 adet sayının hesaplanması için harcanan süredeki değişim Tablo\ref{table:util_S16_FMA16_O8}'de sunulmuştur. Burada söz konusu değişiklik boru hattının dolması sırasında söz konusudur. Boru hattı doldurulduktan sonra 'throughput' olarak her çevrimde 1 sonuç alınır.\par 
+
+\begin{longtable}{p{90pt} p{90pt} p{90pt} p{90pt}}
+\caption{Bölme, logaritma ve üssel fonksiyon hesaplama birimlerinin yarıya düşürülmesinin performansa etkisi} \label{table:util_S16_FMA16_O8} \\
+\textbf{İşlem} & \textbf{Eski Hesap Süresi} & \textbf{Yeni Hesap Süresi} & \textbf{Yüzde Değişim} \\ 
+\hline 
+\endfirsthead
+
+\multicolumn{2}{c}%
+{{\bfseries \tablename\ \thetable{} -- devam}} \\
+\textbf{İşlem} & \textbf{Eski Hesap Süresi} & \textbf{Yeni Hesap Süresi} & \textbf{Yüzde Değişim} \\ 
+\hline 
+\endhead
+
+\hline \multicolumn{2}{r}{\textbf{Sonraki sayfada devam etmektedir.}} \\ 
+\endfoot
+
+\hline \hline
+\endlastfoot
+Float Bölme & 12 & 15 & \%25\\
+Logaritma & 14 & 17 & \%21\\
+Üssel & 10 & 13 & \%30\\
+Tam Sayı Bölme & 22 & 25 & \%14\\
+\end{longtable}
+
+Şekil \ref{image:util_S16_FMAFDIVFLOG8_FEXPDIV4}'de 16 SIMD lane'e sahip bir adada tüm hesap birimlerinden 16, float çarp topla, float bölme ve logaritma 8'er adet, üssel fonksiyon ve tamsayı bölme birimlerinden 4'er adet gerçeklenmiştir. Elde edilen kaynak tüketim değerlerine göre 1 ada hedef platformun kaynaklarının \%17.37'sini kullanmaktadır. Dolayısıyla platformda en fazla 4 adet adadan söz edilebilir. Her bir adada 16 SIMD lane ve 32 warp bulunduğundan eş zamanlı olarak platform üzerinde çalışabilecek toplam thread sayısı 2048'dir. Bu seçenekte adalar yerleştirildikten sonra boş kalan \%14'lük kısım bellek ara yüzü, PCI-e arayüzü ve scheduler için değerlendirilir.\par
+
+\begin{figure}[ht]
+\centering
+\shorthandoff{=}
+\includegraphics[width=0.9\textwidth]{gorsel/Util_S16_FMAFDIVFLOG8_FEXPDIV4.png}
+\shorthandoff{=}
+\caption{Ada alt modüllerinin kaynak kullanımı}
+\label{image:util_S16_FMAFDIVFLOG8_FEXPDIV4}
+\end{figure}
