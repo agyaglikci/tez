@@ -1,7 +1,7 @@
 \chapter{GEREKSİNİM ANALİZİ} \label{chapter:gereksinimAnalizi}
-OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamalarının, özelleştirilebilir, milli tasarım bir donanım üzerinde çalıştırılması amacı ile başlatılan projenin gerekinimleri \ref{projeGereksinimleri} Proje Gereksinimleri başlığı altında sunulmuştur. \ref{paralellestirmeninBasarimaEtkisi} Paralelleştirmenin Başarıma Etkisi başlığı altında proje için performans metrikleri belirlenmiş, \ref{fonksiyonlarinGerceklenmesi} Fonksiyonların Gerçeklenmesi başlığı altında, Tablo \ref{table:fonksiyonListesi}: Fonksiyon Listesi tablosunda verilen fonksiyonların matematiksel ifadeleri ve sayısal sistemler üzerinde gerçekleme algoritmaları sunulmuştur. Sunulan ifadeler \ref{chapter:mimariTasarimi} bölümünde kullanılacaktır. 
+OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamalarının, özelleştirilebilir, milli tasarım bir donanım üzerinde çalıştırılması amacı ile başlatılan projenin gereksinimleri \ref{projeGereksinimleri} Mimari Gereksinimleri başlığı altında sunulmuştur. \ref{basarimEtkenleri} Başarım Etkenleri başlığı altında proje için performans metrikleri belirlenmiş, \ref{fonksiyonlarinGerceklenmesi} Fonksiyonların Gerçeklenmesi başlığı altında, Tablo \ref{table:fonksiyonListesi}: Fonksiyon Listesi tablosunda verilen fonksiyonların matematiksel ifadeleri ve sayısal sistemler üzerinde gerçekleme algoritmaları sunulmuştur.
 
-\section{Proje Gereksinimleri} \label{projeGereksinimleri}
+\section{Mimari Gereksinimleri} \label{projeGereksinimleri}
  Proje gereksinimleri şu şekildedir: 
 \begin{enumerate}
   \item Tasarlanan işlemci çok çekirdekli mimariye sahip olmalıdır.
@@ -13,9 +13,7 @@ OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamal
   \item Verilen bir matrisin kopyası oluşturulup kopya üzerinden işlem yapılmalıdır.
   \item Reel sayılar matrisi oluşturulurken bellekte yalnızca reel sayıların sığabileceği bir alan kullanılmalıdır, karmaşık sayılar matrisi oluşturulurken reel ve imajiner kısımlar için ayrı yer ayrılmalıdır.
   \item Satır, sütun veya alt matris üzerinde işlem yapılırken yalnızca ilgili veriler kopyalanmalıdır.
-  \newpage
   	
-  
 \end{enumerate}
 
 \begin{longtable}{p{80pt} p{250pt}}
@@ -94,7 +92,7 @@ OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamal
 Tasarlanan donanımın temel tasarım kararlarını oluşturan gereksinimler ve fonksiyon listesi incelenmiş, her bir matematiksel işlem için gerekli buyruklar ve donanım birimleri belirlenmiştir. 
 
 
-\section{Paralelleştirmenin Başarıma Etkisi}
+\section{Başarım Etkenleri}\label{basarimEtkenleri}
 Tablo \ref{table:fonksiyonListesi} içinde belirtilen işlemlerin paralelleştirilmesi ile işlem sürelerinin kısalması beklenmektedir. Paralel hesaplamada işlem süresini belirleyen 4 unsur vardır. \par
 
 Bunlardan birincisi bellek işlemlerine ayrılan süredir. Programlanabilir her sistemde olduğu gibi bir işlem veya işlem dizisi başlarken bellekten veri okunur, sonlandığında ise tekrar belleğe sonuçlar yazılır. İşlemler paralelleştirilse de paralelleştirilmese de bellek için harcanan süre toplamda yakındır. {Citation Here} Hem yazılım hem de donanım seviyesinde bellek işlemlerinde yerelliği artırmak bellek işlemlerinin daha hızlı işlenmesine olanak sağlar.\par

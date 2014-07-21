@@ -1,6 +1,6 @@
 \chapter{TEMEL BİLGİLER} \label{chapter:temelBilgiler}
 Tez çalışması boyunca kullanılan teknolojiler hakkında temel bilgiler bu bölümde sunulmuştur.
-\section{FPGA Platformu}
+\section{FPGA: Field Programmable Gate Array}
 FPGA'ler birbirlerine programlanabilir bağlantı birimleriyle bağlı matris yapıda özelleştirilebilir mantık bloklarından (Configurable Logic Block/CLB) oluşan programlanabilir yarı iletken devrelerdir. FPGA’ler herhangi bir uygulama için kolayca programlanabilir, aynı FPGA içeriği değiştirilip tekrar programlanarak bir başka uygulama için de kullanılabilir. Bir FPGA’in lojik hücrelerinden oluşan iç mimarisi teorik olarak Şekil \ref{image:fpgaCLB}’de verilmiştir.\par
 \begin{figure}[ht]
 \centering
@@ -8,7 +8,7 @@ FPGA'ler birbirlerine programlanabilir bağlantı birimleriyle bağlı matris ya
 \includegraphics[width=0.8\textwidth]{gorsel/fpgaCLB.png}
 \shorthandoff{=}
 \caption{FPGA Mantık Hücreleri ve Bağlantı Yapısı}
-\label{fpgaCLB}
+\label{image:fpgaCLB}
 \end{figure}
 
 FPGA'ler esnek mimari yapıları ve programlanma özellikleri sayesinde kendilerine endüstride hızla yer bulmuştur ve günümüzde de otomotivden, telekomünikasyona, uzay uygulamalarından savunma sanayine ve özellikle yüksek performansla birlikte esneklik isteyen birçok uygulama alanında tercih edilmektedirler. \cite{aykenarThesis} \par
@@ -67,7 +67,7 @@ Sürekli gelişmekte olan FPGA teknolojisinde artık FPGA yongalarının içeris
 \end{figure}
 Bu tez çalışması için Xilinx Virtex 7 ailesinden XC7VX690T FPGA’i seçilmiştir. Bu FPGA içinde 108300 slice, 693120 mantık hücresi 866400 CLB flip flop, 10888 KB dağınık ram, 1470 adet 36kbit block ram primitive vardır. \par
 
-\section{GPGPU}
+\section{GPGPU: General Purpose Graphics Processing Unit}
 
 GPU teknolojisindeki ilerlemelerle birlikte, günümüzde kullanılan modern GPU’lar programlanabilir arayüzler sunar hale gelmişlerdir. Bu programlanabilir arayüzler sayesinde GPU’nun işlem gücü ve paralel işleyebilme yeteneği sadece grafik işlemlerinde değil aynı zamanda genel amaçlı hesaplamalarda da kullanılabilir hale gelmiştir. Bu durum ortaya grafik işlem birimi üzerinde genel amaçlı hesaplama (GPGPU - General Purpose programming on Graphic Processing Unit) kavramını çıkarmıştır. \par
 GPU’lar yukarıdaki kısımlarda açıklanan işlem hattı mimarisi sayesinde, paralel olarak işlenebilecek nitelikte verinin yüksek performanslı bir şekilde paralel olarak işlenmesi konusunda çok elverişlidirler. GPGPU uygulamaları GPU’ların grafik aygıtlarına özel olan köşe kenar dönüşümü, dokulandırma, renklendirme, gölgelendirme vb. özelliklerinden ziyade SIMD şeklinde çalışan işlem hattı mimarisinden yararlanırlar. GPGPU uygulamaları genel olarak; işaret işleme, ses işleme, görüntü işleme, şifreleme, bioinformatik, yapay sinir ağları, paralelleştirilebilen bilimsel hesaplamalar, istatiksel hesaplamalar gibi yüklü miktarda verinin küçük parçaları üzerinde bağımsız ve paralel olarak işlem yapılmasına uygun olan uygulama alanlarında başarılıdırlar. \cite{ertanYildizThesis}\par
@@ -79,14 +79,14 @@ GPGPU uygulamaları genel olarak CPU üzerinde çalışan bir host program ve GP
 \includegraphics[width=0.9\textwidth]{gorsel/cudaCComparision.png}
 \shorthandoff{=}
 \caption{CUDA Örnek Kodu}
-\label{cudaCComparision}
+\label{image:cudaCComparision}
 \end{figure}
 Şekil \ref{cudaProgrammingStructure}’da modern GPGPU dillerinden CUDA programlama diline ait programlama modeli yapısı \cite{cudaProgrammingStructure},  Şekil \ref{image:cudaCComparision}’de ise C programlama diliyle yazılmış CPU üzerinde çalışan bir matris toplama fonksiyonu ile yine aynı matris toplama fonksiyonunu GPU üzerinde gerçekleyen, CUDA programlama diliyle yazılmış GPU üzerinde çalışan bir kernel fonksiyonu ve C’de yazılmış bir host program gösterilmiştir. Şekil \ref{cudaProgrammingStructure}’da görüldüğü üzere, CUDA programlama modelinde GPU aygıtı grid olarak görülür ve çok sayıda bloktan oluşur. GPU’da bulunan çok sayıdaki çekirdekten her biri aynı anda bir blok işleyebilir. Bir blok içerisinde paralel olarak çalıştırılabilen çok sayıda thread bulunur. Bu ipliklerinin her biri kendisine düşen veri öbeği üzerinde tanımlanmış olan çekirdek fonksiyonu çalıştırır.
 
 \begin{figure}[h]
 \centering
 \shorthandoff{=}
-\includegraphics[width=0.7\textwidth]{gorsel/cudaProgrammingStructure.png}
+\includegraphics[width=0.6\textwidth]{gorsel/cudaProgrammingStructure.png}
 \shorthandoff{=}
 \caption{CUDA programlama modeli}
 \label{cudaProgrammingStructure}
@@ -98,6 +98,6 @@ GPGPU uygulamaları genel olarak CPU üzerinde çalışan bir host program ve GP
 
 
 
-Tablo \ref{table:cudaCComparision}’de görüldüğü gibi C programlama dilinde yazılmış olan matris toplama fonksiyonu matris elemanları üzerinde ardışık döngüler şeklinde işlem yaparak matris toplama işlemini gerçekleştirir. CUDA ile yazılmış matris toplama programına bakıldığında, program CPU üzerinde çalışan host programdaki main fonksiyonundan ve GPU üzerinde çalışan add\_matrix\_gpu çekirdek fonksiyonundan oluşur. Host program bir bloğun boyutunu ve grid içerisindeki blok sayısını belirler. Daha sonra bloklar üzerinde paralel olarak çalışacak olan add\_matrix\_gpu fonksiyonunu çağırır. çağrı sonucu add\_matrix\_gpu çekirdek fonksiyonu bloklar ve bloklardaki threadler üzerinde paralel olarak yürütülür. Her bir thread kendi thread numarası (thread ID), blok numarası (block ID) ve blok boyutunu (blockDim) kullanarak kendine düşen veri parçası için matris toplama işlemini gerçekleştirir. \par
+Şekil \ref{image:cudaCComparision}’de görüldüğü gibi C programlama dilinde yazılmış olan matris toplama fonksiyonu matris elemanları üzerinde ardışık döngüler şeklinde işlem yaparak matris toplama işlemini gerçekleştirir. CUDA ile yazılmış matris toplama programına bakıldığında, program CPU üzerinde çalışan host programdaki main fonksiyonundan ve GPU üzerinde çalışan add\_matrix\_gpu çekirdek fonksiyonundan oluşur. Host program bir bloğun boyutunu ve grid içerisindeki blok sayısını belirler. Daha sonra bloklar üzerinde paralel olarak çalışacak olan add\_matrix\_gpu fonksiyonunu çağırır. çağrı sonucu add\_matrix\_gpu çekirdek fonksiyonu bloklar ve bloklardaki threadler üzerinde paralel olarak yürütülür. Her bir thread kendi thread numarası (thread ID), blok numarası (block ID) ve blok boyutunu (blockDim) kullanarak kendine düşen veri parçası için matris toplama işlemini gerçekleştirir. \par
 
 

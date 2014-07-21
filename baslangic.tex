@@ -19,7 +19,7 @@
 \keywords{FPGA, accelerator, co-processor, OpenCL}
 \anahtarsoz{FPGA, hızlandırıcı, yardımcı işlemci, OpenCL}
 
-\title{TITLE OF THE THESIS}
+\title{DESIGN OF AN FPGA BASED CO-PROCESSOR FOR DIGITAL SIGNAL PROCESSING APPLICATIONS}
 \baslik{FPGA TABANLI SAYISAL S\.{I}NYAL \.{I}\c{S}LEME ALGOR\.{I}TMALARINA \"{O}ZELLE\c{S}T\.{I}R\.{I}LM\.{I}\c{S} YARDIMCI \.{I}\c{S}LEMC\.{I} TASARIMI}  % buyuk harflerle yazilmali
 
 \yazar{ABDULLAH G\.{I}RAY YA\u{G}LIK\c{C}I}    % buyuk harflerle yazilmali
@@ -32,10 +32,11 @@
 \dept{Computer Engineering}
 \supervisor{Assoc. Prof. Oğuz ERG\.{I}N}
 \tezyoneticisi{Doç. Dr. Oğuz ERG\.{I}N}
-\juribaskani{....}
-\juriuyesi{....}
-\anablmdalibsk{Doç. Dr. Erdoğan Doğdu}
-\enstitumuduru{Prof. Dr. \"Unver KAYNAK}
+\juribaskani{Yrd. Doç. Dr. Ahmet Murat \"{O}ZBAYO\u{G}LU}
+\juriuyesi{Doç. Dr. Oğuz ERG\.{I}N}
+\juriuyesi{Doç. Dr. Coşku KASNAKO\u{G}LU}
+\anablmdalibsk{Doç. Dr. Erdoğan DO\u{G}DU}
+\enstitumuduru{Prof. Dr. Osman ERO\u{G}UL}
 %\copyrightyear{2001}
 \submitdate{August 2014}  % buyuk harflerle yazilmali
 \tarih{A\u{G}USTOS 2014}   % buyuk harflerle yazilmali
@@ -70,18 +71,18 @@
 
 
 \begin{ozet}
-	Sayısal sinyal işlemede yaygın olarak kullanılan fonksiyonların büyük bir veri seti üzerinde çalıştırılması durumunda paralelleştirilmesi, yürütme zamanını kritik bir şekilde azaltmaktadır. Farklı veriler üzerinde aynı işlemlerin tekrarlandığı algoritmalarda performans artışı sağlamak adına iş parçalarının paralel yürütülebilmesi için çok çekirdekli işlemciler, GPGPU, ASIC tasarımlar ve FPGA tabanlı sistemler algoritmanın koşturulacağı platformların başında gelir. Her bir platformun kendi avantajları ve dezavantajları olmakla beraber, düşük maliyet ile yüksek paralellik sağladığı için GPGPU ve FPGA'ler son yıllarda en yaygın kullanılan platformlardır. Bu tez, ASELSAN - TOBB ETÜ iş birliğinde yürütülen, çıktısı FPGA tabanlı ve OpenCL destekli, ölçeklenebilir ve özelleştirilebilir tasarıma sahip bir yardımcı işlemci ünitesi olan projenin donanım tasarımı kısmını kapsar. Tez çalışmalarına paralel olarak derleyici tasarımı yapılmış fakat tez içeriğine dahil edilmemiştir.
+	Sayısal sinyal işlemede yaygın olarak büyük veri setleri üzerinde kullanılan fonksiyonların hızlandırılması için günümüzde çok çekirdekli işlemciler, grafik işlemciler, FPGA tabanlı sistemler ve ASIC tasarımlar kullanılarak paralel hesaplama ile sağlanır. Bu tez çalışması, ASELSAN - TOBB ETÜ iş birliğinde yürütülen ve çıktısı FPGA tabanlı ve OpenCL destekli, ölçeklenebilir ve özelleştirilebilir tasarıma sahip bir yardımcı işlemci ünitesi olan projenin donanım tasarımı kısmını kapsar. Bu çalışmada sinyal işleme uygulamalarında yaygın olarak kullanılan fonksiyonlar için özelleştirilmiş, OpenCL destekli ve ölçeklenebilir bir paralel işlemci mimarisi tasarlanmış ve FPGA platformunda gerçeklenmiştir.
 \end{ozet}
 
 
 
 \begin{abstract}
-	Typical digital signal processing algorithms executes the same DSP functions on different data sets. Parallelizing this process dramatically decreases execution time of such kind of functions. There are 4 popular platforms for parallelized applications: Many-core processors, GPGPUs, ASIC chips and FPGA based applications. Although each kind of platform has own pros and cons, GPGPU and FPGA based applications are more popular than others because of lower price and higher parallel processing capabilities. This MSc thesis consists of hardware design of a project which is managed by ASELSAN and TOBB ETÜ and the output of project is FPGA based OpenCL ready highly scalable and configurable co-processor. Although compiler works are in progress, this thesis only includes the harware design of co-processor.  
+	Typical digital signal processing algorithms executes the same DSP functions on different data sets. Parallelizing this process dramatically decreases execution time of such kind of functions. There are 4 popular platforms for parallelized applications: Many-core processors, GPGPUs, ASIC chips and FPGA based applications. Although each kind of platform has own pros and cons, GPGPU and FPGA based applications are more popular than others because of lower price and higher parallel processing capabilities. This MSc thesis consists of hardware design of FPGA based OpenCL ready highly scalable and configurable co-processor which is a project of ASELSAN and TOBB ETÜ. In this work, a scalable and configurable parallel processor architecture which supports OpenCL is designed and implemented on FPGA platform.  
 \end{abstract}
 
 
 \begin{tesekkur}
- Bu çalışmayı tamamlamamda emeği geçen değerli danışman hocam Doç. Dr. Oğuz Ergin'e; kıymetli çalışma arkadaşlarım Hasan Hassan, Hakkı Doğaner Sümerkan, Serdar Zafer Can, Serhat Gesoğlu, Volkan Keleş ve Osman Seçkin Şimşek'e; tez çalışmam sırasında beni destekleyen aileme ve değerli arkadaşlarım Fahrettin Koç, Tuna Çağlar Gümüş ve Emrah İşlek'e; projeye desteğinden ötürü ASELSAN'a ve çalışma ortamımızı sağladığı için TOBB ETÜ Mühendislik Fakültesi ve Fen Bilimleri Enstitüsüne teşekkür ederim.
+ Bu çalışmayı tamamlamamda emeği geçen değerli danışman hocam Doç. Dr. Oğuz Ergin'e; tez çalışmasına teknik ve mali desteğinden ötürü ASELSAN'a ve ASELSAN yetkilisi Dr. Fatih Say'a; kıymetli çalışma arkadaşlarım Hasan Hassan, Hakkı Doğaner Sümerkan, Serdar Zafer Can, Serhat Gesoğlu, Volkan Keleş ve Osman Seçkin Şimşek'e; tez çalışmam sırasında beni destekleyen aileme ve değerli arkadaşlarım Fahrettin Koç, Tuna Çağlar Gümüş ve Emrah İşlek'e; çalışma ortamımızı sağladığı için TOBB ETÜ Mühendislik Fakültesi ve Fen Bilimleri Enstitüsüne teşekkür ederim.
 \end{tesekkur}
 
 

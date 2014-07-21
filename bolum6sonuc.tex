@@ -95,6 +95,14 @@ Tasarlanan boru hattında bir buyruğun çalışması warp seçimi ile başlar. 
 
 Seçilen warp için sıradaki buyruk bellekten çekilir. Bu aşamada buyruk ön belleğinde söz konusu buyruk bulunursa, 1 çevrimde aşama geçilir. Eğer buyruk önbellekte yoksa, ana bellek üzerinden buyruğun çekilmesi gerekmektedir. Ana belleğin cevap süresi anlık yoğunluğa göre değişmektedir. En kötü durum, tüm adaların hem veri hem buyruk portlarından istek gelirken aynı zamanda PCI ve ana bellek arasında da veri akışı varken, hiçbir isteğin önbellekte bulunamaması durumudur. En kötü durum tahmini cevap süresi $35 x ( N_{ada} x 2 + 1 )$ şeklinde ifade edilebilir. Buyrukların ana bellekten çekilmesi bloklar halinde yapılır. Tek seferde 512 bit yani 16 adet buyruk çekilir. Dolayısıyla en kötü durum gerçekleştiğinde yaşanan gecikme, her 16 buyruk için bir kez yaşanır. Burada dallanma buyruğu gelmesinden dolayı yanlış buyrukların çekilmiş olması senaryosu daha kötü bir durum olarak düşünülür fakat Tosun işlemcisinde her SIMD lane üzerinde koşan thread dallanma neticesinde farklı davranabileceğinden ve SIMD mimarisinin uygulanmasından dolayı dallanmalarda her iki ihtimal de her SIMD lane üzerinde sonuçlar maskelenerek çalıştırıldığından dallanma oluşması buyruk çekme açısından ek bir maliyete sebep olmaz.\par
 
+\begin{figure}[ht] \label{image:fillPipelineBestWorst}
+\centering
+\shorthandoff{=}
+\includegraphics[width=0.9\textwidth]{gorsel/fillPipelineBestWorst.png}
+\shorthandoff{=}
+\caption{En iyi ve en kötü durumlarda buyruk başına çevrim sayısı}
+\end{figure}
+
 Buyruk çözme aşamasında yalnızca bit gruplarının ayrılması işlemi yapıldığından 1 çevrimde geçilebilir. Yazmaç çekme aşamasında her SIMD lane kendine ait yazmaç öbeğinden 1, 2 veya 3 adet yazmacın değerini okur. Yazmaç öbeğinin cevap süresi en kötü durumda 3, ortalamada 1 çevrimdir.\par
 Hesap modülü atama aşamasında işlem koduna göre hesaplama birimlerinden biri hesaplamayı yapmak üzere seçilir ve gerekli giriş değerleri iletilir. Basit karşılaştırma devrelerinden oluşan aşama 1 çevrimde tamamlanır. Hesaplama aşaması ise her buyruk için farklı cevap süresine sahiptir. \par
 Hesaplamanın bitmesi ile birlikte hesaplama modüllerinin çıkışında bulunan tampon belleklerde sonuçlar yazılmak üzere sıraya alınır. Geri yazma gerektirmeyen veya yanlış bir dallanma ile gelen buyruklar bu aşamada yazılmaz fakat işlem süresi olarak beklemek zorundadırlar. Geri yazma işlemi sonucu yazmaç öbeğine yazarken warp listesinde de buyruğun ait olduğu warp'un hazır bayrağını 1 yapar. Böylece aynı warp daha sonra tekrar seçilebilir. Geri yazma aşaması toplamda 1 çevrimde tamamlanır.\par
@@ -113,13 +121,7 @@ Sonuç olarak herhangi bir buyruğun boru hattını baştan sona tamamlaması i�
 
 Her buyruk için en iyi durum ve en kötü durumda çevrim sayısı, 16 SIMD lane'den oluşan 4 ada için Şekil \ref{image:fillPipelineBestWorst}'de sunulmuştur. Grafikte gösterilen çevrim sayıları, en kötü durumda buyruk başına boru hattının dolması için geçen süreyi ifade etmektedir. Boru hattının doldurulmasından sonra her çevrimde bir sonuç verilmesi beklendiğinden Şekil \ref{image:fillPipelineBestWorst}'de sunulan değerler olabilecek en kötü sonuçlardır.\par
 
-\begin{figure}[ht] \label{image:fillPipelineBestWorst}
-\centering
-\shorthandoff{=}
-\includegraphics[width=0.9\textwidth]{gorsel/fillPipelineBestWorst.png}
-\shorthandoff{=}
-\caption{En iyi ve en kötü durumlarda buyruk başına çevrim sayısı}
-\end{figure}
+
 
 Mimaride ada sayısının artışı ile aynı anda çalışabilecek thread bloklarının sayısı, dolayısıyla paralellik artmaktadır. Öte yandan ana bellek veri yolu genişliği sabit olup paralelleştirmede kısıtlayıcı etkendir. Mimaride eş zamanlı koşturulan toplam thread sayısının artırılması bellek işlemlerinde gecikmeyi artırır. En kötü durumda buyruk başına boru hattının ortalama dolma sürelerinin ada sayısına göre değişimi Şekil \ref{image:fillPipelineWorstVsNumOfIslands}'de sunulmuştur.\par
 
@@ -213,6 +215,7 @@ Adanın her bir alt parçası hedef platforma göre sentezlenerek kaynak kullan�
 \end{figure}
 Şekil \ref{image:util_S16_FMA16_O8}'de 16 SIMD lane'e sahip bir adada tüm hesap birimlerinden 16, float bölme, logaritma, üssel fonksiyon ve tamsayı bölme birimlerinden 8 adet gerçeklenmiştir. Elde edilen kaynak tüketim değerlerine göre 1 ada hedef platformun kaynaklarının \%21.4'ünü kullanmaktadır. Dolayısıyla platformda en fazla 4 adet adadan söz edilebilir. Her bir adada 16 SIMD lane ve 32 warp bulunduğundan eş zamanlı olarak platform üzerinde çalışabilecek toplam thread sayısı 2048'dir. Bu seçenekte adalar yerleştirildikten sonra boş kalan \%14'lük kısım bellek ara yüzü, PCI-e arayüzü ve scheduler için değerlendirilir. Bu konfigurasyon için float bölme, logaritma, üssel fonksiyon ve tamsayı bölme işlemlerinde fazladan 1 çevrim hesap süresi, fazladan 2 çevrim kuyruklama süresi eklenir. Değişiklik ile 16 adet sayının hesaplanması için harcanan süredeki değişim Tablo\ref{table:util_S16_FMA16_O8}'de sunulmuştur. Buradaki değişiklik, boru hattının dolması sırasında söz konusudur. Boru hattı doldurulduktan sonra "throughput" olarak her çevrimde 1 sonuç alınır.\par 
 
+Şekil \ref{image:util_S16_FMAFDIVFLOG8_FEXPDIV4}'de 16 SIMD lane'e sahip bir adada tüm hesap birimlerinden 16, float çarp topla, float bölme ve logaritma 8'er adet, üssel fonksiyon ve tamsayı bölme birimlerinden 4'er adet gerçeklenmiştir. Elde edilen kaynak tüketim değerlerine göre 1 ada hedef platformun kaynaklarının \%17.37'sini kullanmaktadır. Dolayısıyla platformda en fazla 4 adet adadan söz edilebilir.\par
 \begin{longtable}{p{90pt} p{90pt} p{90pt} p{90pt}}
 \caption{Bölme, logaritma ve üssel fonksiyon hesaplama birimlerinin yarıya düşürülmesinin performansa etkisi} \label{table:util_S16_FMA16_O8} \\
 \textbf{İşlem} & \textbf{Eski Hesap Süresi} & \textbf{Yeni Hesap Süresi} & \textbf{Yüzde Değişim} \\ 
@@ -235,8 +238,7 @@ Logaritma & 14 & 17 & \%21\\
 Üssel & 10 & 13 & \%30\\
 Tam Sayı Bölme & 22 & 25 & \%14\\
 \end{longtable}
-
-Şekil \ref{image:util_S16_FMAFDIVFLOG8_FEXPDIV4}'de 16 SIMD lane'e sahip bir adada tüm hesap birimlerinden 16, float çarp topla, float bölme ve logaritma 8'er adet, üssel fonksiyon ve tamsayı bölme birimlerinden 4'er adet gerçeklenmiştir. Elde edilen kaynak tüketim değerlerine göre 1 ada hedef platformun kaynaklarının \%17.37'sini kullanmaktadır. Dolayısıyla platformda en fazla 4 adet adadan söz edilebilir. Her bir adada 16 SIMD lane ve 32 warp bulunduğundan eş zamanlı olarak platform üzerinde çalışabilecek toplam thread sayısı 2048'dir. Bu seçenekte adalar yerleştirildikten sonra boş kalan \%14'lük kısım bellek ara yüzü, PCI-e arayüzü ve scheduler için değerlendirilir.\par
+Her bir adada 16 SIMD lane ve 32 warp bulunduğundan eş zamanlı olarak platform üzerinde çalışabilecek toplam thread sayısı 2048'dir. Bu seçenekte adalar yerleştirildikten sonra boş kalan \%14'lük kısım bellek ara yüzü, PCI-e arayüzü ve scheduler için değerlendirilir.\par
 
 \begin{figure}[ht]
 \centering
@@ -280,6 +282,5 @@ Virtex 7 VC709 geliştirme kartı hedef platform olarak belirlenmiş, bu platfor
 
 \section{Gelecek Çalışmalar}
 Proje neticesinde tasarlanan yardımcı işlemci ünitesi ölçeklenebilir ve özelleştirilebilir bir yapıdadır. OpenCL destekli olan yardımcı işlemci ünitesi için tez çalışmasının kapsamı dışında derleyici yazılmıştır. Mevcut derleyici, LLVM ara katmanını kullanarak OpenCL ile yazılan herhangi bir programı Tosun buyruklarına derleyebilmektedir. Bu noktada projenin bulunduğu noktada gerekli yazılım katmanları ile birlikte çalışabilir bir paralel işlem ünitesi vardır.\par
-Gelecek çalışmaların başında en iyileme çalışmaları gelmektedir. Bellek erişimi için kaybedilen zamanın indirgenmesi ve alan kullanımında en iyilemeye gidilerek daha fazla SIMD lane gerçeklenmesi performansı dramatik şekilde artıracaktır. \par
-En iyileme çalışmalarının bir parçası olarak mevcut tasarım baz alınarak mimari seviyesinde yapılabilecek her bir değişim irdelenecek, bu değişimlerin performansa etkileri araştırılarak literatüre katkıda bulunulacaktır. \par
-ASELSAN tarafından desteklenen Tosun işlemcisi genel amaçlı sinyal işleme algoritmaları için tasarlanmış, fakat tasarımda sağlanan standart ara yüzler sayesinde herhangi başka uygulama için hazırlanan hesaplama birimlerinin de entegre edilebileceği şekilde gerçeklenmiştir. Gelecek çalışmalarda daha spesifik uygulamalar için özel modüller entegre edilerek donanımda özelleştirme sağlanacak, eklenen hesaplama birimleri ile bir paralel hesaplama kütüphanesi kurulacaktır.  
+Gelecek çalışmaların başında en iyileme çalışmaları gelmektedir. Bellek erişimi için kaybedilen zamanın indirgenmesi ve alan kullanımında en iyilemeye gidilerek daha fazla SIMD lane gerçeklenmesi performansı dramatik şekilde artıracaktır.\par En iyileme çalışmalarının bir parçası olarak mevcut tasarım baz alınarak mimari seviyesinde yapılabilecek her bir değişim irdelenecek, bu değişimlerin performansa etkileri araştırılarak literatüre katkıda bulunulacaktır. \par
+ASELSAN tarafından desteklenen Tosun işlemcisi genel amaçlı sinyal işleme algoritmaları için tasarlanmış, fakat tasarımda sağlanan standart ara yüzler sayesinde herhangi başka uygulama için hazırlanan hesaplama birimlerinin de entegre edilebileceği şekilde gerçeklenmiştir. Gelecek çalışmalarda daha spesifik uygulamalar için özel modüller entegre edilerek donanımda özelleştirme sağlanacak, böylece bir paralel hesaplama kütüphanesi kurulacaktır.  
