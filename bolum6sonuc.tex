@@ -93,7 +93,7 @@ Tosun üzerinde çalıştırılan bir buyruk işlenmek üzere bir adaya alındı
 
 Tasarlanan boru hattında bir buyruğun çalışması warp seçimi ile başlar. Warp seçimi donanımda aktif warp'ların tutulduğu bir tablo üzerinde Round Robin algoritması ile seçim yapılmasından ibarettir ve 1 çevrimde sonuçlanır. \par 
 
-Seçilen warp için sıradaki buyruk bellekten çekilir. Bu aşamada buyruk ön belleğinde söz konusu buyruk bulunursa, 1 çevrimde aşama geçilir. Eğer buyruk önbellekte yoksa, ana bellek üzerinden buyruğun çekilmesi gerekmektedir. Ana belleğin cevap süresi anlık yoğunluğa göre değişmektedir. En kötü durum, tüm adaların hem veri hem buyruk portlarından istek gelirken aynı zamanda PCI ve ana bellek arasında da veri akışı varken, hiçbir isteğin önbellekte bulunamaması durumudur. En kötü durum tahmini cevap süresi $35 x ( N_{ada} x 2 + 1 )$ şeklinde ifade edilebilir. \par
+Seçilen warp için sıradaki buyruk bellekten çekilir. Bu aşamada buyruk ön belleğinde söz konusu buyruk bulunursa, 1 çevrimde aşama geçilir. Eğer buyruk önbellekte yoksa, ana bellek üzerinden buyruğun çekilmesi gerekmektedir. Ana belleğin cevap süresi anlık yoğunluğa göre değişmektedir. En kötü durum, tüm adaların hem veri hem buyruk portlarından istek gelirken aynı zamanda PCI ve ana bellek arasında da veri akışı varken, hiçbir isteğin önbellekte bulunamaması durumudur. En kötü durum tahmini cevap süresi $35 x ( N_{ada} x 2 + 1 )$ şeklinde ifade edilebilir. Buyrukların ana bellekten çekilmesi bloklar halinde yapılır. Tek seferde 512 bit yani 16 adet buyruk çekilir. Dolayısıyla en kötü durum gerçekleştiğinde yaşanan gecikme, her 16 buyruk için bir kez yaşanır. Burada dallanma buyruğu gelmesinden dolayı yanlış buyrukların çekilmiş olması senaryosu daha kötü bir durum olarak düşünülür fakat Tosun işlemcisinde her SIMD lane üzerinde koşan thread dallanma neticesinde farklı davranabileceğinden ve SIMD mimarisinin uygulanmasından dolayı dallanmalarda her iki ihtimal de her SIMD lane üzerinde sonuçlar maskelenerek çalıştırıldığından dallanma oluşması buyruk çekme açısından ek bir maliyete sebep olmaz.\par
 
 Buyruk çözme aşamasında yalnızca bit gruplarının ayrılması işlemi yapıldığından 1 çevrimde geçilebilir. Yazmaç çekme aşamasında her SIMD lane kendine ait yazmaç öbeğinden 1, 2 veya 3 adet yazmacın değerini okur. Yazmaç öbeğinin cevap süresi en kötü durumda 3, ortalamada 1 çevrimdir.\par
 Hesap modülü atama aşamasında işlem koduna göre hesaplama birimlerinden biri hesaplamayı yapmak üzere seçilir ve gerekli giriş değerleri iletilir. Basit karşılaştırma devrelerinden oluşan aşama 1 çevrimde tamamlanır. Hesaplama aşaması ise her buyruk için farklı cevap süresine sahiptir. \par
@@ -111,7 +111,7 @@ Sonuç olarak herhangi bir buyruğun boru hattını baştan sona tamamlaması i�
 									&= T_{hesap} + 9
 \end{align}
 
-Her buyruk için en iyi durum ve en kötü durumda çevrim sayısı, 16 SIMD lane'den oluşan 4 ada için Şekil \ref{figure:fillPipelineBestWorst}'de sunulmuştur. Grafikte gösterilen çevrim sayıları, en kötü durumda buyruk başına boru hattının dolması için geçen süreyi ifade etmektedir. Boru hattının doldurulmasından sonra her çevrimde bir sonuç verilmesi beklendiğinden Şekil \ref{figure:fillPipelineBestWorst}'de sunulan değerler olabilecek en kötü sonuçlardır.\par
+Her buyruk için en iyi durum ve en kötü durumda çevrim sayısı, 16 SIMD lane'den oluşan 4 ada için Şekil \ref{image:fillPipelineBestWorst}'de sunulmuştur. Grafikte gösterilen çevrim sayıları, en kötü durumda buyruk başına boru hattının dolması için geçen süreyi ifade etmektedir. Boru hattının doldurulmasından sonra her çevrimde bir sonuç verilmesi beklendiğinden Şekil \ref{image:fillPipelineBestWorst}'de sunulan değerler olabilecek en kötü sonuçlardır.\par
 
 \begin{figure}[ht] \label{image:fillPipelineBestWorst}
 \centering
@@ -121,7 +121,7 @@ Her buyruk için en iyi durum ve en kötü durumda çevrim sayısı, 16 SIMD lan
 \caption{En iyi ve en kötü durumlarda buyruk başına çevrim sayısı}
 \end{figure}
 
-Mimaride ada sayısının artışı ile aynı anda çalışabilecek thread bloklarının sayısı, dolayısıyla paralellik artmaktadır. Ana bellek veri yolu genişliği sabit olup paralelleştirmede kısıtlayıcı etkendir. Mimaride eş zamanlı koşturulan toplam thread sayısının artırılması bellek işlemlerinde gecikmeyi artırır. En kötü durumda buyruk başına boru hattının ortalama dolma sürelerinin ada sayısına göre değişimi Şekil \ref{figure:fillPipelineWorstVsNumOfIslands}'de sunulmuştur.\par
+Mimaride ada sayısının artışı ile aynı anda çalışabilecek thread bloklarının sayısı, dolayısıyla paralellik artmaktadır. Öte yandan ana bellek veri yolu genişliği sabit olup paralelleştirmede kısıtlayıcı etkendir. Mimaride eş zamanlı koşturulan toplam thread sayısının artırılması bellek işlemlerinde gecikmeyi artırır. En kötü durumda buyruk başına boru hattının ortalama dolma sürelerinin ada sayısına göre değişimi Şekil \ref{image:fillPipelineWorstVsNumOfIslands}'de sunulmuştur.\par
 
 \begin{figure}[ht]
 \centering
@@ -132,8 +132,51 @@ Mimaride ada sayısının artışı ile aynı anda çalışabilecek thread blokl
 \label{image:fillPipelineWorstVsNumOfIslands}
 \end{figure}
 
+Yukarıda da belirtildiği gibi sunulan değerler boru hattının doldurulması ile ilgili değerlerdir. N adet buytruktan oluşan bir programın ortalama çalışma süresi Denklem \ref{}'de sunulduğu şekilde hesaplanır. \par
+
+\begin{align} \label{equation:pipelineCycleEstimationWorstCase}
+	T_{program}= T_{hesap} + 7 + (N_{buyruk}/16) x 35 x N_{ada}
+\end{align}
+
+$T_{hesap}$ tüm buyrukların hesağlanması için geçen süreyi ifade eder ve programın içerdiği buyruk tiplerine ve sayılarına bağlı olarak değişir. Örneğin standart bir FFT uygulaması için yazılan bir programın boru hattı üzerinde ilerleyişi incelenerek toplam çalışma süresi hesaplanmıştır. Karşılaştırma amaçlı olarak Xilinx tarafından sağlanan FFT IPCore'unun tahmini çalışma süreleri alınmıştır. Değişik örnek sayıları için çalışma süreleri 250 MHz sıklığında saat çevrimi sayısı cinsinden Tablo \ref{table:fftComparision}'de sunulmuştur.
+
+\begin{longtable}{p{90pt} p{90pt} p{120pt}}
+\caption{} \label{table:fftComparision} \\
+\textbf{Nokta Sayısı} & \textbf{Tosun Ç.S.} & \textbf{Xilinx IPCore Ç.S.}\\ 
+\hline 
+\endfirsthead
+
+\multicolumn{2}{c}%
+{{\bfseries \tablename\ \thetable{} -- devam}} \\
+\textbf{Nokta Sayısı} & \textbf{Tosun Ç.S.} & \textbf{Xilinx IPCore Ç.S.}\\ 
+\hline 
+\endhead
+
+\hline \multicolumn{3}{r}{\textbf{Sonraki sayfada devam etmektedir.}} \\ 
+\endfoot
+
+\hline \hline
+\endlastfoot
+8		& 242		& 80 \\
+16		& 321		& 160 \\
+32		& 400		& 320 \\
+64		& 479		& 640 \\
+128		& 558		& 1280 \\
+256		& 1190		& 2560 \\
+512		& 2612		& 5120 \\
+1024	& 5772		& 10240 \\
+2048	& 12724		& 20480 \\
+4096	& 27892		& 40960 \\
+8192	& 60756		& 81920 \\
+16384	& 131540	& 163840 \\
+32768	& 283220	& 327680 \\
+65536	& 606804	& 655360 \\
+\end{longtable}
+
+Tablo \ref{table:fftComparision}'de gözlendiği şekilde sinyalde nokta sayısının artması ile Tosun mimarisi, IPCore'a göre daha yüksek performans göstermektedir. Bunun sebebi nokta sayısının artması ile paralelleştirmenin avantajının artmasıdır. Karşılaştırmanın herhangi bir GPU, CPU veya ASIC tabanlı uygulama yerine IPCore ile karşılaştırılmasının sebebi IPCore'un Tosun mimarisi ile aynı FPGA platformunda çalıştırılabilmesidir. Diğer platformlarla karşılaştırmak için çevrim sayıları $4x10^{-9}$ ile çarpılarak saniye cinsinden zaman değerlerine ulaşılabilir. \par
+
 \section{Tosun Kaynak Kullanımı Analizi}
-Tosun mimarisinin büyük kısmını oluşturan ada yapısı alt modülleri seviyesinde irdelenerek devrenin alan değerlerine karşın performansındaki değişim gözlenmiştir. Hedef platform olarak belirlenen Virtex7 FPGA'in kapasitesi Tablo \ref{table:virtex7Resources}'da verilmiştir.
+Tosun mimarisinin büyük kısmını oluşturan ada yapısı alt modülleri seviyesinde irdelenerek devrenin alan değerlerine karşın performansındaki değişim gözlenmiştir. Hedef platform olarak belirlenen Virtex7 FPGA'in kapasitesi Tablo \ref{table:virtex7Resources}'de verilmiştir.
 
 \begin{longtable}{p{90pt} p{90pt}}
 \caption{Virtex 7 VC709 Geliştirme Kartı Kaynak Kapasitesi} \label{table:virtex7Resources} \\
