@@ -1,8 +1,6 @@
 \chapter{GENEL İŞLEMCİ MİMARİSİ}
 İşlemci tasarımı buyruk kümesinin tasarlanması ile başlar. Daha sonra buyrukların koşturulabilmesi için gerekli donanımlar belirlenir ve bu donanımların yüksek verimli kullanımını sağlamak için boru hattı mimarisi tasarlanır. Tezin bu bölümünde öncelikli olarak buyruk kümesi mimarisi anlatılacak, ardından her buyruğun ihtiyaç duyduğu hesaplama modülleri belirlenecek, sonrasında kullanım senaryoları üzerinden boru hattı mimarisi tasarımı anlatılacaktır. Son olarak Tosun işlemcisinin veri yolu mimari yapısı ve tasarım kararları üzerinde durulacaktır.\par
 
-Literatür özetinde belirtilen mimari alternatifleri, çekirdek sayısı ve homojen - heterojen çekirdekler bakımından farklı sınıflara ayrılmıştır. Hedeflenen donanım bir FPGA platformudur. FPGA platformları, ASIC tasarımlara göre daha düşük saat sıklığında çalışabildiğinden, uygulamanın yüksek seviyede paralelleştirilmesi ile faydalı bir ürün oluşturulabilir. \par
-
 \section{Buyruk Kümesi Mimarisi}
 Hedeflenen işlemciye benzer özelliklerde mevcut paralel işlemcilerin buyruk kümesi mimarileri incelenmiş, gereksinim analizinde fonksiyonların gerçeklenebilmesi için gerekli olarak belirlenen buyruklar bu buyruk kümesi mimarilerine eklenerek Tosun işlemcisi için bir buyruk kümesi mimarisi oluşturulmuştur. Mevcut buyruk kümelerinin incelenmesinin sebebi paralel işlemcilerin mimari özelliklerinden bağımsız olarak sahip olması gereken ortak özelliklerin bulunmasıdır. Bu özelliklerden bazıları yükleme ve saklama operasyonları, threadler arası senkronizasyonun sağlanması, çekirdeklerin bellek erişimlerinde kullanılan adres hesaplamaları, yazmaçlar üzerinde yapılan okuma ve yazma işlemleridir. \par
 
@@ -37,8 +35,8 @@ Tosun buyruk kümesi mimarisinde bulunmasına karar verilen buyruklar tablo \ref
   divi 		&	 $r_{d} = r_{s1} / 			$anlık  & \multicolumn{1}{c}{Anlık}  	\\
   muli 		&	 $r_{d} = r_{s1} x 			$anlık  & \multicolumn{1}{c}{Anlık}  	\\
   subi 		&	 $r_{d} = r_{s1} - 			$anlık  & \multicolumn{1}{c}{Anlık}  	\\
-  movi 		&	 $r_{d}(alt yarısı) = 	$anlık  & \multicolumn{1}{c}{Anlık}  	\\
-  movhi		&	 $r_{d}(üst yarısı) = 	$anlık  & \multicolumn{1}{c}{Anlık}  	\\
+  movi 		&	 $r_{d}(alt) = 	$anlık  & \multicolumn{1}{c}{Anlık}  	\\
+  movhi		&	 $r_{d}(ust) = 	$anlık  & \multicolumn{1}{c}{Anlık}  	\\
   fabs  	&  $r_{d} = |r_{s1}|			$				&	\multicolumn{1}{c}{Y1}		 	\\
   fadd  	&  $r_{d} = r_{s1} + r_{s2}$			&	\multicolumn{1}{c}{Y2}		 	\\
   fcom  	&  $r_{d} = com(r_{s1},r_{s2})$		&	\multicolumn{1}{c}{Karşılaştırma}	 	\\

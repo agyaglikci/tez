@@ -42,7 +42,7 @@ OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamal
  												& Matrisin tüm elemanlarının sabit ile çarpımı				 				\\%math_desc		& C$_{m,n}$= A$_{m,n}$ * b\\
  Bölme									& Matrislerin eleman - eleman bölümü 													\\%math_desc		& C$_{m,n}$= A$_{m,n}$ / B$_{m,n}$\\
  												& Matrisin tüm elemanlarının sabite bölümü 						 				\\%math_desc		& C$_{m,n}$= A$_{m,n}$ / b\\
- Toplam									& Matrisin satır toplamları 																	\\%math_desc		& C$_{(mx1)}$=sum(A,rows)\\
+ Elemanların toplamı    & Matrisin satır toplamları 																	\\%math_desc		& C$_{(mx1)}$=sum(A,rows)\\
  												& Matrisin sütun toplamları				 														\\%math_desc		& C$_{(1xn)}$=sum(A,cols)\\
  												& Matrisin tüm elemanlarının toplamı 													\\%math_desc		& C = sum(A)\\
  Max, Min,  						& Her satır için																							\\%math_desc		& \\
@@ -56,7 +56,7 @@ OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamal
  												& Her sütunun fourier ve ters fourier dönüşümü								\\%math_desc		& \\
  Logaritma							& Her eleman için doğal logaritma hesabı											\\%math_desc		& C$_{m,n}$ = ln(A$_{m,n}$)\\	
  												& Her elemean için 10 tabanında logaritma hesabı							\\%math_desc		& C$_{m,n}$ = log10(A$_{m,n}$)\\
- Eksponansiyel					& 10 tabanında eksponansiyel 																	\\%math_desc		& C$_{m,n}$ = 10$^{A_{m,n}}$\\
+ Üssel fonksiyon				& 10 tabanında eksponansiyel 																	\\%math_desc		& C$_{m,n}$ = 10$^{A_{m,n}}$\\
  												& Doğal tabanda eksponansiyel 																\\%math_desc		& C$_{m,n}$ = e$^{A_{m,n}}$\\ 
  Büyüklüğü  						& Matrisin mutlak büyüklüğü																		\\%math_desc		& C = mag(A, abs)\\ 
  												& Matrisin enerjisi																						\\%math_desc		& C = mag(A, sqr) \\	
@@ -79,8 +79,8 @@ OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamal
  												& Sütun sıralama 																							\\%math_desc		& \\
  												& Matris sıralama (vektör sıralama gibi) 											\\%math_desc		& \\
  Varyans,								& Satır bazlı 	 																							\\%math_desc		& \\
- Standart Sapma					& Sütun bazlı 	 																							\\%math_desc		& \\
- 												& Matris bazlı 	 																							\\%math_desc		& \\
+ Standart 					& Sütun bazlı 	 																							\\%math_desc		& \\
+ Sapma												& Matris bazlı 	 																							\\%math_desc		& \\
  İşaret									& Her bir eleman için signum fonksiyonu 											\\%math_desc		& \\
  Flip										& Yatay ve düşey eksende flip 																\\%math_desc		& \\
  Karekök 								& Her eleman için karekök 																		\\%math_desc		& \\
@@ -95,7 +95,7 @@ Tasarlanan donanımın temel tasarım kararlarını oluşturan gereksinimler ve 
 \section{Başarım Etkenleri}\label{basarimEtkenleri}
 Tablo \ref{table:fonksiyonListesi} içinde belirtilen işlemlerin paralelleştirilmesi ile işlem sürelerinin kısalması beklenmektedir. Paralel hesaplamada işlem süresini belirleyen 4 unsur vardır. \par
 
-Bunlardan birincisi bellek işlemlerine ayrılan süredir. Programlanabilir her sistemde olduğu gibi bir işlem veya işlem dizisi başlarken bellekten veri okunur, sonlandığında ise tekrar belleğe sonuçlar yazılır. İşlemler paralelleştirilse de paralelleştirilmese de bellek için harcanan süre toplamda yakındır. {Citation Here} Hem yazılım hem de donanım seviyesinde bellek işlemlerinde yerelliği artırmak bellek işlemlerinin daha hızlı işlenmesine olanak sağlar.\par
+Bunlardan birincisi bellek işlemlerine ayrılan süredir. Programlanabilir her sistemde olduğu gibi bir işlem veya işlem dizisi başlarken bellekten veri okunur, sonlandığında ise tekrar belleğe sonuçlar yazılır. İşlemler paralelleştirilse de paralelleştirilmese de bellek için harcanan süre toplamda yakındır. \cite{Citation Here} Hem yazılım hem de donanım seviyesinde bellek işlemlerinde yerelliği artırmak bellek işlemlerinin daha hızlı işlenmesine olanak sağlar.\par
 
 İkinci unsur paralelleştirmenin bir ölçüsü olan thread sayısıdır. Söz konusu işlem birbirinden bağımsız iş parçacıklarına bölünür ve her bir iş parçacığı farklı donanımlarda koşturularak paralel işleme sağlanır. Literatürde bu iş parçacıkları ingilizce ismi olan thread kelimesiyle ifade edilmekte ve thread kelimesinin buradaki anlamını taşıyan bir türkçe tercümesi bulunmamaktadır. Bu sebeple tezin devamında sürekli olarak thread kelimesi kullanılacaktır. Thread sayısındaki artış, programın daha paralel koşturulabilmesine olanak sağlar.\par
 
@@ -103,7 +103,7 @@ Bunlardan birincisi bellek işlemlerine ayrılan süredir. Programlanabilir her 
 
 Dördüncü unsur ise her bir thread için harcanan yürütme zamanıdır. Thread başına düşen yürütme zamanı thread içindeki buyruk sayısına, buyrukların çevrim sayılarına, buyruklar arası veri bağımlılıklarına, işlemcinin boru hattı mimarisine ve işlemcinin frekansına bağlı olarak değişir.\par
 
-Dolayısıyla bir paralelleştirilmiş bir uygulamanın yürütme zamanı denklem \ref{equation:yurutmeZamani}'de gösterildiği şekilde formüle dökülebilir.
+Dolayısıyla paralelleştirilmiş bir uygulamanın yürütme zamanı denklem \ref{equation:yurutmeZamani}'de gösterildiği şekilde formüle dökülebilir.
 
 \begin{equation} \label{equation:yurutmeZamani}
 t_{program} = t_{bellek} + t_{thread} x \frac{N_{thread}}{N_{thread yolu}} \& 
@@ -143,10 +143,10 @@ Verilen herhangi N elemanlı bir veri seti üzerinde (matris veya matrisin bir p
 $v_{1}$ ve $v_{2}$ iki adet N elemanlı vektör olsun $v_{1} . v_{2} = \sum_{i=1}^{N} v_{1}[i] x v_{2}[i]$ şeklinde tanımlıdır. Daha önce matris çarpımında belirtildiği şekilde çarp, çarp-topla ve topla buyrukları kullanılarak bu işlem gerçekleştirilir. Burada her bir çarpımı oluşturmak için ayrı bir thread oluşturularak paralellik sağlanabilir.
 
 \subsection{FFT/IFFT}
-Ayrık zamanda fourier ve ters fourier dönüşümü için günümüzde yaygın olarak kullanılan algoritma Cooley-Tukey FFT algoritmasıdır. ref{} Bu algoritmanın radix-2 decimation in time gerçeklemesinin uygulanması durumunda her bir thread bir butterfly işlemini çalıştırır. 8 elemanlı bir vektörün FFT işlemi Şekil \ref{image:fft_radix2_8p}'de sunulmuştur. \par
+Ayrık zamanda fourier ve ters fourier dönüşümü için günümüzde yaygın olarak kullanılan algoritma Cooley-Tukey FFT algoritmasıdır. \cite{cooleyTukey} Bu algoritmanın radix-2 decimation in time gerçeklemesinin uygulanması durumunda her bir thread bir butterfly işlemini çalıştırır. 8 elemanlı bir vektörün FFT işlemi Şekil \ref{image:fft_radix2_8p}'de sunulmuştur. \par
 
 Fourier transformu alınacak olan giriş sinyali x(n), bu sinyalin fourier transformu ise X(n) olsun.
-Radix-2 yönteminde x(n) vektörünün elemanları tek indisli elemanlar ve çift indisli elemanlar olarak ayrılıp, ikişerli gruplara bölünürler. Daha sonra her bir eleman kendinden N/2 uzaktaki eleman ile butterfly işlemine alınır. Şekil \ref{image:fft_radix2_8p}'de sunulan algoritma, şekil \ref{image:fft_radix2_butterfly}'de çizimi sunulan butterfly işlemlerinden oluşur. Her bir butterfly işleminde yapılan hesaplama denklem \ref{equation:butterfly}'de gösterildiği gibidir.
+Radix-2 yönteminde x(n) vektörünün elemanları tek indisli elemanlar ve çift indisli elemanlar olarak ayrılıp, ikişerli gruplara bölünürler. Daha sonra her bir eleman kendinden N/2 uzaktaki eleman ile butterfly işlemine alınır. Şekil \ref{image:fft_radix2_8p}'de sunulan algoritma, şekil \ref{image:fft_radix2_butterfly}'de çizimi sunulan butterfly işlemlerinden oluşur. Her bir butterfly işleminde yapılan hesaplama denklem \ref{equation:fft_radix2_butterfly}'de gösterildiği gibidir.
 
 \begin{figure}
 \centering
@@ -154,10 +154,10 @@ Radix-2 yönteminde x(n) vektörünün elemanları tek indisli elemanlar ve çif
 \includegraphics[width=0.3\textwidth]{gorsel/fft_radix2_butterfly.jpg}
 \shorthandoff{=}
 \caption{Radix 2 için butterfly işlemi}
-\label{fft_radix2_butterfly}
+\label{image:fft_radix2_butterfly}
 \end{figure}
 
-$k_{1} = cos(-\frac{2pi}{N}) \& k_{2} = sin(-\frac{2pi}{N})$
+$k_{1} = cos(-\frac{2pi}{N})$  $k_{2} = sin(-\frac{2pi}{N})$ \par
 \begin{equation} \label{equation:fft_radix2_butterfly}
   \begin{bmatrix}
     c_{Re} & c_{Im} \\[0.3em]
@@ -194,7 +194,7 @@ $k_{1} = cos(-\frac{2pi}{N}) \& k_{2} = sin(-\frac{2pi}{N})$
 \includegraphics[width=0.8\textwidth]{gorsel/fft_radix2_8p.jpg}
 \shorthandoff{=}
 \caption{R8 noktalı sinyal için FFT Radix 2 algoritması}
-\label{fft_radix2_8p}
+\label{image:fft_radix2_8p}
 \end{figure}
 Denklem \ref{equation:fft_radix2_butterfly}'de görüldüğü üzere her bir butterfly işlemi matris çarpımları ve matris toplamları şeklinde ifade edilebilir. İşleme alınan parametreler a ve b sayılarının reel ve imajiner kısımlarının yanı sıra $sin(-2\pi/N)$ ve $cos(-2\pi/N)$ değerleridir. Burada N değeri sonuç vektörünün her bir elemanın indisi olup, bir eleman için bir kez hesaplanır. \par
 FFT gerçeklemesi için sin ve cos değerlerinin hesaplanabilmesi gerekmektedir. Dolayısıyla matris çarpma ve toplama işlemlerinin yanı sıra trigonometri buyrukları da gerekmektedir.
@@ -204,8 +204,8 @@ Verilen bir veri setinin her elemanı için doğal logaritma (e tabanında) ve 1
 $log_{a}(x) = log_{e}(x) / log_{e}(a)$ 
 denkliğinden faydalanılarak herhangi tabanda logaritma hesaplanabilir. Burada buyruk kümesine $log_{e}x$ buyruğunun da eklenmesi gerekir.
 
-\subsection{Eksponansiyel}
-Verilen bir veri setinin her elemanı için $10^{x}$ ve $e^{x}$ değerlerinin hesaplanması gerekir. Xilinx tarafından sağlanan IPCore ile $e^{x}$ hızlı bir şekilde hesaplanabilmektedir. $a^{b} = e^{b x log_{e}{a]}}$ denkliğinden faydalanılarak herhangi $a^{x}$ değeri hesaplanabilir.
+\subsection{Üssel Fonksiyon}
+Verilen bir veri setinin her elemanı için $10^{x}$ ve $e^{x}$ değerlerinin hesaplanması gerekir. Xilinx tarafından sağlanan IPCore ile $e^{x}$ hızlı bir şekilde hesaplanabilmektedir. $a^{b} = e^{b x log_{e}{a}}$ denkliğinden faydalanılarak herhangi $a^{x}$ değeri hesaplanabilir.
 
 \subsection{Norm}
 Sinyal işlemede yaygınlıkla kullanılan matris normları 1, 2 ve $\infty$ normlardır. 1-norm sütun toplamlarının maksimumu şeklinde tanımlıdır. 
