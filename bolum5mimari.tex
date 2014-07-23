@@ -70,8 +70,8 @@ Tosun buyruk kümesi mimarisinde bulunmasına karar verilen buyruklar tablo \ref
   chs  		&  $r_{d} = -r_{s1}$							&	\multicolumn{1}{c}{Y1}		 	\\
   not  		&  $r_{d} = ~r_{s1}$							&	\multicolumn{1}{c}{Y1}		 	\\
   abs  		&  $r_{d} = |r_{s1}|$							&	\multicolumn{1}{c}{Y1}		 	\\
-  com  		&  $r_{d} = max(r_{s1},r_{s2})$		& \multicolumn{1}{c}{Y2}			\\
-  mod  		&  $r_{d} = max(r_{s1},r_{s2})$		& \multicolumn{1}{c}{Y2}			\\
+  com  		&  $r_{d} = com(r_{s1},r_{s2})$		& \multicolumn{1}{c}{C}			\\
+  mod  		&  $r_{d} = r_{s1} \% r_{s2})$		& \multicolumn{1}{c}{Y2}			\\
   brv 		&	 Verilen yazmaçtaki bitleri ters sırada hedef yazmaca yazar & \multicolumn{1}{c}{Y1}  \\
   bfr 		&	 Verilen yazmacın belirtilen kadar kısmını maskeleyip hedef yazmaca yazar & \multicolumn{1}{c}{Y1}  \\
   br 			&	 Karşılaştırma bayraklarında belirtilen koşul varsa, verilen adres kadar ileri atlar & \multicolumn{1}{c}{Dallanma}  \\
@@ -125,7 +125,7 @@ Buyruk listesinde her bir buyruk için mimariye eklenmesi gereken hesaplama mod�
 \item add, addi, sub, subi, abs, chs buyruklarının hesaplamaları tamsayı toplayıcı ipcore kullanılarak yapılır. Bu işlem birimi hem toplama hem çıkarma işlemini gerçeklemektedir.
 \item mul ve muli buyrukları integer çarpma IPCore kullanılarak gerçeklenir.
 \item and, andi, or, ori, not, xor, xori, brv ve bfr buyrukları mantıksal bit işlemleri yaparlar. Bu buyrukların her biri için ayrı bir işlem modülü kullanılır.
-\item min, max ve com buyrukları için iki sayının karşılaştırılması gerekmektedir. Bu üç buyruğun bir karşılaştırıcı modülünü kullanır. Com buyruğu işlem neticesinde büyük, küçük ve eşit bayraklarının değerini değiştirirken min ve max işlemleri sayılardan küçük olanı veya büyük olanı sonuç yazmacına yazar. 
+\item min, max ve com buyrukları için iki sayının karşılaştırılması gerekmektedir. Bu üç buyruk bir karşılaştırıcı modülünü kullanır. Com buyruğu işlem neticesinde büyük, küçük ve eşit bayraklarının değerini değiştirirken min ve max işlemleri sayılardan küçük olanı veya büyük olanı sonuç yazmacına yazar. 
 \item div, divi ve mod buyrukları bölme işlemi için hazırlanmış ipcore kullanırlar.  
 \item shl, shr, shra buyrukları kaydırıcı modül kullanılarak gerçeklenirler.
 \item f2int ve int2f buyrukları float ve integer veri tipleri arasında dönüşüm sağlar. Her ikisi için de hazır IPCore gerçeklenir.
@@ -173,7 +173,7 @@ Buyruk çekme aşamasında bir önceki aşamadan gelen warp id'nin sıradaki buy
 \subsection{Buyruk Çözme}
 Bu aşamada buyruk çözümlenerek hangi işlem biriminin kullanılacağı, hangi yazmaçların okunup, hangilerine yazılacağı belirlenir. Tüm buyrukların 32 bit olması, işlem kodu genişliklerinin buyruklar arasında fazla farklılık göstermemesi ve neredeyse tüm buyrukların aynı yazmaçlara erişim yapabilmesinden dolayı, boru hattının bu aşaması sade bir yapıdadır.
 \subsection{Yazmaç Çekme}
-Burada çalıştırılmak üzere olan buyruğun işlem sırasında kullanacağı verilen yazmaç öbeğinden alınır. Her bir SIMD lane üzerinde her bir warp için ayrı bir Yazmaç Öbeği vardır ve bunlardan kullanılacak veriler aynı anda çekilir. İki adet kaynak yazmacı bulunan buyruklarda ve 16 çekirdekli bir adada toplam 32(16*2) adet 32-bitlik veri ortalama 1 çevrimde okunur.
+Burada çalıştırılmak üzere olan buyruğun işlem sırasında kullanacağı verilen yazmaç öbeğinden alınır. Her bir SIMD lane üzerinde her bir warp için ayrı bir Yazmaç Öbeği vardır ve bunlardan kullanılacak veriler aynı anda çekilir. İki adet kaynak yazmacı bulunan buyruklarda ve 16 çekirdekli bir adada toplam 32 (16 x 2) adet 32-bitlik veri ortalama 1 çevrimde okunur.
 \subsection{Hesap Modülü Atama}
 Boru hattının bu aşaması hesaplamanın başlatıldığı yerdir. Bu aşamaya gelen bir buyruğun tüm verileri hesaplamaya hazır bir halde beklemektedir. Bu aşamada işlem koduna bakılarak buyruk gerekli hesaplama donanımına gönderilir.
 \subsection{Hesap}
@@ -199,7 +199,7 @@ Tasarımın adalara ayrılması ile donanım seviyesinde bir soyutlama sağlanm�
 
 \subsection{Ada İçi Veri Yolu Mimarisi}
 
-Yukarıda anlatılan buyrukların koşturulduğu ve boru hattının uygulandığı mimari ada içi mimaridir. Her adanın içinde N adet SIMD lane var ise N adet yazmaç öbeği bulunmaktadır. Alan tüketimi az olan ve hedef uygulamalarda sıkça kullanılan hesaplama birimlerinden de N adet bulunmaktadır. Diğer buyruklara oranla daha az sıklıkta kullanılan ve alan tüketimi yüksek olan hesaplama birimlerinden ise $N/2^{k}, k\in[1,log_{2}N]$ adet kullanılır. Uzun süren hesaplama modüllerinin içinde de boru hattı bulunmaktadır. Bu sayede modül sayısının $N/2^{k}$ olduğu durumda sadece k çevrim maliyeti olur.\par
+Yukarıda anlatılan buyrukların koşturulduğu ve boru hattının uygulandığı mimari ada içi mimaridir. Her adanın içinde N adet SIMD lane var ise N adet yazmaç öbeği bulunmaktadır. Alan tüketimi az olan ve hedef uygulamalarda sıkça kullanılan hesaplama birimlerinden de N adet bulunmaktadır. Diğer buyruklara oranla daha az sıklıkta kullanılan ve alan tüketimi yüksek olan hesaplama birimlerinden ise $N/2^{k}, k\in Z^{+} , 1 \le k \le log_{2}N$ adet kullanılır. Uzun süren hesaplama modüllerinin içinde de boru hattı bulunmaktadır. Bu sayede modül sayısının $N/2^{k}$ olduğu durumda sadece k çevrim maliyeti olur.\par
 \begin{figure}[h]
 \centering
 \shorthandoff{=}
@@ -248,7 +248,7 @@ Hesaplama modülleri \ref{image:executionUnitIO}'de sağ tarafta gösterildiği 
 
 \subsubsection{Paylaşımlı Bellek}
 Threadlerin yazmaçları kendilerine özel olup dışarıdan bir modülün erişimi yoktur. Oysa ki paralel hesaplamalarda bir threadin ürettiği bir sonuç başka bir thread tarafından kullanılabilir. Threadler arası veri paylaşımı için iki seçenek vardır. Bir seçenek ana bellek üzerinden veri paylaşımı yapılması iken diğeri paylaşımlı bellek eklenmesidir. Ana bellek hem yonga dışında olduğundan hem de veri yolu genişliğinin sınırlı olmasından dolayı yavaş olacaktır.\par
-FPGA üstünde paylaşımlı bellek gerçeklemesi ancak Block RAM kullanımı ile mümkündür. Donanımda tanımlı Block RAM Primitive'ler 32KB büyüklüğünde olup 2 portu desteklemektedir. Paylaşımlı bellek kapasitesinin artırılması birden fazla Block RAM Primitive üzerine adres uzayı taksim edilir.\par
+FPGA üstünde paylaşımlı bellek gerçeklemesi ancak Block RAM kullanımı ile mümkündür. Donanımda tanımlı Block RAM Primitive'ler 32kbit büyüklüğünde olup 2 portu desteklemektedir. Paylaşımlı bellek kapasitesinin artırılması birden fazla Block RAM Primitive üzerine adres uzayı taksim edilir.\par
 Her bir çekirdeğin paylaşımlı belleğe erişiminin bulunması gerekmektedir. Bunun için çekirdek sayısı adetinde porta sahip bir paylaşımlı bellek Block RAM Primitive'ler kullanılarak Şekil \ref{image:sharedMemory}'de gösterildiği şekilde tasarlanmıştır.
 \begin{figure}[ht]
 \centering
@@ -259,8 +259,8 @@ Her bir çekirdeğin paylaşımlı belleğe erişiminin bulunması gerekmektedir
 \label{image:sharedMemory}
 \end{figure}
 
-Paylaşımlı belleğin girişindeki her bir port bir SIMD lane'e bağlıdır. Paylaşımlı belleğin içinde N adet 32kB Block RAM Primitive şekil \ref{image:sharedMemory}'de gösterildiği gibi giriş portlarına öncelik atayıcı donanımlar üzerinden bağlıdır. Her block ram portu için bir öncelik atayıcı bulunmakta ve o block ram portunun hangi SIMD lane portu ile bağlanacağına karar vermektedir. Herhangi SIMD lane üzerinde paylaşımlı belleğe yazma veya okuma amaçlı erişmek isteyen bir buyruk olursa, o SIMD lane'e bağlı port üzerinden ilgili öncelik atayıcıya istek gelir. Her saat vuruşunda öncelik atayıcılar kendilerine gelen istekler üzerinden Round Robin algoritması ile bir seçim yapar. Seçilen paket block ram'e iletilirken, seçilmeyen paketler sırada tutulur. Bunun için her SIMD lane portunun girişinde bir FIFO tampon bellek bulunmaktadır. Her block ram primitive 2 adet porta sahip olduğu için SIMD lane portları ikiye bölünür. Yarısı block ram primitive'lerin A portlarına bağlanırken diğer yarısı B portlarına bağlanır.\par
+Paylaşımlı belleğin girişindeki her bir port bir SIMD lane'e bağlıdır. Paylaşımlı belleğin içinde N adet 32kbit Block RAM Primitive şekil \ref{image:sharedMemory}'de gösterildiği gibi giriş portlarına öncelik atayıcı donanımlar üzerinden bağlıdır. Her block ram portu için bir öncelik atayıcı bulunmakta ve o block ram portunun hangi SIMD lane portu ile bağlanacağına karar vermektedir. Herhangi SIMD lane üzerinde paylaşımlı belleğe yazma veya okuma amaçlı erişmek isteyen bir buyruk olursa, o SIMD lane'e bağlı port üzerinden ilgili öncelik atayıcıya istek gelir. Her saat vuruşunda öncelik atayıcılar kendilerine gelen istekler üzerinden Round Robin algoritması ile bir seçim yapar. Seçilen paket block ram'e iletilirken, seçilmeyen paketler sırada tutulur. Bunun için her SIMD lane portunun girişinde bir FIFO tampon bellek bulunmaktadır. Her block ram primitive 2 adet porta sahip olduğu için SIMD lane portları ikiye bölünür. Yarısı block ram primitive'lerin A portlarına bağlanırken diğer yarısı B portlarına bağlanır.\par
 
 Paylaşımlı bellek mimarisi için en kötü durum tüm SIMD lane portlarından aynı block RAM primitive için istek paketleri gelmesidir. Bu durumda SIMD lane sayısının yarısı büyüklüğünde kuyruk oluşur ve işlemler buna göre gecikmeli gerçekleşir. En kötü durum ihtimalini ortadan kaldırmak mümkün değildir fakat ihtimali düşürmek adına adres uzayının block ram'lere dağıtım yönteminde iyileştirme yapılabilir. \par
 
-Tosun paylaşımlı bellek mimarisinde kullanılan verilerin tamamı 32 bit genişliğinde, block ram primitiveler ise 32 kbit büyüklüğündedir. Dolayısıyla her block ram primitive 1000 adet adresten oluşur. Paylaşımlı bellek büyüklüğünün 128kbit olması durumunda toplamda8 adet block ram bulunmaktadır Adres uzayı block ramlere patlaştırılırken üst bitler yeerine alt bitlerin kullanılması ile ardışık adresler her zaman farklı block ram primitive'lerini gösterir ve en kötü durum ihtimali azaltılır. 
+Tosun paylaşımlı bellek mimarisinde kullanılan verilerin tamamı 32 bit genişliğinde, block ram primitiveler ise 32 kbit büyüklüğündedir. Dolayısıyla her block ram primitive 1000 adet adresten oluşur. Paylaşımlı bellek büyüklüğünün 128kbit olması durumunda toplamda 8 adet block ram bulunmaktadır Adres uzayı block ramlere paylaştırılırken üst bitler yerine alt bitlerin kullanılması ile ardışık adresler her zaman farklı block ram primitive'lerini gösterir ve en kötü durum ihtimali azaltılır. 
