@@ -139,7 +139,7 @@ Yukarıda da belirtildiği gibi sunulan değerler boru hattının doldurulması 
 $T_{hesap}$ tüm buyrukların hesaplanması için geçen süreyi ifade eder ve programın içerdiği buyruk tiplerine ve sayılarına bağlı olarak değişir. Örneğin standart bir FFT uygulaması için yazılan bir programın boru hattı üzerinde ilerleyişi incelenerek toplam çalışma süresi hesaplanmıştır. Karşılaştırma amaçlı olarak Xilinx tarafından sağlanan FFT IPCore'unun tahmini çalışma süreleri alınmıştır. Değişik örnek sayıları için çalışma süreleri 250 MHz sıklığında saat çevrimi sayısı cinsinden Tablo \ref{table:fftComparision}'de sunulmuştur.
 
 \begin{longtable}{p{90pt} p{90pt} p{120pt}}
-\caption{} \label{table:fftComparision} \\
+\caption{Tosun ve Xilinx IPCore FFT Performans Karşılaştırması} \label{table:fftComparision} \\
 \textbf{Nokta Sayısı} & \textbf{Tosun Ç.S.} & \textbf{Xilinx IPCore Ç.S.}\\ 
 \hline 
 \endfirsthead
@@ -174,7 +174,7 @@ $T_{hesap}$ tüm buyrukların hesaplanması için geçen süreyi ifade eder ve p
 Tablo \ref{table:fftComparision}'de gözlendiği şekilde sinyalde nokta sayısının artması ile Tosun mimarisi, IPCore'a göre daha yüksek performans göstermektedir. Bunun sebebi nokta sayısının artması ile paralelleştirmenin avantajının artmasıdır. Karşılaştırmanın herhangi bir GPU, CPU veya ASIC tabanlı uygulama yerine IPCore ile yapılmasının sebebi IPCore'un Tosun mimarisi ile aynı FPGA platformunda çalıştırılabilmesidir. Diğer platformlarla karşılaştırmak için çevrim sayıları $4x10^{-9}$ ile çarpılarak saniye cinsinden zaman değerlerine ulaşılabilir. \par
 
 \section{Tosun Kaynak Kullanımı Analizi}
-Tosun mimarisinin büyük kısmını oluşturan ada yapısı alt modülleri seviyesinde irdelenerek devrenin alan değerlerine karşın performansındaki değişim gözlenmiştir. Hedef platform olarak belirlenen Virtex7 FPGA'in kapasitesi Tablo \ref{table:virtex7Resources}'de verilmiştir.
+Tosun mimarisinin büyük kısmını oluşturan ada yapısı alt modülleri seviyesinde irdelenerek devrenin alan - performans değişimi gözlenmiştir. Hedef platform olarak belirlenen Virtex7 FPGA'in kapasitesi Tablo \ref{table:virtex7Resources}'de verilmiştir.
 
 \begin{longtable}{p{90pt} p{90pt}}
 \caption{Virtex 7 VC709 Geliştirme Kartı Kaynak Kapasitesi} \label{table:virtex7Resources} \\
@@ -200,7 +200,7 @@ DSPs & 3600\\
 I/O & 1032\\
 \end{longtable}
 
-Adanın her bir alt parçası hedef platforma göre sentezlenerek kaynak kullanımları gözlenmiştir. Hesap modüllerinin sayılarında değişikliğe gidilerek farklı kombinasyonlarda kaynak kullanımı gözlenmiş ve performansa etkisi irdelenmiştir.\par
+Adanın her bir alt modülü hedef platforma göre sentezlenerek kaynak kullanımları gözlenmiş, alt modül sayılarında değişikliğe gidilerek farklı kombinasyonlarda kaynak kullanımı hesaplanmış ve performansa etkisi irdelenmiştir.\par
 \begin{figure}[ht]
 \centering
 \shorthandoff{=}
@@ -213,7 +213,7 @@ Adanın her bir alt parçası hedef platforma göre sentezlenerek kaynak kullan�
 
 Şekil \ref{image:util_S16_FMAFDIVFLOG8_FEXPDIV4}'de 16 SIMD lane'e sahip bir adada tüm hesap birimlerinden 16, float çarp topla, float bölme ve logaritma 8'er adet, üssel fonksiyon ve tamsayı bölme birimlerinden 4'er adet gerçeklenmiştir. Elde edilen kaynak tüketim değerlerine göre 1 ada hedef platformun kaynaklarının \%17.37'sini kullanmaktadır. Dolayısıyla platformda en fazla 4 adet adadan söz edilebilir.\par
 \begin{longtable}{p{90pt} p{90pt} p{90pt} p{90pt}}
-\caption{Bölme, logaritma ve üssel fonksiyon hesaplama birimlerinin yarıya düşürülmesinin performansa etkisi} \label{table:util_S16_FMA16_O8} \\
+\caption{Bazı özel hesaplama birimlerinin yarıya düşürülmesinin performansa etkisi} \label{table:util_S16_FMA16_O8} \\
 \textbf{İşlem} & \textbf{Eski Hesap Süresi} & \textbf{Yeni Hesap Süresi} & \textbf{Yüzde Değişim} \\ 
 \hline 
 \endfirsthead
@@ -234,7 +234,7 @@ Logaritma & 14 & 17 & \%21\\
 Üssel & 10 & 13 & \%30\\
 Tam Sayı Bölme & 22 & 25 & \%14\\
 \end{longtable}
-Her bir adada 16 SIMD lane ve 32 warp bulunduğundan eş zamanlı olarak platform üzerinde çalışabilecek toplam thread sayısı 2048'dir. Bu seçenekte adalar yerleştirildikten sonra boş kalan \%31.52'lik kısım bellek ara yüzü, PCI-e arayüzü ve scheduler için değerlendirilir.\par
+\newpage Her bir adada 16 SIMD lane ve 32 warp bulunduğundan eş zamanlı olarak platform üzerinde çalışabilecek toplam thread sayısı 2048'dir. Bu seçenekte adalar yerleştirildikten sonra boş kalan \%31.52'lik kısım bellek ara yüzü, PCI-e arayüzü ve scheduler için değerlendirilir.\par
 
 \begin{figure}[ht]
 \centering

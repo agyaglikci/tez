@@ -9,7 +9,7 @@
 %% 5 Ekim 2011, Ankara
 %%
 %%
-\NeedsTeXFormat{LaTeX2e} \ProvidesClass{buthesis}
+\NeedsTeXFormat{LaTeX2e} \ProvidesClass{etutez}
 
 % --- temel cls dosyasi ve digerleri..
 \LoadClass[12pt]{report} \RequirePackage{graphicx}
@@ -50,11 +50,11 @@
 
 
 %% sayfadaki text boyutu ile ilgili olculer
-\voffset 15mm \topmargin 0mm \headsep 0mm \textheight 210mm
+\voffset 18.0mm \topmargin 0mm \headsep 0mm \headheight 0mm \textheight 212mm
 
 %% genislikle ilgili olculer
 \hoffset 5mm \textwidth 145mm \oddsidemargin 0.6in \evensidemargin 0.6in
-\marginparwidth 44mm \marginparsep 1mm
+\marginparwidth 4.4cm \marginparsep 1mm
 
 \parskip 0.166in \footskip 35pt
 \tolerance=6000 \brokenpenalty=10000
@@ -129,7 +129,7 @@
 
                 }
     \end{center}
-        \vspace{3cm}
+        \vspace{2.7cm}
 
         \begin{center}
                 {
@@ -151,6 +151,7 @@
     \end{center}
 
 \newpage}
+
 
 
 %\def\titlepagePhD{%
@@ -211,46 +212,46 @@
 
     \begin{minipage}{5.7in}
     Fen Bilimleri Enstit\"{u} onay{\i} \par
-    \vspace{.2in}
+    \vspace{.2cm}
     \hbox to 5.7in{\hfil\shortstack{\vrule width 3in height 0.4pt \\
-    \\ \vspace{0.3cm}
+    \\ \vspace{0.2cm}
     \\
             \@enstitumuduru\\ \vspace{0.2cm} \\
              M\"{u}d\"{u}r}}
     \end{minipage}
-    \vspace{0.3in}
+    \vspace{0.2cm}
 
     \begin{minipage}{5.7in}
     Bu tezin Y\"{u}ksek Lisans derecesinin t\"{u}m gereksinimlerini sa\u{g}lad{\i}\u{g}{\i}n{\i} onaylar{\i}m. \par
     \vspace{0.8in}
     \hbox to 5.7in{\hfil\shortstack{\vrule width 3in height 0.4pt \\
-    \\ \vspace{0.3cm}
+    \\ \vspace{0.2cm}
     \\
             \@anablmdalibsk\\ \vspace{0.2cm} \\
              Anabilim Dal{\i} Ba\c{s}kan{\i}}}
     \end{minipage}
 
-      \vspace{0.3in}
+      \vspace{0.2cm}
 
 \begin{minipage}{5.7in}
     {\@yazar}  taraf{\i}ndan haz{\i}rlanan \uppercase{\@baslik} adl{\i} bu tezin Y\"{u}ksek Lisans tezi olarak uygun oldu\u{g}unu onaylar{\i}m. \par
     \vspace{0.8in}
     \hbox to 5.7in{\hfil\shortstack{\vrule width 3in height 0.4pt \\
-    \\ \vspace{0.3cm}
+    \\ \vspace{0.2cm}
     \\
             \@tezyoneticisi\\ \vspace{0.2cm} \\
              Tez Dan{\i}\c{s}man{\i}}}
     \end{minipage}
 
-      \vspace{0.3in}
+      \vspace{0.2cm}
 
 \begin{minipage}{5.7in}
     Tez J\"{u}ri \"{U}yeleri \par
-    \vspace{0.2in}
+    \vspace{0.2cm}
     Ba\c{s}kan : \makebox[3in][l]{\@juribaskani} \makebox[2in][r]{\shortstack{\vrule width 2in height 0.4pt}}\\
-    \vspace{0.2in}\\
+    \vspace{0.2cm}\\
     \"{U}ye \hspace{0.55cm}: \makebox[3in][l]{\@tezyoneticisi} \makebox[2in][r]{\shortstack{\vrule width 2in height 0.4pt}}\\
-    \vspace{0.2in}\\
+    \vspace{0.2cm}\\
      \"{U}ye \hspace{0.55cm}: \makebox[3in][l]{\@juriuyesi} \makebox[2in][r]{\shortstack{\vrule width 2in height 0.4pt}}
     \end{minipage}
 }
@@ -398,19 +399,26 @@
 \renewcommand{\bibname}{\huge KAYNAKLAR}
 \renewcommand{\figurename}{\c{S}ekil}
 \renewcommand{\tablename}{\c{C}izelge}
-%\renewcommand{\chaptername}{B\"OL\"UM}
+\renewcommand{\chaptername}{}
 
 %*****************************************************
 % Bu kisim Chapter yazisinin gorunmemesini saglamak icin
 \makeatletter
 \renewcommand{\@makechapterhead}[1]{%
-\vspace*{50 pt}%
+\vspace{5 pt}%
 {\setlength{\parindent}{0pt} \raggedright \normalfont
-\bfseries\Huge\thechapter.\ #1
-\par\nobreak\vspace{40 pt}}}
+\bfseries\Large\thechapter.\ #1
+\par\nobreak\vspace{4 pt}}}
 \makeatother
 %*************************************************
 
+%\renewcommand{\chaptername}{}
+%\titleformat{\chapter}
+%  {\bfseries\Large}
+%  {\chaptertitlename }
+%  {1ex}
+%  {\vspace{1ex}}
+%  [\vspace{1ex}]
 
 
 \pagestyle{headings} \makeatother
