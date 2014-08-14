@@ -227,6 +227,72 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "Searching 53 files for \"Şekil\"\n\n/Users/agyaglikci/Workspace/tez/bolum2.tex:\n    2  Tez çalışması boyunca kullanılan teknolojiler hakkında temel bilgiler bu bölümde sunulmuştur.\n    3  \\section{FPGA: Field Programmable Gate Array}\n    4: FPGA'ler birbirlerine programlanabilir bağlantı birimleriyle bağlı matris yapıda özelleştirilebilir mantık bloklarından (Configurable Logic Block/CLB) oluşan programlanabilir yarı iletken devrelerdir. FPGA’ler herhangi bir uygulama için kolayca programlanabilir, aynı FPGA içeriği değiştirilip tekrar programlanarak bir başka uygulama için de kullanılabilir. Bir FPGA’in lojik hücrelerinden oluşan iç mimarisi teorik olarak Şekil \\ref{image:fpgaCLB}’de verilmiştir.\\par\n    5  \\begin{figure}[ht]\n    6  \\centering\n    .\n   57  \n   58  \n   59: Sürekli gelişmekte olan FPGA teknolojisinde artık FPGA yongalarının içerisine özel fonksiyona sahip makro birimler yerleştirilmektedir. Bu makro birimler hard olarak yongaya gömülü durumda olup sadece izin verilen ölçüde parametreleri programlanabilmektedirler. Bu makro bloklara örnek olarak DCM, RAM, DSP slice, çarpıcı birimleri gösterilebilir. Genel olarak bir FPGA’in mimari yapısı Şekil \\ref{image:fpgaGenelMimari}’de görülebilir.\n   60  \\begin{figure}[h]\n   61  \\centering\n   ..\n   71  \n   72  GPU teknolojisindeki ilerlemelerle birlikte, günümüzde kullanılan modern GPU’lar programlanabilir arayüzler sunar hale gelmişlerdir. Bu programlanabilir arayüzler sayesinde GPU’nun işlem gücü ve paralel işleyebilme yeteneği sadece grafik işlemlerinde değil aynı zamanda genel amaçlı hesaplamalarda da kullanılabilir hale gelmiştir. Bu durum ortaya grafik işlem birimi üzerinde genel amaçlı hesaplama (GPGPU - General Purpose programming on Graphic Processing Unit) kavramını çıkarmıştır. \\par\n   73: GPU’lar yukarıdaki kısımlarda açıklanan işlem hattı mimarisi sayesinde, paralel olarak işlenebilecek nitelikte verinin yüksek performanslı bir şekilde paralel olarak işlenmesi konusunda çok elverişlidirler. GPGPU uygulamaları GPU’ların grafik aygıtlarına özel olan köşe kenar dönüşümü, dokulandırma, renklendirme, gölgelendirme vb. özelliklerinden ziyade SIMD şeklinde çalışan işlem hattı mimarisinden yararlanırlar. GPGPU uygulamaları genel olarak; işaret işleme, ses işleme, görüntü işleme, şifreleme, bioinformatik, yapay sinir ağları, paralelleştirilebilen bilimsel hesaplamalar, istatiksel hesaplamalar gibi yüklü miktarda verinin küçük parçaları üzerinde bağımsız ve paralel olarak işlem yapılmasına uygun olan uygulama alanlarında başarılıdırlar. \\cite{ertanYildizThesis}\\par\n   74  \n   75: GPGPU uygulamaları genel olarak CPU üzerinde çalışan bir host program ve GPU’daki çekirdekler üzerinde hesaplama yapacak olaran çekirdek fonksiyonundan (kernel function) oluşur. Her çekirdekte çalışan çerkirdek fonksiyonu, stream Şekilde GPU’ya iletilen verinin kendine düşen daha küçük bir birimi üzerinde işlem yapar. Giriş verisinin GPU’ya iletilmesi, sonuç verisinin toplanması istenilen formata dönüştürülmesi gibi ardışık işlemleri CPU’da çalışan host program yürütür. \\par\n   76  \\begin{figure}[h]\n   77  \\centering\n   ..\n   82  \\label{image:cudaCComparision}\n   83  \\end{figure}\n   84: Şekil \\ref{cudaProgrammingStructure}’da modern GPGPU dillerinden CUDA programlama diline ait programlama modeli yapısı \\cite{cudaProgrammingStructure},  Şekil \\ref{image:cudaCComparision}’de ise C programlama diliyle yazılmış CPU üzerinde çalışan bir matris toplama fonksiyonu ile yine aynı matris toplama fonksiyonunu GPU üzerinde gerçekleyen, CUDA programlama diliyle yazılmış GPU üzerinde çalışan bir kernel fonksiyonu ve C’de yazılmış bir host program gösterilmiştir. Şekil \\ref{cudaProgrammingStructure}’da görüldüğü üzere, CUDA programlama modelinde GPU aygıtı grid olarak görülür ve çok sayıda bloktan oluşur. GPU’da bulunan çok sayıdaki çekirdekten her biri aynı anda bir blok işleyebilir. Bir blok içerisinde paralel olarak çalıştırılabilen çok sayıda thread bulunur. Bu threadlerin her biri kendisine düşen veri öbeği üzerinde tanımlanmış olan çekirdek fonksiyonu çalıştırır.\n   85  \n   86  \\begin{figure}[h]\n   ..\n   99  \n  100  \n  101: Şekil \\ref{image:cudaCComparision}’de görüldüğü gibi C programlama dilinde yazılmış olan matris toplama fonksiyonu matris elemanları üzerinde ardışık döngüler şeklinde işlem yaparak matris toplama işlemini gerçekleştirir. CUDA ile yazılmış matris toplama programına bakıldığında, program CPU üzerinde çalışan host programdaki main fonksiyonundan ve GPU üzerinde çalışan add\\_matrix\\_gpu çekirdek fonksiyonundan oluşur. Host program bir bloğun boyutunu ve grid içerisindeki blok sayısını belirler. Daha sonra bloklar üzerinde paralel olarak çalışacak olan add\\_matrix\\_gpu fonksiyonunu çağırır. Çağrı sonucu add\\_matrix\\_gpu çekirdek fonksiyonu bloklar ve bloklardaki threadler üzerinde paralel olarak yürütülür. Her bir thread kendi thread numarası (thread ID), blok numarası (block ID) ve blok boyutunu (blockDim) kullanarak kendine düşen veri parçası için matris toplama işlemini gerçekleştirir. \\par\n  102  \n  103  \n\n/Users/agyaglikci/Workspace/tez/bolum3gereksinimler.tex:\n    3  \n    4  \\section{Mimari Gereksinimleri} \\label{projeGereksinimleri}\n    5:  Proje gereksinimleri şu Şekildedir: \n    6  \\begin{enumerate}\n    7    \\item Tasarlanan işlemci çok çekirdekli mimariye sahip olmalıdır.\n    .\n  104  Dördüncü unsur ise her bir thread için harcanan yürütme zamanıdır. Thread başına düşen yürütme zamanı thread içindeki buyruk sayısına, buyrukların çevrim sayılarına, buyruklar arası veri bağımlılıklarına, işlemcinin boru hattı mimarisine ve işlemcinin frekansına bağlı olarak değişir.\\par\n  105  \n  106: Dolayısıyla paralelleştirilmiş bir uygulamanın yürütme zamanı denklem \\ref{equation:yurutmeZamani}'de gösterildiği Şekilde formüle dökülebilir.\n  107  \n  108  \\begin{equation} \\label{equation:yurutmeZamani}\n  ...\n  141  \n  142  \\subsection{Nokta çarpımı}\n  143: $v_{1}$ ve $v_{2}$ iki adet N elemanlı vektör olsun $v_{1} . v_{2} = \\sum_{i=1}^{N} v_{1}[i] x v_{2}[i]$ şeklinde tanımlıdır. Daha önce matris çarpımında belirtildiği Şekilde çarp, çarp-topla ve topla buyrukları kullanılarak bu işlem gerçekleştirilir. Burada her bir çarpımı oluşturmak için ayrı bir thread oluşturularak paralellik sağlanabilir.\n  144  \n  145  \\subsection{FFT/IFFT}\n  146: Ayrık zamanda Fourier ve Ters Fourier dönüşümü için günümüzde yaygın olarak kullanılan algoritma Cooley-Tukey FFT algoritmasıdır. \\cite{cooleyTukey} Bu algoritmanın radix-2 decimation in time gerçeklemesinin uygulanması durumunda her bir thread bir butterfly işlemini çalıştırır. 8 elemanlı bir vektörün FFT işlemi Şekil \\ref{image:fft_radix2_8p}'de sunulmuştur. \\par\n  147  \n  148  Fourier transformu alınacak olan giriş sinyali x(n), bu sinyalin fourier transformu ise X(n) olsun.\n  149: Radix-2 yönteminde x(n) vektörünün elemanları tek indisli elemanlar ve çift indisli elemanlar olarak ayrılıp, ikişerli gruplara bölünürler. Daha sonra her bir eleman kendinden N/2 uzaktaki eleman ile butterfly işlemine alınır. Şekil \\ref{image:fft_radix2_8p}'de sunulan algoritma, Şekil \\ref{image:fft_radix2_butterfly}'de çizimi sunulan butterfly işlemlerinden oluşur. Her bir butterfly işleminde yapılan hesaplama denklem \\ref{equation:fft_radix2_butterfly}'de gösterildiği gibidir.\n  150  \n  151  \\begin{figure}\n  ...\n  201  \n  202  \\subsection{Logaritma}\n  203: Verilen bir veri setinin her elemanı için doğal logaritma (e tabanında) ve 10 tabanında logaritma hesaplanması gerekir. Xilinx tarafından sağlanan IPCore ile doğal logaritma hızlı bir Şekilde hesaplanabilmektedir. \n  204  $log_{a}(x) = log_{e}(x) / log_{e}(a)$ \n  205  denkliğinden faydalanılarak herhangi tabanda logaritma hesaplanabilir. Burada buyruk kümesine $log_{e}x$ buyruğunun da eklenmesi gerekir.\n  206  \n  207  \\subsection{Üssel Fonksiyon}\n  208: Verilen bir veri setinin her elemanı için $10^{x}$ ve $e^{x}$ değerlerinin hesaplanması gerekir. Xilinx tarafından sağlanan IPCore ile $e^{x}$ hızlı bir Şekilde hesaplanabilmektedir. $a^{b} = e^{b x log_{e}{a}}$ denkliğinden faydalanılarak herhangi $a^{x}$ değeri hesaplanabilir.\n  209  \n  210  \\subsection{Norm}\n  ...\n  238  \n  239  \\subsection{Karekök}\n  240: Karekök işlemi kendi başına bir uygulama olarak değil diğer uygulamaların içinde bir işlem olarak kendini gösterir. Xilinx IPCore kullanılarak karekök işlemi hızlı bir Şekilde yapılabildiğinden IPCore kullanımı tercih edilmiştir.\n  241  \n  242  \\subsection{İşaret}\n  243: İşaret fonksiyonu bir matris veya vektörün tüm elemanları için eleman pozitif ise 1, 0 ise 0, negatif ise -1 değerini döndürür. Eleman sayısı adetinde thread oluşturularak hızlı bir Şekilde bu işlem gerçekleştirilebilir.\n  244  \n  245  \\subsection{Interpolasyon}\n\n/Users/agyaglikci/Workspace/tez/bolum4literatur.tex:\n   30  \n   31  \\subsection{Homojen az çekirdekli işlemciler}\n   32: Homojen az çekirdekli mimariler birbirinin aynı olan az sayıda yüksek işlem kapasiteli çekirdeklerin 2. veya daha üst seviyede önbellekler üzerinden veri paylaşımı sağladığı işlemcilerdir. Bu mimaride her işlemci çekirdeğin kendisine ait bir önbelleği vardır. Bunlar bir interconnect yardımıyla bütünleşik bir paylaşımlı önbelleğe bağlanırlar. Bu yapıya örnek olarak Intel'in Nehalem işlemcisi gösterilebilir \\cite{molka2009memory} \\cite{hackenberg2009comparing}. Nehalem mimarisinde hususi önbellek 2 seviyeye ayrılmıştır ve paylaşımlı önbellek 3. seviyeyi oluşturmaktadır. Çekirdekler 3. seviye önbelleğin ardından Şekil \\ref{image:nehalem}'deki gibi bir bellek denetleyicisi ile sistemin ana belleğine bağlanır.\\par\n   33  \n   34  \\begin{figure}\n   ..\n   42  \n   43  \\subsection{Homojen çok çekirdekli işlemciler}\n   44: Homojen çok çekirdekli mimariler birbirinin aynı olan çok sayıda düşük işlem kapasiteli çekirdeklerden oluşan yapılardır. Bunlara örnek olarak grafik işlemcileri verilebilir \\cite{MCSE.2012.23}. Şekil \\ref{image:nvidiagpu}'teki gibi bir yapıya sahip olan grafik işlemcilerde amaç, paralelliği ön plana çıkarmak, çok sayıda verinin aynı anda işlenebilmesine olanak sağlamaktır. Az çekirdekli işlemcilerin aksine belleği kullanmak isteyen daha çok çekirdek olacağından bu mimarilerde bellek açısından bir darboğaz oluşmasına sebep olur. Homojen çok çekirdekli mimarilerin bellek hiyerarşisi 2 seviyeli önbellek ve ana bellekten oluşur. Her iki önbellek de çekirdek adacığında paylaşımlıdır. Az çekirdekli mimarilerin aksine çok çekirdekli mimarilerde genel bir yazmaç öbeği tüm çekirdeklerin erişimine açık olup yürütme zamanında her bir çekirdeğe özel olarak atanır.\n   45  \n   46  %\\begin{figure}[h] \\label{image:nvidiagpu} \n   ..\n   94  \\end{figure}\n   95  \n   96: Homojen çok çekirdekli mimarilere verilebilecek bir örnek de sunucu sistemlerinde kullanılan Tile mimarisidir. \\cite{tileArchitecture} Bu mimaride 36-100 arasında RISC işlemciden oluşan çekirdekler birbirlerine bağlanarak yüksek paralellik elde edilir. Tile mimarisinde bellek mimarisi olarak Şekil  \\ref{image:tileArchitecture}'te sunulan NUCA (non-uniform cache architecture) önbellek mimarisi kullanılır.\\par \n   97  \n   98  \\newpage Bu mimaride çekirdeklerin her birinin kendine ait özel önbelleği vardır. İkinci seviye önbellek olarak diğer çekirdeklerin önbellekleri kullanılır. Örnek olarak, 64 çekirdekli bir işlemcide her bir çekirdeğin 32 KB önbelleği olduğunu varsayarsak; 1 numaralı çekirdeğin 32 KB 1. seviye ve 2016 KB 2. seviye önbelleği olacaktır. Bu tasarımda herhangi bir çekirdeğin diğer tüm çekirdeklerin önbelleklerine bağlantısı olmalıdır.\\par\n   ..\n  114  Birbirinin aynı olan çekirdeklerin az veya çok sayıda gerçeklenmesi ile elde edilen paralel hesaplama donanımları çoğu uygulamada performans açısından yeterli gelse de, bir takım uygulamalarda sık kullanılan bazı işlemlerin hızlandırılması adına özel donanımlar gerçeklenir. Literatürde bu tip işlemciler heterojen yapıdaki işlemciler olarak adlandırılır.\\par \n  115  \n  116: Heterojen mimariler doğrudan amaca yönelik hazırlandıkları için çok farklı mimari yapılarda gerçeklenebilirler. Heterojen mimarilerin temel özelliği bir işi her zaman o işi en hızlı yapan donanıma vermeleridir. Bu sebeple sık kullanılan hemen her işlem için ayrı hesaplama birimleri yerleştirilerek, özel fonksiyonların yazılım seviyesinden donanım seviyesine indirilmesi sağlanır. Örnek olarak Şekil \\ref{image:playStationArchitecture}'te sunulan heterojen mimari çizimi Playstation oyun konsollarında kullanılan Cell mimarisine aittir. \\par\n  117  \n  118: Şekil \\ref{image:playStationArchitecture}'te gösterilen Cell mimarisinde PPE (Power processing element) ana işlemci olup, SPE (Synergistic processing element) bloklarının her biri ise DSP benzeri SIMD işlemcilerdir.\n\n/Users/agyaglikci/Workspace/tez/bolum5mimari.tex:\n    7  Tosun buyruk kümesi mimarisinin oluşturulmasında NVidia PTX \\cite{nvidiaPTXISA} buyruk kümesi paralel işleme mimarisi olarak temel alınmıştır. Ayrıca adres hesapları, dallanmalar, temel aritmetik ve mantık işlemleri gibi her işlemcinin sahip olması gereken temel buyruklar için de Intel x86 \\cite{x86ISA} ve MIPS \\cite{MIPSISA} buyruk kümeleri referans alınmıştır. \\par\n    8  \n    9: Tosun buyruk kümesi mimarisinde bulunmasına karar verilen buyruklar Tablo \\ref{table:tosunInstructions} içinde; tüm buyruk türlerinin bit yapısı Şekil \\ref{image:instructionTypes}'de sunulmuştur. \n   10  \n   11  \n   ..\n   89  Tosun buyruk kümesinde toplam 56 adet buyruk belirlenmiştir. Tablo \\ref{table:tosunInstructions} içinde verilen buyruklar içerdikleri işlenen tür ve sayılarına göre türlere ayrılmıştır. Bu sınıflandırma buyruk içinde belirtilmesi gereken işlenen cins ve sayılarına göre yapılmıştır. Buyruk türlerinin bit yapısının belirlenebilmesi için öncelikle buyruk içine yerleştirilecek bilgilerin bit genişlikleri belirlenmelidir. \\par\n   90  \n   91: Buyruk bit yapılarında kaynak ve hedef hafıza birimleri olarak yazmaç numaraları kullanılır. Buyruk içinde bir yazmacın kaç bit ile ifade edileceği, bir thread için tahsis edilen yazmaç sayısına bağlıdır. İşlemci mimarisinde yazmaç sayısının belirlenmesi bir ödünleşimli karardır. Yazmaç sayısının artması yazmaçlar için kullanılan alanı artıracağı gibi yazmaç numaraları için kullanılan karşılaştırıcı devrelerin de büyümesine sebep olur. Öte yandan yazmaç sayısının azlığı bellek işlemlerinin artmasına ve başarımın düşmesine sebep olacaktır. Tosun mimarisinde çok çekirdekli bir mimariden söz edildiği için yazmaç sayılarının artışı tek çekirdekli işlemcilere oranla daha fazla bir alan kullanımında artışa sebep olmaktadır. Bu yüzden Tosun mimarisinde hedef programlara yetebilecek minimum sayıda yazmaç kullanılmıştır. Bu çalışmada NVidia CUDA ile çalışan 184 adet paralel hesaplama uygulamasının yazmaç kullanım adetleri incelenmiştir. Elde edilen sonuçlara göre Tablo \\ref{table:NVidiaRegisterUsage}'ta sunulduğu Şekilde 64 adetten fazla sayıda yazmaç kullanan program ile karşılaşılmamıştır.\n   92  \n   93  \\begin{longtable}{p{350pt} p{100pt} }\n   ..\n  143  \n  144  \\section{Boru Hattı Mimarisi}\n  145: Buyruk kümesinde bulunan her buyruğun çalıştırılması sırasında geçmesi gereken sabit adımlar vardır. Öncelikle bir buyruk bellekten çekildikten sonra işlem kodu okunmalı ve uygun Şekilde bitler ayrılarak buyruk içinde gelen yazmaç numaraları, anlık değerler vb. ayrıştırılmalıdır. Sonrasında ilgili yazmaçlarda tutulan değerler okunmalı, buyruk ile ilgili işlem seçilip okunan değerler üzerine uygulanmalı ve son olarak sonuç yazmacına sonuç yazılmalıdır. Bu adımlar arasına flip floplar eklenerek bir buyruğun adımları ardışık saat vuruşlarında takip etmesi sağlanabilir. Böylece bir buyruğun geçtiği adımdaki donanımlar boşa çıkar ve söz konusu buyruk tüm işlemleri tamamlamadan yeni bir buyruk aynı donanımları kullanarak hesaplamaya girebilir. Boru hattı tasarımında kaynakların etkin kullanımı son derece önemlidir. Eğer programın genelinde tüm boru hattı aşamaları aynı anda doldurulamıyorsa boru hattı kullanmanın avantajı yoktur. Öte yandan boru hattı aşamaları etkin bir Şekilde doldurulabilirse buyruklar birbirinin çalışma sürelerini gizlerler ve her saat vuruşunda yeni bir sonuç üretilmiş olur.   \\par\n  146  \n  147  Boru hattı aşamalarının tam doldurulması konusunda güncel problemlerin başında veri bağımlılıkları gelir. Eğer n. buyruğun kullanacağı bir veri m. buyruk tarafından hesaplanıyorsa, m. buyruk sonucu yazmaç öbeğine yazmadan n. buyruk yazmaç değerlerini okuyamaz. Veri bağımlılığı önlenemeyen bir problemdir. Bunun yerine literatürde veri bağımlılığı olmayan buyrukların, bekleyen buyrukların önüne alınması yöntemiyle çözülmektedir. Bu yaklaşıma \"Out of order execution\" ismi verilir. \\cite{superscalar600mhz} \\cite{superscalarpatent}\\par\n  ...\n  149  Sırasız çalıştırma yöntemi beraberinde yazmaçların analizi, veri bağımlılıklarının çözülmesi, yazmaçların donanım seviyesinde yeniden adlandırılması, yazmaç sayıları ile ilgili bir sanallaştırma katmanı tanımlanması gibi donanımsal karmaşıklıkları da beraberinde getirmektedir. Oysa ki aynı anda çok fazla threadin koşturulacağı bir işlemcide, boru hattının etkin kullanımı için daha sade bir çözüm olarak aralıklı işlem modeli kendini gösterir. \\cite{interleavedMultithreading} \n  150  \n  151: Aralıklı İşlem Modeline göre çalışan işlemciler her bir buyruğun çalıştırılmasında sonra farklı bir thread’e geçiş yaparak çalışırlar. Çok sayıda birbirinden bağımsız işlemi bir arada yürütmeye çalışan işlemciler için Aralıklı İşlem tercih edilen bir yöntemdir \\cite{Controldatacorp} \\cite{TeraMTA}. Bu Şekilde çalışan işlemciler her bir thread için ayrı yazmaç öbeği ve program sayacı tutar. Herhangi bir thread’den boruhattına buyruk ataması yapıldığı zaman, farklı bir thread seçilerek bir sonraki buyruk o thread’in program sayacının gösterdiği yerden çekilir.\\par\n  152  \n  153  Aralıklı İşlem Modelinde veri bağımlılığı oluşmadığı için boruhattının etkin kullanımı sağlanmış olur. Farklı thread’ler arasında, yazmaç bazında, veri paylaşımı olmadığı için farklı thread’lerden buyrukların boruhattına alınması veri bağımlılığı sorunlarına yol açmaz. Böylece çok sayıda çevrim gerektiren buyruklar, farklı thread’lerden gelen buyrukların çalıştırılmasıyla gizlenmiş olur. Örnek vermek gerekirse, Tosun mimarisinde sin/cos işlemleri 28 saat vuruşunda tamamlanmaktadır. Tek bir thread üzerinden çalışan bir sistem düşünülürse bu sin/cos buyruğundan sonra gelen ve bunun sonucunu kullanan buyruk sin/cos’un tamamlanmasını beklemek zorunda kalır. Bu uzun süre içerisinde de boru hattının büyük bir bölümü boşta bekler. Aralıklı İşlem Modelinde ise aralarında veri bağımlılığı olma ihtimali olmadığı için farklı thread’lerden gelen buyruklar boruhattının içine alınabilir. Böylece sin/cos veya diğer çok sayıda saat vuruşunda sonuç veren işlemler için geçen süre başka buyrukların çalıştırılmasıyla gizlenmiş olur.\\par\n  154  \n  155: Aralıklı işlem modelinin bir sonucu olarak farklı threadler arasında hızlı bir Şekilde \"context switch\" yapmak gerekmektedir. Yani bir thread çalışırken bir anda farklı bir threade geçilebilmesi gerekmektedir. Klasik işlemcilerde tüm yazmaç verilerinin belleğe kaydedilmesi ve diğer threade ait verilerin bellekten kopyalanmasıanlamına gelen context switch oldukça pahalı bir işlemdir. Oysa ki aralıklı işlem modelinden faydalanabilmek için 1 saat çevriminde context switch yapılması gerekmektedir. Bu hızda bir context switch ancak farklı threadlere ait yazmaçların da yazmaç öbeğinin bir kısmında saklanması ile mümkün olur. Tosun mimarisinde bu işlemin nasıl yapıldığı \"Yazmaç Öbeği\" başlığı altında anlatılacaktır.\\par\n  156  \n  157: Aralıklı işlem modeli ile çalışan Tosun boru hattı mimarisinin aşamaları Şekil \\ref{image:pipelineStages}'de gösterilmiştir.\n  158  \n  159  \\begin{figure}[h]\n  ...\n  178  Boru hattının bu aşaması hesaplamanın başlatıldığı yerdir. Bu aşamaya gelen bir buyruğun tüm verileri hesaplamaya hazır bir halde beklemektedir. Bu aşamada işlem koduna bakılarak buyruk gerekli hesaplama donanımına gönderilir.\n  179  \\subsection{Hesap}\n  180: Hesaplamanın yapıldığı aşamadır. Burada birçok işlem birimi yer alır. Bunlardan, sık kullanılan ve daha az alan kaplayan işlem birimleri SIMD lane adetindedir. Bu Şekilde, bu işlem birimleri gelen tüm verileri aynı anda işleme sokabilecek durumdadır. Daha nadir erişilen trigonometrik işlemler ve logaritma gibi hesaplardan sorumlu işlem birimleri ise daha az sayıda bulunabilir. Az sayıda bulunan işlem birimlerinin kendi boru hattı mevcuttur. Örneğin SIMD lane sayısının yarısı adetinde olan bir hesaplama modülü ilk çevrimde gelen sayıların yarısını işleme alır, ikinci çevrimde ise diğer yarısını işleme alır. Böylece tüm sayılar boru hattında peşi sıra ilerlemiş olurlar. Örneğin 28 çevrim süren bir sinus işlemi için SIMD lane sayısının çeyreği kadar sinus hesaplama birimi yerleştirilmişse, tüm sayıların sinus sonuçlarının hesaplanması 28 + 3 = 31 çevrim sürer. Alan kullanımı ve performans optimizasyonu için esneklik sağlayan bu yapıda ilave 3 çevrim kabul edilerek alandan kazanılabilir ya da hesap modülü sayısı artırılarak performans artışı sağlanabilir. Hesap aşamasının sonunda bir sonuç buffer'ı bulunmaktadır. Hesap modüllerinin boru hattından çıkan sonuçlar önce bu buffer'lara yazılır ve yazılmak için kendi sıralarının gelmesini beklerler. \n  181  \\subsection{Geri Yazma}\n  182  Geri yazma aşaması sonuçların yazmaç öbeklerine yazıldığı aşamadır. Geri yazma aşamasının kontrolcüsü sürekli olarak hesap modüllerinin çıkışlarındaki sonuç buffer'larını kontrol eder ve sırasıyla sonuçları ilgili yazmaçlara yazar.\n  ...\n  185  Önceki bölümlerde Tosun mimarisinin buyruk kümesi, hesaplama donanımları ve boru hattı aşamaları belirlenmiştir. Parçaların birleştirilmesi ile veri yolu mimarisi oluşacaktır. Tasarım gereksinimleri arasında belirtilen ölçkelenebilirlik özelliğinden dolayı tüm kodlama parametrik olarak yapılmıştır. Mimarinin üzerine inşa edildiği temel parametrelerden biri de SIMD lane sayısıdır. SIMD lane sayısındaki artış, veri yolu genişliklerinin, karşılaştırıcı, kod çözücü ve kodlayıcı gibi donanımların katlanarak artmasına sebep olmaktadır. Bu etki hem alan kullanımında hem de sinyal gecikmelerinde artışa neden olur. Neticede performans kaygısı ile paralelliğin artması için SIMD lane sayısının artırılması ile alan kullanımı büyümekte, gecikmeler artmakta ve hem güç tüketimi artmakta hem saat sıklığı azalmaktadır. Dahası FPGA içi routing işlemi de SIMD lane sayısının artması ile zorlaşmakta ve imkansız hale gelebilmektedir. Bu etki, kaçınılmaz olmakla beraber hiyerarşik tasarım kullanılarak azaltılabilir.\\par \n  186  \n  187: Tosun mimarisi routing ve timing ile ilgili kısıtları zorlayabilmek adına hiyerarşik bir yapıda tasarlanmıştır. Doğrudan N adet SIMD lane gerçeklenmesi yerine küçük gruplar halinde, $N=N_{1}xN_{2}$ olacak Şekilde $N_{1}$ adet ada ve her adanın içinde $N_{2}$ adet SIMD lane olacak Şekilde gerçeklenmiştir. Hiyerarşinin üst seviyesinde, ölçeklenebilirliği olmayan PCI-e ve Ana bellek arayüzü gerçeklenmiş ve AXI bus yapısı ile N adet ada ismi verilen donanıma bağlanmıştır. Tosun üst seviye mimari çizimi Şekil \\ref{image:genelMimari}’da sunulmuştur. Mimarinin büyük tek bir ada yerine çok sayıda daha küçük adalardan oluşmasının iki sebebi  vardır. \\par\n  188  \\begin{figure}[h]\n  189  \\centering\n  ...\n  219  \\end{figure}\n  220  \n  221: Ada içi mimarinin kavramsal gösterimi Şekil \\ref{image:adaMimarisiEski}'de boru hattı ile gösterimi Şekil \\ref{image:adaMimarisi}'de sunulmuştur. Her bir buyruk boru hattı üzerinde ilerleyerek işlenir. Boru hattının etkin kullanımı için daha önce belirtilen aralıklı işlem modeli kullanılır ve her saat vuruşunda farklı bir warptan işlem alınır. \\par\n  222  Bir adada koşturulan thread sayısı adanın SIMD lane sayısı kadardır. Aralıklı işlem modelinin uygulanabilmesi için adada koşturulan warplara ait yazmaç bilgilerinin tamamının yazmaç öbeğinde saklanması gerekir. Dolayısıyla adada koşturulan warp sayısı yazmaç öbeğinin büyüklüğüne bağlıdır.\\par\n  223  \n  ...\n  232  \\label{image:registerFile}\n  233  \\end{figure}\n  234: Şekil \\ref{image:registerFile}’de gösterilen yazmaç öbeği 2 adet true dual port BRAM kullanmaktadır. Dolayısıyla toplam 4 adet fiziksel port bulunur. Buyruk kümesinde var olan buyruklara göre aynı anda en fazla 3 okuma ve 1 yazma operasyonu (4 portlu) gelmektedir. 4 port üzerinden gelen isteklerin BRAM’lere bağlı 4 porta aktarılabilmesi için adreslerin 2’şerli gruplandığında farklı BRAM’leri göstermesi gerekir. Bu durumun her zaman olacağı garanti edilemeyeceğinden portlara bir öncelik ataması yapılmış (WR > RD1 > RD2 > RD3) ve önceliği düşük olan 2 portun sonraki çevrim(ler)de işlenebilmesi için gerekli hafıza birimleri yerleştirilmiştir. Burada en kötü durum tüm portların aynı BRAM’e ait adresleri göstermesidir.  Böyle bir durum oluştuğunda WR ve RD1 portunun istekleri aynı çevrimde işlenirken RD2 ve RD3 portları sonraki çevrimde işlenmek üzere bekletilir. Eğer sonraki çevrimde yeni bir WR operasyonu gelirse WR ve RD2 işlenir, RD3 bekletilir. Nihayetinde en kötü durumda 3. Çevrimde RD3’ün de okunması ile okuma işlemi tamamlanmış olur. Özetle Şekil \\ref{image:registerFile}’de gösterilen tasarıma sahip bir yazmaç öbeği kümesinde bulunan yazmaç öbeklerinde en kötü durum için yazma işlemi 1 çevrimde okuma işlemi 3 çevrimde tamamlanmaktadır. Bu gecikmeler BRAM kısıtlarından kaynaklanmaktadır. \\par\n  235  Yazmaç öbeği okuma işlemlerinin en kötü durumdaki cevap süresini kısaltmak mümkün olmasa da en kötü durumun oluşma ihtimalini azaltmak mümkündür. Bir iyileştirme olarak her bir thread’e ait 64 adet yazmaçtan oluşan yazmaç öbeği, 32 yazmaçlık 2’şer gruba bölünerek tüm thread’lere ait yazmaç öbeklerinin ilk yarıları ilk BRAM’de, ikinci yarıları ise ikinci BRAM’de saklanır. Bu saklama şekli sabit tutularak derleyicinin yazmaçları seçerken bu ayrımı göz önünde bulundurulması sağlanmakta ve en kötü durumun oluşma ihtimali en aza indirgenmektedir. \\par\n  236: Yazmaç Öbeği Kümesi 11 bit ile adreslenir. Soldaki 5 bit warp numarasını, sağdaki 6 bit ise yazmaç numarasını belirtir. Bu Şekilde farklı bir warp'a geçiş yapılacağı zaman sadece bu adresin 5 bitlik prefix’inin değiştirilmesi yeterli olur. Dolayısıyla hiç saat vuruşu kaybetmeden context switch yapılabilir.\n  237  \\subsubsection{Hesaplama Modülleri}\n  238: Tüm işlemler için hesaplama modüllerinin yapısı aynıdır. Giriş ve çıkışlardan da sadece “sayılar” girişleri içerideki birime göre değişken olabilir, diğer tüm giriş ve çıkışlar ise standarttır. Örneğin; toplama birimi için 2 adet 32-bitlik giriş varken, multiply-add işlemi için 3 adet sayı gerekir. Şekil \\ref{image:executionUnitIO}'de “N” hesaplamada kullanılan eleman sayısını göstermektedir.\\par\n  239  \\begin{figure}\n  240  \\centering\n  ...\n  250  Threadlerin yazmaçları kendilerine özel olup dışarıdan bir modülün erişimi yoktur. Oysa ki paralel hesaplamalarda bir threadin ürettiği bir sonuç başka bir thread tarafından kullanılabilir. Threadler arası veri paylaşımı için iki seçenek vardır. Bir seçenek ana bellek üzerinden veri paylaşımı yapılması iken diğeri paylaşımlı bellek eklenmesidir. Ana bellek hem yonga dışında olduğundan hem de veri yolu genişliğinin sınırlı olmasından dolayı yavaş olacaktır.\\par\n  251  FPGA üstünde paylaşımlı bellek gerçeklemesi ancak Block RAM kullanımı ile mümkündür. Donanımda tanımlı Block RAM Primitive'ler 32kbit büyüklüğünde olup 2 portu desteklemektedir. Paylaşımlı bellek kapasitesinin artırılması birden fazla Block RAM Primitive üzerine adres uzayı taksim edilir.\\par\n  252: Her bir çekirdeğin paylaşımlı belleğe erişiminin bulunması gerekmektedir. Bunun için çekirdek sayısı adetinde porta sahip bir paylaşımlı bellek Block RAM Primitive'ler kullanılarak Şekil \\ref{image:sharedMemory}'de gösterildiği şekilde tasarlanmıştır.\n  253  \\begin{figure}[ht]\n  254  \\centering\n  ...\n  260  \\end{figure}\n  261  \n  262: Paylaşımlı belleğin girişindeki her bir port bir SIMD lane'e bağlıdır. Paylaşımlı belleğin içinde N adet 32kbit Block RAM Primitive Şekil \\ref{image:sharedMemory}'de gösterildiği gibi giriş portlarına öncelik atayıcı donanımlar üzerinden bağlıdır. Her block ram portu için bir öncelik atayıcı bulunmakta ve o block ram portunun hangi SIMD lane portu ile bağlanacağına karar vermektedir. Herhangi SIMD lane üzerinde paylaşımlı belleğe yazma veya okuma amaçlı erişmek isteyen bir buyruk olursa, o SIMD lane'e bağlı port üzerinden ilgili öncelik atayıcıya istek gelir. Her saat vuruşunda öncelik atayıcılar kendilerine gelen istekler üzerinden Round Robin algoritması ile bir seçim yapar. Seçilen paket block ram'e iletilirken, seçilmeyen paketler sırada tutulur. Bunun için her SIMD lane portunun girişinde bir FIFO tampon bellek bulunmaktadır. Her block ram primitive 2 adet porta sahip olduğu için SIMD lane portları ikiye bölünür. Yarısı block ram primitive'lerin A portlarına bağlanırken diğer yarısı B portlarına bağlanır.\\par\n  263  \n  264  Paylaşımlı bellek mimarisi için en kötü durum tüm SIMD lane portlarından aynı block RAM primitive için istek paketleri gelmesidir. Bu durumda SIMD lane sayısının yarısı büyüklüğünde kuyruk oluşur ve işlemler buna göre gecikmeli gerçekleşir. En kötü durum ihtimalini ortadan kaldırmak mümkün değildir fakat ihtimali düşürmek adına adres uzayının block ram'lere dağıtım yönteminde iyileştirme yapılabilir. \\par\n\n/Users/agyaglikci/Workspace/tez/bolum6sonuc.tex:\n    7  \\item Threadler arası veri paylaşımı paylaşımlı bellek üzerinden sağlanır. Her adada bir paylaşımlı bellek bulunmaktadır.\n    8  \\item Paylaşımlı bellek farklı block ram'lere dağıtılmış bir adres uzayı üzerinde işlem yapmaktadır. Bu sayede SIMD lane adet port üzerinden gelen istekler çoğu durumda eş zamanlı olarak cevaplanabilmektedir. \n    9: \\item Paylaşımlı bellek adres uzayı, block ram'lere dağıttılırken ardışık adresler farklı block ramler'de olacak Şekilde soyutlama yapılmıştır. Farklı portlardan gelen isteklerin eş zamanlı çalıştırılabilmesi için bu soyutlama ile yazılım seviyesinde optimizasyon imkanı sağlanmıştır. \n   10  \\item Hiyerarşik yapı, yazılım tarafından bakıldığında OpenCL destekli diğer platformlar gibi bazı kısıtlar getirmektedir. OpenCL ile gerçeklenmiş çekirdekler thread bloklarından oluşur. Her thread bloğunun içindeki threadler arasında veri paylaşımına izin vardır. Tosun mimarisinde her bir ada içinde paylaşımlı bellek gerçeklendiğinden bir adada çalışan herhangi bir thread, aynı ada içinde çalışan başka herhangi bir thread ile veri paylaşımında bulunabilir. Mevcut mimaride thread bloğu içindeki en fazla thread sayısı $N_{SIMD lane} x N_{warp}$ şeklinde ifade edilebilir. \n   11  \\item Hesaplama modüllerinin sabitlenmiş giriş çıkış ara yüzlerine uygun olmak şartı ile herhangi bir özel hesaplama modülü daha sonra tasarıma ilave edilebilir. Mevcut mimaride belirtilen buyruk kümesindeki tüm işlemler için gerekli olan hesaplama modülleri değişik sayılarda boru hattının hesap aşamasına eklenmiştir. Daha sonra ilave edilmek istenen bir hesap biriminden istenilen adette aynı giriş çıkış standardına bağlı kalınarak hesap aşamasına eklenebilir. Böylece buyruk kümesi genişletilebilir. \n   ..\n  118  \\end{align}\n  119  \n  120: Her buyruk için en iyi durum ve en kötü durumda çevrim sayısı, 16 SIMD lane'den oluşan 4 ada için Şekil \\ref{image:fillPipelineBestWorst}'de sunulmuştur. Grafikte gösterilen çevrim sayıları, en kötü durumda buyruk başına boru hattının dolması için geçen süreyi ifade etmektedir. Boru hattının doldurulmasından sonra her çevrimde bir sonuç verilmesi beklendiğinden Şekil \\ref{image:fillPipelineBestWorst}'de sunulan değerler olabilecek en kötü sonuçlardır.\\par\n  121  \n  122: Mimaride ada sayısının artışı ile aynı anda çalışabilecek thread bloklarının sayısı, dolayısıyla paralellik artmaktadır. Öte yandan ana bellek veri yolu genişliği sabit olup paralelleştirmede kısıtlayıcı etkendir. Mimaride eş zamanlı koşturulan toplam thread sayısının artırılması bellek işlemlerinde gecikmeyi artırır. En kötü durumda buyruk başına boru hattının ortalama dolma sürelerinin ada sayısına göre değişimi Şekil \\ref{image:fillPipelineWorstVsNumOfIslands}'de sunulmuştur.\\par\n  123  \n  124  \\begin{figure}[ht]\n  ...\n  131  \\end{figure}\n  132  \n  133: Yukarıda da belirtildiği gibi sunulan değerler boru hattının doldurulması ile ilgili değerlerdir. N adet buytruktan oluşan bir programın ortalama çalışma süresi Denklem \\ref{equation:pipelineCycleEstimationWorstCase}'de sunulduğu Şekilde hesaplanır. \\par\n  134  \n  135  \\begin{align} \\label{equation:pipelineCycleEstimationWorstCase}\n  ...\n  172  \\end{longtable}\n  173  \n  174: Tablo \\ref{table:fftComparision}'de gözlendiği Şekilde sinyalde nokta sayısının artması ile Tosun mimarisi, IPCore'a göre daha yüksek performans göstermektedir. Bunun sebebi nokta sayısının artması ile paralelleştirmenin avantajının artmasıdır. Karşılaştırmanın herhangi bir GPU, CPU veya ASIC tabanlı uygulama yerine IPCore ile yapılmasının sebebi IPCore'un Tosun mimarisi ile aynı FPGA platformunda çalıştırılabilmesidir. Diğer platformlarla karşılaştırmak için çevrim sayıları $4x10^{-9}$ ile çarpılarak saniye cinsinden zaman değerlerine ulaşılabilir. \\par\n  175  \n  176  \\section{Tosun Kaynak Kullanımı Analizi}\n  ...\n  210  \\label{image:util_S16_FMA16_O8}\n  211  \\end{figure}\n  212: Şekil \\ref{image:util_S16_FMA16_O8}'de 16 SIMD lane'e sahip bir adada tüm hesap birimlerinden 16, float bölme, logaritma, üssel fonksiyon ve tamsayı bölme birimlerinden 8 adet gerçeklenmiştir. Elde edilen kaynak tüketim değerlerine göre 1 ada hedef platformun kaynaklarının \\%21.4'ünü kullanmaktadır. Dolayısıyla platformda en fazla 4 adet adadan söz edilebilir. Her bir adada 16 SIMD lane ve 32 warp bulunduğundan eş zamanlı olarak platform üzerinde çalışabilecek toplam thread sayısı 2048'dir. Bu seçenekte adalar yerleştirildikten sonra boş kalan \\%14.4'lük kısım bellek ara yüzü, PCI-e arayüzü ve scheduler için değerlendirilir. Bu konfigurasyon için float bölme, logaritma, üssel fonksiyon ve tamsayı bölme işlemlerinde fazladan 1 çevrim hesap süresi, fazladan 2 çevrim kuyruklama süresi eklenir. Değişiklik ile 16 adet sayının hesaplanması için harcanan süredeki değişim Tablo\\ref{table:util_S16_FMA16_O8}'de sunulmuştur. Buradaki değişiklik, boru hattının dolması sırasında söz konusudur. Boru hattı doldurulduktan sonra \"throughput\" olarak her çevrimde 1 sonuç alınır.\\par \n  213  \n  214: Şekil \\ref{image:util_S16_FMAFDIVFLOG8_FEXPDIV4}'de 16 SIMD lane'e sahip bir adada tüm hesap birimlerinden 16, float çarp topla, float bölme ve logaritma 8'er adet, üssel fonksiyon ve tamsayı bölme birimlerinden 4'er adet gerçeklenmiştir. Elde edilen kaynak tüketim değerlerine göre 1 ada hedef platformun kaynaklarının \\%17.37'sini kullanmaktadır. Dolayısıyla platformda en fazla 4 adet adadan söz edilebilir.\\par\n  215  \\begin{longtable}{p{90pt} p{90pt} p{90pt} p{90pt}}\n  216  \\caption{Bazı özel hesaplama birimlerinin yarıya düşürülmesinin performansa etkisi} \\label{table:util_S16_FMA16_O8} \\\\\n  ...\n  273  \n  274  \\section{Çalışma Sonuçları}\n  275: ASELSAN tarafından desteklenen ve tez çalışmasını oluşturan bu yardımcı işlemci ünitesi tasarımı projesi kapsamında, temel sayısal sinyal işleme fonksiyonları için özelleştirilmiş, ölçeklenebilir ve OpenCL destekli bir paralel işlemci tasarlanmıştır. Fonksiyon listesi ve benzer mimarilerin sahip olduğu buyruk kümeleri incelenerek buyruk kümesi mimarisi oluşturulmuş, her bir buyruk için hesaplama birimleri tasarlanmıştır. Hesaplamanın paralelleştirilebilmesi için hesaplama birimleri paralel yollar üzerine kopyalanarak SIMD lane'ler oluşturulmuştur. Routing ve timing kısıtlarının sağlanabilmesi için farklı SIMD lane'ler için ortak olan işlemler tekrarlanmamıştır. Buyrukların baştan sona işlem akışı tasarlanmış ve saat sıklığının düşmemesi için boru hattı aşamalarına bölünmüştür. Boru hattının etkin kullanımı için aralıklı işleme modeli boru hattı üzerinde gerçeklenmiştir. Tasarımın ölçeklenebilirliğini artırmak ve bellek işlemlerindeki dar boğaz riskini azaltmak için hiyerarşik bir tasarıma geçilerek adalardan oluşan bir mimari tasarlanmış ve tüm yardımcı işlemci ünitesi bu Şekilde gerçeklenmiştir. \\par\n  276  \n  277  Virtex 7 VC709 geliştirme kartı hedef platform olarak belirlenmiş, bu platforma göre devreler sentezlenerek işlem süreleri ve kaynak kullanımları ölçülmüştür.\n  ...\n  279  \\section{Gelecek Çalışmalar}\n  280  Proje neticesinde tasarlanan yardımcı işlemci ünitesi ölçeklenebilir ve özelleştirilebilir bir yapıdadır. OpenCL destekli olan yardımcı işlemci ünitesi için tez çalışmasının kapsamı dışında derleyici yazılmıştır. Mevcut derleyici, LLVM ara katmanını kullanarak OpenCL ile yazılan herhangi bir programı Tosun buyruklarına derleyebilmektedir. Bu noktada projenin bulunduğu noktada gerekli yazılım katmanları ile birlikte çalışabilir bir paralel işlem ünitesi vardır.\\par\n  281: Gelecek çalışmaların başında en iyileme çalışmaları gelmektedir. Bellek erişimi için kaybedilen zamanın indirgenmesi ve alan kullanımında en iyilemeye gidilerek daha fazla SIMD lane gerçeklenmesi performansı dramatik Şekilde artıracaktır.\\par En iyileme çalışmalarının bir parçası olarak mevcut tasarım baz alınarak mimari seviyesinde yapılabilecek her bir değişim irdelenecek, bu değişimlerin performansa etkileri araştırılarak literatüre katkıda bulunulacaktır. \\par\n  282: ASELSAN tarafından desteklenen Tosun işlemcisi genel amaçlı sinyal işleme algoritmaları için tasarlanmış, fakat tasarımda sağlanan standart ara yüzler sayesinde herhangi başka uygulama için hazırlanan hesaplama birimlerinin de entegre edilebileceği Şekilde gerçeklenmiştir. Gelecek çalışmalarda daha spesifik uygulamalar için özel modüller entegre edilerek donanımda özelleştirme sağlanacak, böylece bir paralel hesaplama kütüphanesi kurulacaktır.  \n\n53 matches across 5 files\n\n\nSearching 53 files for \"Tablo\" (case sensitive)\n\n/Users/agyaglikci/Workspace/tez/bolum2.tex:\n   14  FPGA'ler esnek mimari yapıları ve programlanma özellikleri sayesinde kendilerine endüstride hızla yer bulmuştur ve günümüzde de otomotivden, telekomünikasyona, uzay uygulamalarından savunma sanayine ve özellikle yüksek performansla birlikte esneklik isteyen birçok uygulama alanında tercih edilmektedirler. \\cite{aykenarThesis} \\par\n   15  \n   16: Xilinx ve Altera firmaları dünya üzerinde en çok müşteriye sahip iki firmadırlar. Bu firmalar birçok uygulamaya özel ve farklı ihtiyaçlara hitap eden değişik FPGA aileleri üretmektedirler. Xilinx firmasının piyasada sıklıkla kullanılan farklı FPGA ailelerinden FPGA örnekleri ve özellikleri Tablo \\ref{table:fpgaModels}’de verilmiştir.\\par\n   17  \n   18  \\begin{longtable}{p{90pt} p{30pt} p{30pt} p{30pt} p{30pt}}\n   ..\n   54  Mantık hücresi (logic slice) olarak isimlendirilen birimler FPGA'lerin işlem ve depolama birimlerini içerir. Bir mantık hücresinin içinde temel olarak 4 veya daha fazla girişli look up table (LUT), 1 adet flip flop ve çeşitli çoklayıcılar bulunur. \\par\n   55  \n   56: Basitçe doğruluk Tablosunu oluşturabilen sade devreler 1 adet mantık hücresi kullanılarak gerçeklenebilir. Fakat karmaşık mantık yapısına ve çokça yazmaca ihtiyaç duyan devreler ancak birden çok mentık hücresi ile gerçeklenebilirler. \\par\n   57  \n   58  \n\n/Users/agyaglikci/Workspace/tez/bolum3gereksinimler.tex:\n    1  \\chapter{GEREKSİNİM ANALİZİ} \\label{chapter:gereksinimAnalizi}\n    2: OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamalarının, özelleştirilebilir, milli tasarım bir donanım üzerinde çalıştırılması amacı ile başlatılan projenin gereksinimleri \\ref{projeGereksinimleri} Mimari Gereksinimleri başlığı altında sunulmuştur. \\ref{basarimEtkenleri} Başarım Etkenleri başlığı altında proje için performans metrikleri belirlenmiş, \\ref{fonksiyonlarinGerceklenmesi} Fonksiyonların Gerçeklenmesi başlığı altında, Tablo \\ref{table:fonksiyonListesi}: Fonksiyon Listesi Tablosunda verilen fonksiyonların matematiksel ifadeleri ve sayısal sistemler üzerinde gerçekleme algoritmaları sunulmuştur.\n    3  \n    4  \\section{Mimari Gereksinimleri} \\label{projeGereksinimleri}\n    .\n   10    \\item Tasarım modüler olmalı alt modül sayıları parametrik tanımlanmalı, bütün mimari modülleri özelleştirilebilir olmalıdır. \n   11    \\item Gelecek çalışmalarda tasarlanacak özel hesaplama ipcore modülleri için standart bir arayüzü desteklemelidir.\n   12:   \\item Tasarım sayısal sinyal işleme uygulamalarında sıklıkla kullanılan ve Tablo \\ref{table:fonksiyonListesi} içinde belirtilen fonksiyonları desteklemelidir.\n   13    \\item Verilen bir matrisin kopyası oluşturulup kopya üzerinden işlem yapılmalıdır.\n   14    \\item Reel sayılar matrisi oluşturulurken bellekte yalnızca reel sayıların sığabileceği bir alan kullanılmalıdır, karmaşık sayılar matrisi oluşturulurken reel ve imajiner kısımlar için ayrı yer ayrılmalıdır.\n   ..\n   94  \n   95  \\section{Başarım Etkenleri}\\label{basarimEtkenleri}\n   96: Tablo \\ref{table:fonksiyonListesi} içinde belirtilen işlemlerin paralelleştirilmesi ile işlem sürelerinin kısalması beklenmektedir. Paralel hesaplamada işlem süresini belirleyen 4 unsur vardır. \\par\n   97  \n   98  Bunlardan birincisi bellek işlemlerine ayrılan süredir. Programlanabilir her sistemde olduğu gibi bir işlem veya işlem dizisi başlarken bellekten veri okunur, sonlandığında ise tekrar belleğe sonuçlar yazılır. İşlemler paralelleştirilse de paralelleştirilmese de bellek için harcanan süre toplamda yakındır. \\cite{Citation Here} Hem yazılım hem de donanım seviyesinde bellek işlemlerinde yerelliği artırmak bellek işlemlerinin daha hızlı işlenmesine olanak sağlar.\\par\n   ..\n  247  \n  248  \\subsection{Özet}\n  249: Listedeki fonksiyonların incelenmesi ile gerekli hesaplama buyrukları çıkarılmıştır. Fonksiyon listesinin gerçeklenebilmesi için gerekli buyruklar Tablo \\ref{table:instructionList1}'de sunulmuştur. \n  250  \n  251  \\begin{longtable}{p{100pt} p{250pt}}\n\n/Users/agyaglikci/Workspace/tez/bolum3literatur.log:\n 3283  <write> ...le:cpuGpuComparision' on page \\thepage \n 3284                                                    \\space undefined\\on@line .\n 3285: l.20 ...adÄ±r. Tablo \\ref{table:cpuGpuComparision}\n 3286                                                     iÃ§inde CPU ve GPU mimari...\n 3287  The control sequence at the end of the top line\n\n/Users/agyaglikci/Workspace/tez/bolum4literatur.tex:\n   59  \n   60  \n   61: Homojen az çekirdekli mimariler genel amaçlı kullanılan CPU (Central Processing Unit) mimarilerinde tercih edilirken çok çekirdekli mimariler GPU (Graphical Processing Unit) ön plana çıkar. CPU çekirdekleri yüksek işlem gücüne sahip ve az sayıda iken GPU çekirdekleri düşük işlem gücüne sahip ve çok sayıdadır. CPU üzerinde koşturulan programların dallanma ve bellek işlemleri için harcadığı zamanın azaltılması için çekirdeklere yakın büyük kapasiteli önbellekler kullanılır. GPU çekirdeklerinin sayıca fazla olması paralel hesaplamayı ön plana çıkarmakta ve ana bellek erişimi için kullanılan veri yolu genişliği, önbellek büyüklüğünden daha önemli bir kriter olmaktadır. Tablo \\ref{table:cpuGpuComparision} içinde CPU ve GPU mimarilerinin bellek özellikleri sunulmuştur \\cite{cpuGpuMemoryTable}. \\par\n   62  \n   63  \\begin{longtable}{p{150pt} p{100pt} p{100pt}}\n\n/Users/agyaglikci/Workspace/tez/bolum5mimari.tex:\n    7  Tosun buyruk kümesi mimarisinin oluşturulmasında NVidia PTX \\cite{nvidiaPTXISA} buyruk kümesi paralel işleme mimarisi olarak temel alınmıştır. Ayrıca adres hesapları, dallanmalar, temel aritmetik ve mantık işlemleri gibi her işlemcinin sahip olması gereken temel buyruklar için de Intel x86 \\cite{x86ISA} ve MIPS \\cite{MIPSISA} buyruk kümeleri referans alınmıştır. \\par\n    8  \n    9: Tosun buyruk kümesi mimarisinde bulunmasına karar verilen buyruklar Tablo \\ref{table:tosunInstructions} içinde; tüm buyruk türlerinin bit yapısı Şekil \\ref{image:instructionTypes}'de sunulmuştur. \n   10  \n   11  \n   ..\n   87  \\end{longtable}\n   88  \n   89: Tosun buyruk kümesinde toplam 56 adet buyruk belirlenmiştir. Tablo \\ref{table:tosunInstructions} içinde verilen buyruklar içerdikleri işlenen tür ve sayılarına göre türlere ayrılmıştır. Bu sınıflandırma buyruk içinde belirtilmesi gereken işlenen cins ve sayılarına göre yapılmıştır. Buyruk türlerinin bit yapısının belirlenebilmesi için öncelikle buyruk içine yerleştirilecek bilgilerin bit genişlikleri belirlenmelidir. \\par\n   90  \n   91: Buyruk bit yapılarında kaynak ve hedef hafıza birimleri olarak yazmaç numaraları kullanılır. Buyruk içinde bir yazmacın kaç bit ile ifade edileceği, bir thread için tahsis edilen yazmaç sayısına bağlıdır. İşlemci mimarisinde yazmaç sayısının belirlenmesi bir ödünleşimli karardır. Yazmaç sayısının artması yazmaçlar için kullanılan alanı artıracağı gibi yazmaç numaraları için kullanılan karşılaştırıcı devrelerin de büyümesine sebep olur. Öte yandan yazmaç sayısının azlığı bellek işlemlerinin artmasına ve başarımın düşmesine sebep olacaktır. Tosun mimarisinde çok çekirdekli bir mimariden söz edildiği için yazmaç sayılarının artışı tek çekirdekli işlemcilere oranla daha fazla bir alan kullanımında artışa sebep olmaktadır. Bu yüzden Tosun mimarisinde hedef programlara yetebilecek minimum sayıda yazmaç kullanılmıştır. Bu çalışmada NVidia CUDA ile çalışan 184 adet paralel hesaplama uygulamasının yazmaç kullanım adetleri incelenmiştir. Elde edilen sonuçlara göre Tablo \\ref{table:NVidiaRegisterUsage}'ta sunulduğu şekilde 64 adetten fazla sayıda yazmaç kullanan program ile karşılaşılmamıştır.\n   92  \n   93  \\begin{longtable}{p{350pt} p{100pt} }\n\n/Users/agyaglikci/Workspace/tez/bolum6sonuc.tex:\n   13  \n   14  \\section{Tosun Performans Analizi}\n   15: Tasarlanan mimaride performansın bir ölçütü buyrukların kaç çevrimde tamamlandığıdır. Her buyruğun boru hattını tamamlama süresi belli olsa da bir uygulamanın çalışmasında boru hattının etkin kullanımına göre toplam süre değişiklik gösterir. Mimariye uygun yazılan bir program için en iyi durumda boru hattı bir kere doldurulduktan sonra her çevrimde bir buyruk tamamlanır. Boru hattının uzunluğu hesap aşaması haricinde tüm buyruklar için sabittir. Hesap aşamasında ise her işlemin farklı bir süresi vardır. Her bir buyruk için hesap aşamasının tamamlanma süresi Tablo \\ref{table:hesapSureleri}'de sunulmuştur. Tablo \\ref{table:hesapSureleri}'de verilen \"Hesaplama Ç.S.\", matematiksel işlem için kullanılan zamandır. Hesap aşamasında hesaplama modülüne bağlı olarak giriş ve çıkışta kuyruk yapıları kullanılır. Boru hattının etkin kullanımı için eklenen bu kuyruklar, çevrim sayısında artışa sebep olur. Kuyrukların etkisiyle beraber, boru hattının hesaplama aşaması için her bir buyruğun toplam çevrim sayıları da \"Boru Hattı Aşaması Ç.S.\" sütununda verilmiştir. \\par\n   16  \n   17  \\begin{longtable}{p{50pt} p{90pt} p{90pt}}\n   ..\n   90  \\end{longtable}\n   91  \n   92: Tosun üzerinde çalıştırılan bir buyruk işlenmek üzere bir adaya alındıktan sonra tüm boru hattı aşamalarından geçerek işlemini tamamlar. Tablo \\ref{table:hesapSureleri}'de sunulan boru hattı aşaması çevrim sayıları yalnızca hesaplama aşamasına ait verilerdir. Nitekim buyruklar arası çevrim sayısı farklılıkları yalnızca hesaplama aşamasında oluşmaktadır. Diğer tüm boru hattı aşamaları, tüm buyruklar için sabit çevrim sayısına sahiptir.\\par\n   93  \n   94: Tasarlanan boru hattında bir buyruğun çalışması warp seçimi ile başlar. Warp seçimi donanımda aktif warp'ların tutulduğu bir Tablo üzerinde Round Robin algoritması ile seçim yapılmasından ibarettir ve 1 çevrimde sonuçlanır. \\par \n   95  \n   96  Seçilen warp için sıradaki buyruk bellekten çekilir. Bu aşamada buyruk ön belleğinde söz konusu buyruk bulunursa, 1 çevrimde aşama geçilir. Eğer buyruk önbellekte yoksa, ana bellek üzerinden buyruğun çekilmesi gerekmektedir. Ana belleğin cevap süresi anlık yoğunluğa göre değişmektedir. En kötü durum, tüm adaların hem veri hem buyruk portlarından istek gelirken aynı zamanda PCI ve ana bellek arasında da veri akışı varken, hiçbir isteğin önbellekte bulunamaması durumudur. En kötü durum tahmini cevap süresi $35 x ( N_{ada} x 2 + 1 )$ şeklinde ifade edilebilir. Buyrukların ana bellekten çekilmesi bloklar halinde yapılır. Tek seferde 512 bit yani 16 adet buyruk çekilir. Dolayısıyla en kötü durum gerçekleştiğinde yaşanan gecikme, her 16 buyruk için bir kez yaşanır. Burada dallanma buyruğu gelmesinden dolayı yanlış buyrukların çekilmiş olması senaryosu daha kötü bir durum olarak düşünülür fakat Tosun işlemcisinde her SIMD lane üzerinde koşan thread dallanma neticesinde farklı davranabileceğinden ve SIMD mimarisinin uygulanmasından dolayı dallanmalarda her iki ihtimal de her SIMD lane üzerinde sonuçlar maskelenerek çalıştırıldığından dallanma oluşması buyruk çekme açısından ek bir maliyete sebep olmaz.\\par\n   ..\n  137  \\end{align}\n  138  \n  139: $T_{hesap}$ tüm buyrukların hesaplanması için geçen süreyi ifade eder ve programın içerdiği buyruk tiplerine ve sayılarına bağlı olarak değişir. Örneğin standart bir FFT uygulaması için yazılan bir programın boru hattı üzerinde ilerleyişi incelenerek toplam çalışma süresi hesaplanmıştır. Karşılaştırma amaçlı olarak Xilinx tarafından sağlanan FFT IPCore'unun tahmini çalışma süreleri alınmıştır. Değişik örnek sayıları için çalışma süreleri 250 MHz sıklığında saat çevrimi sayısı cinsinden Tablo \\ref{table:fftComparision}'de sunulmuştur.\n  140  \n  141  \\begin{longtable}{p{90pt} p{90pt} p{120pt}}\n  ...\n  172  \\end{longtable}\n  173  \n  174: Tablo \\ref{table:fftComparision}'de gözlendiği şekilde sinyalde nokta sayısının artması ile Tosun mimarisi, IPCore'a göre daha yüksek performans göstermektedir. Bunun sebebi nokta sayısının artması ile paralelleştirmenin avantajının artmasıdır. Karşılaştırmanın herhangi bir GPU, CPU veya ASIC tabanlı uygulama yerine IPCore ile yapılmasının sebebi IPCore'un Tosun mimarisi ile aynı FPGA platformunda çalıştırılabilmesidir. Diğer platformlarla karşılaştırmak için çevrim sayıları $4x10^{-9}$ ile çarpılarak saniye cinsinden zaman değerlerine ulaşılabilir. \\par\n  175  \n  176  \\section{Tosun Kaynak Kullanımı Analizi}\n  177: Tosun mimarisinin büyük kısmını oluşturan ada yapısı alt modülleri seviyesinde irdelenerek devrenin alan - performans değişimi gözlenmiştir. Hedef platform olarak belirlenen Virtex7 FPGA'in kapasitesi Tablo \\ref{table:virtex7Resources}'de verilmiştir.\n  178  \n  179  \\begin{longtable}{p{90pt} p{90pt}}\n  ...\n  210  \\label{image:util_S16_FMA16_O8}\n  211  \\end{figure}\n  212: Şekil \\ref{image:util_S16_FMA16_O8}'de 16 SIMD lane'e sahip bir adada tüm hesap birimlerinden 16, float bölme, logaritma, üssel fonksiyon ve tamsayı bölme birimlerinden 8 adet gerçeklenmiştir. Elde edilen kaynak tüketim değerlerine göre 1 ada hedef platformun kaynaklarının \\%21.4'ünü kullanmaktadır. Dolayısıyla platformda en fazla 4 adet adadan söz edilebilir. Her bir adada 16 SIMD lane ve 32 warp bulunduğundan eş zamanlı olarak platform üzerinde çalışabilecek toplam thread sayısı 2048'dir. Bu seçenekte adalar yerleştirildikten sonra boş kalan \\%14.4'lük kısım bellek ara yüzü, PCI-e arayüzü ve scheduler için değerlendirilir. Bu konfigurasyon için float bölme, logaritma, üssel fonksiyon ve tamsayı bölme işlemlerinde fazladan 1 çevrim hesap süresi, fazladan 2 çevrim kuyruklama süresi eklenir. Değişiklik ile 16 adet sayının hesaplanması için harcanan süredeki değişim Tablo\\ref{table:util_S16_FMA16_O8}'de sunulmuştur. Buradaki değişiklik, boru hattının dolması sırasında söz konusudur. Boru hattı doldurulduktan sonra \"throughput\" olarak her çevrimde 1 sonuç alınır.\\par \n  213  \n  214  Şekil \\ref{image:util_S16_FMAFDIVFLOG8_FEXPDIV4}'de 16 SIMD lane'e sahip bir adada tüm hesap birimlerinden 16, float çarp topla, float bölme ve logaritma 8'er adet, üssel fonksiyon ve tamsayı bölme birimlerinden 4'er adet gerçeklenmiştir. Elde edilen kaynak tüketim değerlerine göre 1 ada hedef platformun kaynaklarının \\%17.37'sini kullanmaktadır. Dolayısıyla platformda en fazla 4 adet adadan söz edilebilir.\\par\n  ...\n  246  \\end{figure}\n  247  \n  248: Bu konfigurasyon için float çarp-topla, float bölme ve logaritma işlemlerinde fazladan 1 çevrim, üssel fonksiyon ve tamsayı bölme işlemlerinde fazladan 2 çevrim hesap süresi; her iki gruba da fazladan 2 çevrim kuyruklama süresi eklenir. Değişiklik ile 16 adet sayının hesaplanması için harcanan süredeki değişim Tablo \\ref{table:util_S16_FMAFDIVFLOG8_FEXPDIV4}'de sunulmuştur. Buradaki değişiklik, boru hattının dolması sırasında söz konusudur. Boru hattı doldurulduktan sonra \"throughput\" olarak her çevrimde 1 sonuç alınır.\\par \n  249  \n  250  \\begin{longtable}{p{90pt} p{90pt} p{90pt} p{90pt}}\n\n/Users/agyaglikci/Workspace/tez/tez.log:\n  994   [63]\n  995  Underfull \\hbox (badness 1845) in paragraph at lines 216--216\n  996: []\\T1/cmr/m/n/12 Tablo 6.4: Baz^^Y özel he-sap-lama bi-rim-le-ri-nin ya-r^^Yya\n  997   []\n  998  \n\n/Users/agyaglikci/Workspace/tez/tez.tex:\n    3  \\tableofcontents  \n    4  \\listoffigures  % Eger tezde herhangi bir sekil yoksa silinmelidir \n    5: \\listoftables  % Tezde herhangi bir Tablo yoksa silinmelidir\n    6  \\newpage\n    7  \\newpage\n\n23 matches across 8 files\n\n\nSearching 53 files for \"tercih edilmektedirler.\" (case sensitive)\n\n/Users/agyaglikci/Workspace/tez/bolum2.tex:\n   12  \\end{figure}\n   13  \n   14: FPGA'ler esnek mimari yapıları ve programlanma özellikleri sayesinde kendilerine endüstride hızla yer bulmuştur ve günümüzde de otomotivden, telekomünikasyona, uzay uygulamalarından savunma sanayine ve özellikle yüksek performansla birlikte esneklik isteyen birçok uygulama alanında tercih edilmektedirler. \\cite{aykenarThesis} \\par\n   15  \n   16  Xilinx ve Altera firmaları dünya üzerinde en çok müşteriye sahip iki firmadırlar. Bu firmalar birçok uygulamaya özel ve farklı ihtiyaçlara hitap eden değişik FPGA aileleri üretmektedirler. Xilinx firmasının piyasada sıklıkla kullanılan farklı FPGA ailelerinden FPGA örnekleri ve özellikleri Tablo \\ref{table:fpgaModels}’de verilmiştir.\\par\n\n1 match in 1 file\n\n\nSearching 53 files for \"aykenarThesis\" (case sensitive)\n\n/Users/agyaglikci/Workspace/tez/bolum2.tex:\n   12  \\end{figure}\n   13  \n   14: FPGA'ler esnek mimari yapıları ve programlanma özellikleri sayesinde kendilerine endüstride hızla yer bulmuştur ve günümüzde de otomotivden, telekomünikasyona, uzay uygulamalarından savunma sanayine ve özellikle yüksek performansla birlikte esneklik isteyen birçok uygulama alanında tercih edilmektedirler. \\cite{aykenarThesis} \\par\n   15  \n   16  Xilinx ve Altera firmaları dünya üzerinde en çok müşteriye sahip iki firmadırlar. Bu firmalar birçok uygulamaya özel ve farklı ihtiyaçlara hitap eden değişik FPGA aileleri üretmektedirler. Xilinx firmasının piyasada sıklıkla kullanılan farklı FPGA ailelerinden FPGA örnekleri ve özellikleri Tablo \\ref{table:fpgaModels}’de verilmiştir.\\par\n\n/Users/agyaglikci/Workspace/tez/tez.aux:\n   17  \\newlabel{chapter:giris}{{1}{1}}\n   18  \\citation{kuon2007measuring}\n   19: \\citation{aykenarThesis}\n   20  \\@writefile{toc}{\\contentsline {chapter}{\\numberline {2}TEMEL B\\IeC {\\.I}LG\\IeC {\\.I}LER}{4}}\n   21  \\@writefile{lof}{\\addvspace {10\\p@ }}\n\n/Users/agyaglikci/Workspace/tez/tez.log:\n  612  \n  613  \n  614: LaTeX Warning: Citation `aykenarThesis' on page 4 undefined on input line 14.\n  615  \n  616  [4\n\n3 matches across 3 files\n\n\nSearching 53 files for \"Genel olarak bir FPGA’in mimari yapısı \" (case sensitive)\n\n/Users/agyaglikci/Workspace/tez/bolum2.tex:\n   57  \n   58  \n   59: Sürekli gelişmekte olan FPGA teknolojisinde artık FPGA yongalarının içerisine özel fonksiyona sahip makro birimler yerleştirilmektedir. Bu makro birimler hard olarak yongaya gömülü durumda olup sadece izin verilen ölçüde parametreleri programlanabilmektedirler. Bu makro bloklara örnek olarak DCM, RAM, DSP slice, çarpıcı birimleri gösterilebilir. Genel olarak bir FPGA’in mimari yapısı Şekil \\ref{image:fpgaGenelMimari}’de görülebilir.\n   60  \\begin{figure}[h]\n   61  \\centering\n\n1 match in 1 file\n\n\nSearching 53 files for \" yapılmasına uygun olan uygulama alanlarında \" (case sensitive)\n\n/Users/agyaglikci/Workspace/tez/bolum2.tex:\n   71  \n   72  GPU teknolojisindeki ilerlemelerle birlikte, günümüzde kullanılan modern GPU’lar programlanabilir arayüzler sunar hale gelmişlerdir. Bu programlanabilir arayüzler sayesinde GPU’nun işlem gücü ve paralel işleyebilme yeteneği sadece grafik işlemlerinde değil aynı zamanda genel amaçlı hesaplamalarda da kullanılabilir hale gelmiştir. Bu durum ortaya grafik işlem birimi üzerinde genel amaçlı hesaplama (GPGPU - General Purpose programming on Graphic Processing Unit) kavramını çıkarmıştır. \\par\n   73: GPU’lar yukarıdaki kısımlarda açıklanan işlem hattı mimarisi sayesinde, paralel olarak işlenebilecek nitelikte verinin yüksek performanslı bir şekilde paralel olarak işlenmesi konusunda çok elverişlidirler. GPGPU uygulamaları GPU’ların grafik aygıtlarına özel olan köşe kenar dönüşümü, dokulandırma, renklendirme, gölgelendirme vb. özelliklerinden ziyade SIMD şeklinde çalışan işlem hattı mimarisinden yararlanırlar. GPGPU uygulamaları genel olarak; işaret işleme, ses işleme, görüntü işleme, şifreleme, bioinformatik, yapay sinir ağları, paralelleştirilebilen bilimsel hesaplamalar, istatiksel hesaplamalar gibi yüklü miktarda verinin küçük parçaları üzerinde bağımsız ve paralel olarak işlem yapılmasına uygun olan uygulama alanlarında başarılıdırlar. \\cite{ertanYildizThesis}\\par\n   74  \n   75  GPGPU uygulamaları genel olarak CPU üzerinde çalışan bir host program ve GPU’daki çekirdekler üzerinde hesaplama yapacak olaran çekirdek fonksiyonundan (kernel function) oluşur. Her çekirdekte çalışan çerkirdek fonksiyonu, stream şekilde GPU’ya iletilen verinin kendine düşen daha küçük bir birimi üzerinde işlem yapar. Giriş verisinin GPU’ya iletilmesi, sonuç verisinin toplanması istenilen formata dönüştürülmesi gibi ardışık işlemleri CPU’da çalışan host program yürütür. \\par\n\n1 match in 1 file\n\n\nSearching 53 files for \"Programlanabilir her sistemde oldu\" (case sensitive)\n\n/Users/agyaglikci/Workspace/tez/bolum3gereksinimler.tex:\n   96  Tablo \\ref{table:fonksiyonListesi} içinde belirtilen işlemlerin paralelleştirilmesi ile işlem sürelerinin kısalması beklenmektedir. Paralel hesaplamada işlem süresini belirleyen 4 unsur vardır. \\par\n   97  \n   98: Bunlardan birincisi bellek işlemlerine ayrılan süredir. Programlanabilir her sistemde olduğu gibi bir işlem veya işlem dizisi başlarken bellekten veri okunur, sonlandığında ise tekrar belleğe sonuçlar yazılır. İşlemler paralelleştirilse de paralelleştirilmese de bellek için harcanan süre toplamda yakındır. \\cite{Citation Here} Hem yazılım hem de donanım seviyesinde bellek işlemlerinde yerelliği artırmak bellek işlemlerinin daha hızlı işlenmesine olanak sağlar.\\par\n   99  \n  100  İkinci unsur paralelleştirmenin bir ölçüsü olan thread sayısıdır. Söz konusu işlem birbirinden bağımsız iş parçacıklarına bölünür ve her bir iş parçacığı farklı donanımlarda koşturularak paralel işleme sağlanır. Literatürde bu iş parçacıkları ingilizce ismi olan thread kelimesiyle ifade edilmekte ve thread kelimesinin buradaki anlamını taşıyan bir türkçe tercümesi bulunmamaktadır. Bu sebeple tezin devamında sürekli olarak thread kelimesi kullanılacaktır. Thread sayısındaki artış, programın daha paralel koşturulabilmesine olanak sağlar.\\par\n\n1 match in 1 file\n",
+			"settings":
+			{
+				"buffer_size": 59068,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "bolum3gereksinimler.tex",
+			"settings":
+			{
+				"buffer_size": 25640,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "kaynakca.tex",
+			"settings":
+			{
+				"buffer_size": 5385,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bolum2.tex",
+			"settings":
+			{
+				"buffer_size": 8101,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ozgecmis.tex",
+			"settings":
+			{
+				"buffer_size": 1356,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tez.tex",
+			"settings":
+			{
+				"buffer_size": 915,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bolum4literatur.tex",
+			"settings":
+			{
+				"buffer_size": 10755,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "baslangic.tex",
+			"settings":
+			{
+				"buffer_size": 4667,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/minilatex/MiniLaTeX.sublime-build",
 	"command_palette":
@@ -263,17 +329,17 @@
 	},
 	"file_history":
 	[
-		"/Users/agyaglikci/Workspace/tez/etutez.cls",
 		"/Users/agyaglikci/Workspace/tez/bolum5mimari.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum2.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum3gereksinimler.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum6sonuc.tex",
+		"/Users/agyaglikci/Workspace/tez/etutez.cls",
 		"/Users/agyaglikci/Workspace/tez/ozgecmis.tex",
 		"/Users/agyaglikci/Workspace/tez/bolum4literatur.tex",
-		"/Users/agyaglikci/Workspace/tez/bolum6sonuc.tex",
 		"/Users/agyaglikci/Workspace/tez/baslangic.tex",
 		"/Users/agyaglikci/Workspace/tez/kaynakca.tex",
 		"/Users/agyaglikci/Workspace/tez/tez.tex",
 		"/Users/agyaglikci/Workspace/tez/bolum1giris.tex",
-		"/Users/agyaglikci/Workspace/tez/bolum2.tex",
-		"/Users/agyaglikci/Workspace/tez/bolum3gereksinimler.tex",
 		"/Users/agyaglikci/Workspace/tez/bolum3literatur.tex",
 		"/Users/agyaglikci/Workspace/tez/bolum4mimari.tex",
 		"/Users/agyaglikci/Workspace/tez/bolum2gereksinimler.tex",
@@ -410,9 +476,19 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"Programlanabilir her sistemde oldu",
+			" yapılmasına uygun olan uygulama alanlarında ",
+			"Genel olarak bir FPGA’in mimari yapısı ",
+			"aykenarThesis",
+			"tercih edilmektedirler.",
+			"Tablo",
+			"Şekil",
+			"Şekile",
+			"Şekil",
+			"şekil",
 			"chaptername",
 			"chapter",
 			"R8",
@@ -486,8 +562,581 @@
 	"groups":
 	[
 		{
+			"selected": 4,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 59068,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										661,
+										666
+									],
+									[
+										1167,
+										1172
+									],
+									[
+										1925,
+										1929
+									],
+									[
+										2809,
+										2814
+									],
+									[
+										3173,
+										3178
+									],
+									[
+										3326,
+										3331
+									],
+									[
+										3645,
+										3650
+									],
+									[
+										4121,
+										4126
+									],
+									[
+										5205,
+										5210
+									],
+									[
+										5750,
+										5755
+									],
+									[
+										6064,
+										6069
+									],
+									[
+										6602,
+										6607
+									],
+									[
+										7004,
+										7009
+									],
+									[
+										7058,
+										7063
+									],
+									[
+										7527,
+										7532
+									],
+									[
+										7954,
+										7959
+									],
+									[
+										8331,
+										8336
+									],
+									[
+										8617,
+										8622
+									],
+									[
+										9437,
+										9442
+									],
+									[
+										9839,
+										9844
+									],
+									[
+										10903,
+										10908
+									],
+									[
+										12260,
+										12265
+									],
+									[
+										12423,
+										12428
+									],
+									[
+										13227,
+										13232
+									],
+									[
+										14769,
+										14774
+									],
+									[
+										15139,
+										15144
+									],
+									[
+										15940,
+										15945
+									],
+									[
+										17438,
+										17443
+									],
+									[
+										18846,
+										18851
+									],
+									[
+										19578,
+										19583
+									],
+									[
+										20099,
+										20104
+									],
+									[
+										22714,
+										22719
+									],
+									[
+										22790,
+										22795
+									],
+									[
+										23013,
+										23018
+									],
+									[
+										23285,
+										23290
+									],
+									[
+										23347,
+										23352
+									],
+									[
+										23974,
+										23979
+									],
+									[
+										25034,
+										25039
+									],
+									[
+										25980,
+										25985
+									],
+									[
+										26515,
+										26520
+									],
+									[
+										27622,
+										27627
+									],
+									[
+										27910,
+										27915
+									],
+									[
+										29748,
+										29753
+									],
+									[
+										31157,
+										31162
+									],
+									[
+										31423,
+										31428
+									],
+									[
+										31952,
+										31957
+									],
+									[
+										32327,
+										32332
+									],
+									[
+										32522,
+										32527
+									],
+									[
+										33164,
+										33169
+									],
+									[
+										34261,
+										34266
+									],
+									[
+										36005,
+										36010
+									],
+									[
+										36951,
+										36956
+									],
+									[
+										37459,
+										37464
+									],
+									[
+										38428,
+										38433
+									],
+									[
+										38849,
+										38854
+									],
+									[
+										39680,
+										39685
+									],
+									[
+										39734,
+										39739
+									],
+									[
+										40284,
+										40289
+									],
+									[
+										40757,
+										40762
+									],
+									[
+										41633,
+										41638
+									],
+									[
+										41955,
+										41960
+									],
+									[
+										42884,
+										42889
+									],
+									[
+										43586,
+										43591
+									],
+									[
+										43836,
+										43841
+									],
+									[
+										45185,
+										45190
+									],
+									[
+										46040,
+										46045
+									],
+									[
+										46088,
+										46093
+									],
+									[
+										46785,
+										46790
+									],
+									[
+										47231,
+										47236
+									],
+									[
+										49100,
+										49105
+									],
+									[
+										49252,
+										49257
+									],
+									[
+										50077,
+										50082
+									],
+									[
+										51127,
+										51132
+									],
+									[
+										52115,
+										52120
+									],
+									[
+										52548,
+										52553
+									],
+									[
+										52815,
+										52820
+									],
+									[
+										53330,
+										53353
+									],
+									[
+										54205,
+										54218
+									],
+									[
+										54715,
+										54728
+									],
+									[
+										54966,
+										54979
+									],
+									[
+										55563,
+										55602
+									],
+									[
+										57057,
+										57102
+									],
+									[
+										58075,
+										58109
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								58337,
+								58337
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 7,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 10785.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "bolum3gereksinimler.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 25640,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8245,
+								8245
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4814.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "kaynakca.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5385,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								978,
+								978
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "bolum2.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8101,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5383,
+								5383
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1004.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "ozgecmis.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1356,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								953,
+								953
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 122.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "tez.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 915,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								899,
+								899
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "bolum4literatur.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10755,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								36,
+								36
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "baslangic.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4667,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4571,
+								4571
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 975.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
 			]
 		}
 	],
