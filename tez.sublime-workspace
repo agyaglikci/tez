@@ -227,14 +227,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "etutez.cls",
-			"settings":
-			{
-				"buffer_size": 11935,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "Packages/minilatex/MiniLaTeX.sublime-build",
 	"command_palette":
@@ -271,12 +263,13 @@
 	},
 	"file_history":
 	[
-		"/Users/agyaglikci/Workspace/tez/kaynakca.tex",
 		"/Users/agyaglikci/Workspace/tez/etutez.cls",
-		"/Users/agyaglikci/Workspace/tez/baslangic.tex",
-		"/Users/agyaglikci/Workspace/tez/ozgecmis.tex",
-		"/Users/agyaglikci/Workspace/tez/bolum6sonuc.tex",
 		"/Users/agyaglikci/Workspace/tez/bolum5mimari.tex",
+		"/Users/agyaglikci/Workspace/tez/ozgecmis.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum4literatur.tex",
+		"/Users/agyaglikci/Workspace/tez/bolum6sonuc.tex",
+		"/Users/agyaglikci/Workspace/tez/baslangic.tex",
+		"/Users/agyaglikci/Workspace/tez/kaynakca.tex",
 		"/Users/agyaglikci/Workspace/tez/tez.tex",
 		"/Users/agyaglikci/Workspace/tez/bolum1giris.tex",
 		"/Users/agyaglikci/Workspace/tez/bolum2.tex",
@@ -397,8 +390,7 @@
 		"/Applications/MAMP/htdocs/islamhane/application/config/autoload.php",
 		"/Users/agyaglikci/Desktop/untitled.html",
 		"/Users/agyaglikci/Desktop/KS_3/111101051/soru1/soru1.v",
-		"/Users/agyaglikci/Desktop/KS_3/121101061/proje_2/soru2.v",
-		"/Users/agyaglikci/Downloads/rss.rss"
+		"/Users/agyaglikci/Desktop/KS_3/121101061/proje_2/soru2.v"
 	],
 	"find":
 	{
@@ -421,6 +413,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"chaptername",
 			"chapter",
 			"R8",
 			"8",
@@ -493,39 +486,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "etutez.cls",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11935,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4666,
-								4666
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/TeX.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2133.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

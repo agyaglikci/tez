@@ -1,5 +1,5 @@
 \chapter{GEREKSİNİM ANALİZİ} \label{chapter:gereksinimAnalizi}
-OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamalarının, özelleştirilebilir, milli tasarım bir donanım üzerinde çalıştırılması amacı ile başlatılan projenin gereksinimleri \ref{projeGereksinimleri} Mimari Gereksinimleri başlığı altında sunulmuştur. \ref{basarimEtkenleri} Başarım Etkenleri başlığı altında proje için performans metrikleri belirlenmiş, \ref{fonksiyonlarinGerceklenmesi} Fonksiyonların Gerçeklenmesi başlığı altında, Tablo \ref{table:fonksiyonListesi}: Fonksiyon Listesi tablosunda verilen fonksiyonların matematiksel ifadeleri ve sayısal sistemler üzerinde gerçekleme algoritmaları sunulmuştur.
+OpenCL ve CUDA altyapıları kullanılarak gerçeklenen sinyal işleme uygulamalarının, özelleştirilebilir, milli tasarım bir donanım üzerinde çalıştırılması amacı ile başlatılan projenin gereksinimleri \ref{projeGereksinimleri} Mimari Gereksinimleri başlığı altında sunulmuştur. \ref{basarimEtkenleri} Başarım Etkenleri başlığı altında proje için performans metrikleri belirlenmiş, \ref{fonksiyonlarinGerceklenmesi} Fonksiyonların Gerçeklenmesi başlığı altında, Tablo \ref{table:fonksiyonListesi}: Fonksiyon Listesi Tablosunda verilen fonksiyonların matematiksel ifadeleri ve sayısal sistemler üzerinde gerçekleme algoritmaları sunulmuştur.
 
 \section{Mimari Gereksinimleri} \label{projeGereksinimleri}
  Proje gereksinimleri şu şekildedir: 
@@ -143,10 +143,10 @@ Verilen herhangi N elemanlı bir veri seti üzerinde (matris veya matrisin bir p
 $v_{1}$ ve $v_{2}$ iki adet N elemanlı vektör olsun $v_{1} . v_{2} = \sum_{i=1}^{N} v_{1}[i] x v_{2}[i]$ şeklinde tanımlıdır. Daha önce matris çarpımında belirtildiği şekilde çarp, çarp-topla ve topla buyrukları kullanılarak bu işlem gerçekleştirilir. Burada her bir çarpımı oluşturmak için ayrı bir thread oluşturularak paralellik sağlanabilir.
 
 \subsection{FFT/IFFT}
-Ayrık zamanda fourier ve ters fourier dönüşümü için günümüzde yaygın olarak kullanılan algoritma Cooley-Tukey FFT algoritmasıdır. \cite{cooleyTukey} Bu algoritmanın radix-2 decimation in time gerçeklemesinin uygulanması durumunda her bir thread bir butterfly işlemini çalıştırır. 8 elemanlı bir vektörün FFT işlemi Şekil \ref{image:fft_radix2_8p}'de sunulmuştur. \par
+Ayrık zamanda Fourier ve Ters Fourier dönüşümü için günümüzde yaygın olarak kullanılan algoritma Cooley-Tukey FFT algoritmasıdır. \cite{cooleyTukey} Bu algoritmanın radix-2 decimation in time gerçeklemesinin uygulanması durumunda her bir thread bir butterfly işlemini çalıştırır. 8 elemanlı bir vektörün FFT işlemi Şekil \ref{image:fft_radix2_8p}'de sunulmuştur. \par
 
 Fourier transformu alınacak olan giriş sinyali x(n), bu sinyalin fourier transformu ise X(n) olsun.
-Radix-2 yönteminde x(n) vektörünün elemanları tek indisli elemanlar ve çift indisli elemanlar olarak ayrılıp, ikişerli gruplara bölünürler. Daha sonra her bir eleman kendinden N/2 uzaktaki eleman ile butterfly işlemine alınır. Şekil \ref{image:fft_radix2_8p}'de sunulan algoritma, şekil \ref{image:fft_radix2_butterfly}'de çizimi sunulan butterfly işlemlerinden oluşur. Her bir butterfly işleminde yapılan hesaplama denklem \ref{equation:fft_radix2_butterfly}'de gösterildiği gibidir.
+Radix-2 yönteminde x(n) vektörünün elemanları tek indisli elemanlar ve çift indisli elemanlar olarak ayrılıp, ikişerli gruplara bölünürler. Daha sonra her bir eleman kendinden N/2 uzaktaki eleman ile butterfly işlemine alınır. Şekil \ref{image:fft_radix2_8p}'de sunulan algoritma, Şekil \ref{image:fft_radix2_butterfly}'de çizimi sunulan butterfly işlemlerinden oluşur. Her bir butterfly işleminde yapılan hesaplama denklem \ref{equation:fft_radix2_butterfly}'de gösterildiği gibidir.
 
 \begin{figure}
 \centering
